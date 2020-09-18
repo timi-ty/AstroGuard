@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "250299381092",
+    "firebase_url": "https://astroguard-eb5e7.firebaseio.com",
+    "project_id": "astroguard-eb5e7",
+    "storage_bucket": "astroguard-eb5e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250299381092:android:acabe5a038c5e6e94ef671",
+        "android_client_info": {
+          "package_name": "com.cradaptive.astroguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250299381092-g33a0j4k0it6k6v5eos8aira9tg5qmta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmMbJ9OA0UOBnzNakMn56Lwxv2cSz6ARI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250299381092-g33a0j4k0it6k6v5eos8aira9tg5qmta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

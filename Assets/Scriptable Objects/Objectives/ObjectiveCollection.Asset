@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989c4d0943318e44d9c0d9f0240624f8, type: 3}
+  m_Name: ObjectiveCollection
+  m_EditorClassIdentifier: 
+  objectivePool:
+  - '{"category":0,"resetCondition":0,"count":2,"xpReward":2}'
+  - '{"category":13,"resetCondition":0,"count":2,"xpReward":2}'
+  - '{"category":8,"resetCondition":0,"count":2,"xpReward":3}'
+  - '{"category":9,"resetCondition":0,"count":4,"xpReward":4}'
+  - '{"category":18,"resetCondition":0,"count":2,"xpReward":2}'
+  - '{"category":22,"resetCondition":1,"count":4,"xpReward":4}'
+  - '{"category":19,"resetCondition":0,"count":1,"xpReward":2}'
+  - '{"category":1,"resetCondition":0,"count":5,"xpReward":3}'
+  - '{"category":4,"resetCondition":0,"count":5,"xpReward":2}'
+  _category: 1
+  _resetCondition: 0
+  _count: 5
+  _xpReward: 3

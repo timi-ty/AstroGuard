@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e432a570d647e254cb7009fbc317d1a8, type: 3}
+  m_Name: RemoteLevels
+  m_EditorClassIdentifier: 
+  defaultLevelCollection: []
+  _levelInfo:
+    environmentSettings:
+      backgroundAssetIndex: 0
+    objectSpawnSettings:
+      powerUpOrbGenerosity: 0
+      powerUpOrbLineup: []
+      bombLineup: []
+    enemyLineup: []
+  _enemySpawnInfo:
+    spawnDelay: 20
+    spawnPositionIndex: 0
+    enemyType: 0
+    enemySpeed: 20
+    enemySize: 5
+  _powerUpOrbSpawnInfo:
+    spawnDelay: 0
+    spawnSide: 0
+    powerType: 0
+  _bombSpawnInfo:
+    spawnDelay: 0
+    spawnSide: 0
+    bombSize: 0
+  _powerUpSpawnDuration: 60
