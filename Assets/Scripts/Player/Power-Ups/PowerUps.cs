@@ -11,7 +11,6 @@ public class PowerUps : MonoBehaviour
     private Attractor attractor { get; set; }
     private Shield shield { get; set; }
     private SlowMo slowMo { get; set; }
-    private DarkRush darkRush { get; set; }
     #endregion
 
     #region PowerUp States
@@ -19,7 +18,6 @@ public class PowerUps : MonoBehaviour
     public bool isAttractorActive { get { return attractor.isActive; } }
     public bool isShieldActive { get { return shield.isActive; } }
     public bool isSlowMoActive { get { return slowMo.isActive; } }
-    public bool isDarkRushActive { get { return darkRush.isActive; } }
     #endregion
 
     #region Properties
@@ -70,14 +68,6 @@ public class PowerUps : MonoBehaviour
         missileLauncher.Deactivate();
         shield.Deactivate();
         slowMo.Deactivate();
-        darkRush.Deactivate();
-    }
-
-    private void ActivateDarkRush()
-    {
-        darkRush.Activate();
-
-        Metrics.LogDarkRush();
     }
 
     private void FindPowerUpExtensions()
@@ -86,6 +76,5 @@ public class PowerUps : MonoBehaviour
         attractor = GetComponentInChildren<Attractor>();
         shield = GetComponentInChildren<Shield>();
         slowMo = GetComponentInChildren<SlowMo>();
-        darkRush = GetComponentInChildren<DarkRush>();
     }
 }

@@ -31,8 +31,6 @@ public class ObjectiveEditor : Editor
         EditorGUILayout.Space(25);
 
         ListObjectives();
-
-        EditorUtility.SetDirty(objectiveCollection);
     }
 
     private GUIStyle BoldStyle()
@@ -121,7 +119,7 @@ public class ObjectiveEditor : Editor
             isObjectivesListed = true;
         }
 
-        EditorGUILayout.Space(25);
+        EditorGUILayout.Space(100);
 
         if (GUILayout.Button("Clear"))
         {

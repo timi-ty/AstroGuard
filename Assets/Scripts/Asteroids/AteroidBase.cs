@@ -9,13 +9,11 @@ public struct AsteroidDeathInfo
     {
         public bool duringAttraction;
         public bool duringSlowMotion;
-        public bool duringDarkRush;
 
-        public DeathConditions(bool duringAttraction, bool duringSlowMotion, bool duringDarkRush)
+        public DeathConditions(bool duringAttraction, bool duringSlowMotion)
         {
             this.duringAttraction = duringAttraction;
             this.duringSlowMotion = duringSlowMotion;
-            this.duringDarkRush = duringDarkRush;
         }
     }
 
@@ -226,8 +224,7 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
         PowerUps powerUps = mEnemyCommander.player.powerUps;
 
         AsteroidDeathInfo.DeathConditions deathConditions = new AsteroidDeathInfo.DeathConditions(duringAttraction: powerUps.isAttractorActive,
-                                                                                            duringSlowMotion: powerUps.isSlowMoActive,
-                                                                                            duringDarkRush: powerUps.isDarkRushActive);
+                                                                                            duringSlowMotion: powerUps.isSlowMoActive);
 
         return new AsteroidDeathInfo(killer, DateTime.Now, deathConditions);
     }

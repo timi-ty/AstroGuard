@@ -1,52 +1,81 @@
 ﻿[System.Serializable]
 public enum ObjectiveCategory
 {
-    #region Asteroid Destruction
+    //#region Asteroid Destruction
+    //TotalAsteroidDestruction,
+    //LevelZeroAsteroidDestruction,
+    //LevelOneAsteroidDestruction,
+    //LevelTwoAsteroidDestruction,
+    //SwordAsteroidDestruction,
+    //ShipAsteroidDestruction,
+    //ShieldAsteroidDestruction,
+    //PowerUpOrbAsteroidDestruction,
+    //ExplosionAsteroidDestruction,
+    //MissileAsteroidDestruction,
+    //SlowMotionAsteroidDestruction,
+    //DarkRushAsteroidDestruction,
+    //AttractionAsteroidDestruction,
+    //#endregion
+
+    //#region Bomb Explosions
+    //TotalBombExplosions,
+    //SwordBombExplosions,
+    //ShipBombExplosions,
+    //ShieldBombExplosions,
+    //ExplosionBombExplosions,
+    //MissileBombExplosions,
+    //SlowMotionBombExplosions,
+    //DarkRushBombExplosions,
+    //AttractionBombExplosions,
+    //#endregion
+
+    //#region PowerUp Collection
+    //TotalPowerUpCollection,
+    //SlowMoPowerUpCollection,
+    //ShieldPowerUpCollection,
+    //AttractorPowerUpCollection,
+    //MissileLauncherPowerUpCollection,
+    //DarkRushPowerUpCollection,
+    //#endregion
+
+    //#region Non-Violent
+    //AsteroidEscapes,
+    //BombDisposals,
+    //#endregion
+
+    //#region Blissful Failure
+    //PlayerDeaths,
+    //ShipHits
+    //#endregion
+
     TotalAsteroidDestruction,
-    LevelZeroAsteroidDestruction,
-    LevelOneAsteroidDestruction,
-    LevelTwoAsteroidDestruction,
-    SwordAsteroidDestruction,
-    ShipAsteroidDestruction,
-    ShieldAsteroidDestruction,
-    PowerUpOrbAsteroidDestruction,
-    ExplosionAsteroidDestruction,
-    MissileAsteroidDestruction,
-    SlowMotionAsteroidDestruction,
-    DarkRushAsteroidDestruction,
-    AttractionAsteroidDestruction,
-    #endregion
-
-    #region Bomb Explosions
-    TotalBombExplosions,
     SwordBombExplosions,
-    ShipBombExplosions,
-    ShieldBombExplosions,
-    ExplosionBombExplosions,
-    MissileBombExplosions,
-    SlowMotionBombExplosions,
-    DarkRushBombExplosions,
-    AttractionBombExplosions,
-    #endregion
-
-    #region PowerUp Collection
+    LevelZeroAsteroidDestruction,
     TotalPowerUpCollection,
-    SlowMoPowerUpCollection,
-    ShieldPowerUpCollection,
-    AttractorPowerUpCollection,
+    ShipAsteroidDestruction,
     MissileLauncherPowerUpCollection,
-    DarkRushPowerUpCollection,
-    #endregion
-
-    #region Non-Violent
-    AsteroidEscapes,
-    BombDisposals,
-    #endregion
-
-    #region Blissful Failure
+    TotalBombExplosions,
+    SlowMotionAsteroidDestruction,
+    AttractorPowerUpCollection,
+    LevelOneAsteroidDestruction,
+    AttractionBombExplosions,
+    ExplosionAsteroidDestruction,
+    ExplosionBombExplosions,
+    ShieldPowerUpCollection,
+    PowerUpOrbAsteroidDestruction,
+    ShipHits,
+    AttractionAsteroidDestruction,
+    SlowMotionBombExplosions,
+    LevelTwoAsteroidDestruction,
     PlayerDeaths,
-    ShipHits
-    #endregion
+    ShipBombExplosions,
+    SwordAsteroidDestruction,
+    AsteroidEscapes,
+    MissileBombExplosions,
+    ShieldAsteroidDestruction,
+    SlowMoPowerUpCollection,
+    MissileAsteroidDestruction,
+    BombDisposals,
 }
 [System.Serializable]
 public enum ObjectiveResetCondition
@@ -95,9 +124,6 @@ public static class ObjectiveAdapter
             case ObjectiveCategory.SlowMotionAsteroidDestruction:
                 return Metrics.Instance.asteroidDestruction.duringSlowMotion;
 
-            case ObjectiveCategory.DarkRushAsteroidDestruction:
-                return Metrics.Instance.asteroidDestruction.duringDarkRush;
-
             case ObjectiveCategory.AttractionAsteroidDestruction:
                 return Metrics.Instance.asteroidDestruction.duringAttraction;
 
@@ -110,9 +136,6 @@ public static class ObjectiveAdapter
             case ObjectiveCategory.ShipBombExplosions:
                 return Metrics.Instance.bombExplosions.byShip;
 
-            case ObjectiveCategory.ShieldBombExplosions:
-                return Metrics.Instance.bombExplosions.byShield;
-
             case ObjectiveCategory.ExplosionBombExplosions:
                 return Metrics.Instance.bombExplosions.byExplosion;
 
@@ -121,9 +144,6 @@ public static class ObjectiveAdapter
 
             case ObjectiveCategory.SlowMotionBombExplosions:
                 return Metrics.Instance.bombExplosions.duringSlowMotion;
-
-            case ObjectiveCategory.DarkRushBombExplosions:
-                return Metrics.Instance.bombExplosions.duringDarkRush;
 
             case ObjectiveCategory.AttractionBombExplosions:
                 return Metrics.Instance.bombExplosions.duringAttraction;
@@ -142,9 +162,6 @@ public static class ObjectiveAdapter
 
             case ObjectiveCategory.MissileLauncherPowerUpCollection:
                 return Metrics.Instance.powerUpCollection.missileLauncher;
-
-            case ObjectiveCategory.DarkRushPowerUpCollection:
-                return Metrics.Instance.powerUpCollection.darkRush;
 
             case ObjectiveCategory.AsteroidEscapes:
                 return Metrics.Instance.nonViolent.enemyEscapes;
@@ -233,10 +250,6 @@ public static class ObjectiveAdapter
                 descriptionPrefix = "Destroy";
                 descriptionBody = isPlural ? "Asteroids while in Slow Motion" : "an Asteroid while in Slow Motion";
                 break;
-            case ObjectiveCategory.DarkRushAsteroidDestruction:
-                descriptionPrefix = "Destroy";
-                descriptionBody = isPlural ? "Asteroids while in Dark Rush" : "an Asteroid while in Dark Rush";
-                break;
             case ObjectiveCategory.AttractionAsteroidDestruction:
                 descriptionPrefix = "Destroy";
                 descriptionBody = isPlural ? "Asteroids with Attraction" : "an Asteroid with Attraction";
@@ -253,10 +266,6 @@ public static class ObjectiveAdapter
                 descriptionPrefix = "Allow";
                 descriptionBody = isPlural ? "Bombs to explode on your Ship" : "a Bomb to explode on your Ship";
                 break;
-            case ObjectiveCategory.ShieldBombExplosions:
-                descriptionPrefix = "Allow";
-                descriptionBody = isPlural ? "Bombs to explode on your Ship's Shield" : "a Bomb to explode on your Ship's Shield";
-                break;
             case ObjectiveCategory.ExplosionBombExplosions:
                 descriptionPrefix = "Destroy";
                 descriptionBody = isPlural ? "Bombs with explosions" : "a Bomb with an explosion";
@@ -268,10 +277,6 @@ public static class ObjectiveAdapter
             case ObjectiveCategory.SlowMotionBombExplosions:
                 descriptionPrefix = "Destroy";
                 descriptionBody = isPlural ? "Bombs while in Slow Motion" : "a Bomb while in Slow Motion";
-                break;
-            case ObjectiveCategory.DarkRushBombExplosions:
-                descriptionPrefix = "Destroy";
-                descriptionBody = isPlural ? "Bombs while in Dark Rush" : "a Bomb while in Dark Rush";
                 break;
             case ObjectiveCategory.AttractionBombExplosions:
                 descriptionPrefix = "Destroy";
@@ -296,10 +301,6 @@ public static class ObjectiveAdapter
             case ObjectiveCategory.MissileLauncherPowerUpCollection:
                 descriptionPrefix = "Collect";
                 descriptionBody = isPlural ? "Missile Launcher Power-Ups" : "a Missile Launcher Power-Up";
-                break;
-            case ObjectiveCategory.DarkRushPowerUpCollection:
-                descriptionPrefix = "Activate Dark Rush";
-                descriptionBody = isPlural ? "times" : "once";
                 break;
             case ObjectiveCategory.AsteroidEscapes:
                 descriptionPrefix = "Allow";

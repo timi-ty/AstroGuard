@@ -12,6 +12,7 @@ public class ObjectiveCollection : ScriptableObject
     public int Count => objectivePool.Count;
     #endregion
 
+#if UNITY_EDITOR
     #region Editor Cache
     public ObjectiveCategory _category;
     public ObjectiveResetCondition _resetCondition;
@@ -27,6 +28,11 @@ public class ObjectiveCollection : ScriptableObject
         string objectiveJson = JsonUtility.ToJson(objective);
 
         objectivePool.Add(objectiveJson);
+
+        EditorUtility.SetDirty(this);
+
+        Debug.Log(string.Format("Saved Objective {0}: {1}", objectivePool.Count, 
+            ObjectiveAdapter.GetCorrespondingDescription(objective.Category, objective.ResetCondition, objective.Count)));
     }
 
     public Objective PollObjective()
@@ -39,12 +45,16 @@ public class ObjectiveCollection : ScriptableObject
 
         objectivePool.RemoveAt(Count - 1);
 
+        EditorUtility.SetDirty(this);
+
         return objective;
     }
     
     public void DeleteObjective(int index)
     {
         objectivePool.RemoveAt(index);
+
+        EditorUtility.SetDirty(this);
     }
 
     public void InsertObjective(int index)
@@ -54,13 +64,27 @@ public class ObjectiveCollection : ScriptableObject
         string objectiveJson = JsonUtility.ToJson(objective);
 
         objectivePool.Insert(index + 1, objectiveJson);
+
+        EditorUtility.SetDirty(this);
     }
 
     public void ClearAllObjectives()
     {
         objectivePool.Clear();
+
+        EditorUtility.SetDirty(this);
     }
     #endregion
+
+    [MenuItem("Assets/Create/Objective Collection")]
+    public static void CreateDefaultLevels()
+    {
+        string path = EditorUtility.SaveFilePanelInProject("New Objective Collection", "ObjectiveCollection", "Asset", "Save Objective Collection", "Assets");
+        if (path == "")
+            return;
+        AssetDatabase.CreateAsset(CreateInstance<ObjectiveCollection>(), path);
+    }
+#endif
 
     #region Data Accessor Methods
     public Objective PullObjective(int index)
@@ -72,15 +96,4 @@ public class ObjectiveCollection : ScriptableObject
         return objective;
     }
     #endregion
-
-#if UNITY_EDITOR
-    [MenuItem("Assets/Create/Objective Collection")]
-    public static void CreateDefaultLevels()
-    {
-        string path = EditorUtility.SaveFilePanelInProject("New Objective Collection", "ObjectiveCollection", "Asset", "Save Objective Collection", "Assets");
-        if (path == "")
-            return;
-        AssetDatabase.CreateAsset(CreateInstance<ObjectiveCollection>(), path);
-    }
-#endif
 }

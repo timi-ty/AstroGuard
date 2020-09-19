@@ -15675,49 +15675,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79059574}
   m_CullTransparentMesh: 0
---- !u!1 &86749544
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 86749545}
-  - component: {fileID: 86749546}
-  m_Layer: 8
-  m_Name: Dark Rush
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &86749545
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86749544}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1400478148}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &86749546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86749544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21079495d4eb0a41a57f7c86e46362c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &102248176
 GameObject:
   m_ObjectHideFlags: 0
@@ -37606,7 +37563,7 @@ Transform:
   m_Children:
   - {fileID: 1207281965}
   m_Father: {fileID: 1400478148}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &768351551
 MonoBehaviour:
@@ -49086,7 +49043,7 @@ Transform:
   m_Children:
   - {fileID: 551566253}
   m_Father: {fileID: 1400478148}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1010857064
 MonoBehaviour:
@@ -52287,7 +52244,6 @@ Transform:
   m_Children:
   - {fileID: 1234852015}
   - {fileID: 1439243359}
-  - {fileID: 86749545}
   - {fileID: 1010857063}
   - {fileID: 768351550}
   m_Father: {fileID: 1433934410}

@@ -108,9 +108,9 @@ public class LevelEditor : Editor
 
         ListSavedLevels();
 
-        EditorGUILayout.Space(25);
+        //EditorGUILayout.Space(25);
 
-        ShuffleLevels();
+        //ShuffleLevels();
 
         EditorGUILayout.Space(30);
 
@@ -500,6 +500,12 @@ public class LevelEditor : Editor
             levelCollection.DeleteLevel(levelCollection.Count - 1);
             levelCollection.InsertLevel(levelCollection.Count - 1);
         }
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField(levelCollection.defaultLevelCollection.Count + " Levels", bold);
+
+        EditorGUILayout.Space(25);
     }
 
     private void ListSavedLevels()
@@ -513,35 +519,45 @@ public class LevelEditor : Editor
 
             GUILayoutOption[] JSONLayout = { GUILayout.MinHeight(50), GUILayout.MaxHeight(120), GUILayout.ExpandHeight(true) };
 
-            for (int i = 0; i < levelCollection.Count; i++)
+            for (int i = 0; i < levelCollection._levelInfoCollection.Count; i++)
             {
                 EditorGUILayout.LabelField("Level " + (i + 1), bold);
 
-                if (scroll.Count - 1 < i)
-                {
-                    scroll.Add(new Vector2());
-                }
+                //if (scroll.Count - 1 < i)
+                //{
+                //    scroll.Add(new Vector2());
+                //}
 
-                scroll[i] = EditorGUILayout.BeginScrollView(scroll[i], JSONLayout);
+                //scroll[i] = EditorGUILayout.BeginScrollView(scroll[i], JSONLayout);
 
-                levelCollection.defaultLevelCollection[i] = EditorGUILayout.TextArea(levelCollection.defaultLevelCollection[i]);
+                //levelCollection.defaultLevelCollection[i] = EditorGUILayout.TextArea(levelCollection.defaultLevelCollection[i]);
 
-                EditorGUILayout.EndScrollView();
+                //EditorGUILayout.EndScrollView();
+
+                EditorGUILayout.IntField("Enemies", levelCollection._levelInfoCollection[i].enemyLineup.Count);
+                EditorGUILayout.IntField("PowerUps", levelCollection._levelInfoCollection[i].objectSpawnSettings.powerUpOrbLineup.Count);
+                EditorGUILayout.IntField("Bombs", levelCollection._levelInfoCollection[i].objectSpawnSettings.bombLineup.Count);
 
                 if (GUILayout.Button(new GUIContent("Delete", "Delete this level and re-assign level indices.")))
                 {
                     levelCollection.DeleteLevel(i);
                 }
-                if (GUILayout.Button(new GUIContent("Insert", "Insert a new level here and re-assign level indices.")))
+                if (GUILayout.Button(new GUIContent("Insert Above", "Insert a new level here and re-assign level indices.")))
                 {
-                    levelCollection.InsertLevel(i);
+                    levelCollection.InsertLevel(i - 1);
+                }
+                if (i < levelCollection._levelInfoCollection.Count - 1)
+                {
+                    if (GUILayout.Button(new GUIContent("Insert Below", "Insert a new level here and re-assign level indices.")))
+                    {
+                        levelCollection.InsertLevel(i);
+                    }
                 }
 
                 if (isInFirebaseMode)
                 {
                     if (GUILayout.Button(new GUIContent("Publish To Firebase", "Publish this level to the firebase database.")))
                     {
-                        LevelInfo level = JsonUtility.FromJson<LevelInfo>(levelCollection.defaultLevelCollection[i]);
                         FirebaseUtility.WriteToDatabase(LevelManager.DLC_LEVELS_PATH + "/" + i, levelCollection.defaultLevelCollection[i], 
                             () => { Debug.Log("Level Published Successfully!"); });
                     }
@@ -553,6 +569,10 @@ public class LevelEditor : Editor
         else if (GUILayout.Button(new GUIContent("List Saved Levels", "Show all saved levels."), minorButtonLayout))
         {
             isDefaultLevelsListed = true;
+        }
+        if (GUILayout.Button(new GUIContent("Refresh Saved Levels", "Refresh list of all saved levels."), minorButtonLayout))
+        {
+            levelCollection.LoadLevelInfoCollection();
         }
     }
 

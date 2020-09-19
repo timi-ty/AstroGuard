@@ -6,7 +6,7 @@ public static class MyExtensions
     public static void Shuffle<T>(this IList<T> list, Random rnd, int startIndex, int endIndex)
     {
         for (var i = endIndex + 1; i > startIndex; i--)
-            list.Swap(0, rnd.Next(0, i));
+            list.Swap(startIndex, rnd.Next(startIndex, i));
     }
 
     public static void Swap<T>(this IList<T> list, int i, int j)

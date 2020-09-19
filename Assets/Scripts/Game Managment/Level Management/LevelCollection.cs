@@ -22,6 +22,7 @@ public class LevelCollection : ScriptableObject
 
 #if UNITY_EDITOR
     #region Editor Cache
+    public List<LevelInfo> _levelInfoCollection = new List<LevelInfo>();
     public LevelInfo _levelInfo = new LevelInfo();
     public AsteroidSpawnInfo _enemySpawnInfo = new AsteroidSpawnInfo();
     public PowerUpOrbSpawnInfo _powerUpOrbSpawnInfo = new PowerUpOrbSpawnInfo();
@@ -47,12 +48,22 @@ public class LevelCollection : ScriptableObject
 
         EditorUtility.SetDirty(this);
 
+        LoadLevelInfoCollection();
+
         Debug.Log("New Default Level Saved. Level " + (defaultLevelCollection.Count));
+    }
+
+    public void LoadLevelInfoCollection()
+    {
+        _levelInfoCollection = GetAll();
+        Debug.Log("Editor level list refreshed");
     }
 
     public void InsertLevel(int index)
     {
         defaultLevelCollection.Insert(index + 1, CurrentLevelInfoAsJson());
+
+        LoadLevelInfoCollection();
 
         EditorUtility.SetDirty(this);
 
@@ -77,6 +88,8 @@ public class LevelCollection : ScriptableObject
     {
         defaultLevelCollection.RemoveAt(index);
 
+        LoadLevelInfoCollection();
+
         EditorUtility.SetDirty(this);
 
         Debug.Log("Level " + (index + 1) + " Deleted.");
@@ -85,6 +98,8 @@ public class LevelCollection : ScriptableObject
     public void ClearAll()
     {
         defaultLevelCollection.Clear();
+
+        LoadLevelInfoCollection();
 
         EditorUtility.SetDirty(this);
 
@@ -104,6 +119,8 @@ public class LevelCollection : ScriptableObject
 
         defaultLevelCollection.Shuffle(new System.Random(), shuffleStartLevel - 1, shuffleEndLevel - 1);
 
+        LoadLevelInfoCollection();
+
         EditorUtility.SetDirty(this);
 
         Debug.Log(string.Format("Levels {0} to {1} shuffled.", shuffleStartLevel, shuffleEndLevel));
@@ -118,6 +135,8 @@ public class LevelCollection : ScriptableObject
         }
 
         defaultLevelCollection = tempUnshuffledLevelCollection;
+
+        LoadLevelInfoCollection();
 
         EditorUtility.SetDirty(this);
 

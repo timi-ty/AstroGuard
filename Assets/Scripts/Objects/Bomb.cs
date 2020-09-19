@@ -8,13 +8,11 @@ public struct BombExplosionInfo
     {
         public bool duringAttraction;
         public bool duringSlowMotion;
-        public bool duringDarkRush;
 
-        public ExplosionConditions(bool duringAttraction, bool duringSlowMotion, bool duringDarkRush)
+        public ExplosionConditions(bool duringAttraction, bool duringSlowMotion)
         {
             this.duringAttraction = duringAttraction;
             this.duringSlowMotion = duringSlowMotion;
-            this.duringDarkRush = duringDarkRush;
         }
     }
 
@@ -138,8 +136,7 @@ public class Bomb : OutsideSpawnable, IExplosionImpactible
         PowerUps powerUps = GameManager.instance.player.powerUps;
 
         BombExplosionInfo.ExplosionConditions explosionConditions = new BombExplosionInfo.ExplosionConditions(duringAttraction: powerUps.isAttractorActive,
-                                                                                                              duringSlowMotion: powerUps.isSlowMoActive,
-                                                                                                              duringDarkRush: powerUps.isDarkRushActive);
+                                                                                                              duringSlowMotion: powerUps.isSlowMoActive);
 
         return new BombExplosionInfo(trigger, DateTime.Now, explosionConditions);
     }

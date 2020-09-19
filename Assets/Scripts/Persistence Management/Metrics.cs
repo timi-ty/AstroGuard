@@ -71,18 +71,6 @@ public class Metrics
             });
     }
 
-    public static void LogDarkRush()
-    {
-        Instance.powerUpCollection.LogDarkRush();
-
-        FirebaseUtility.RecordCustomEvent("Power Up Collection",
-            new Firebase.Analytics.Parameter[]
-            {
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevel, GameManager.currentLevel),
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterItemName, "DarkRush")
-            });
-    }
-
     public static void LogPlayTime(uint seconds)
     {
         Instance.time.LogPlayTime(seconds);
@@ -150,7 +138,6 @@ public class Metrics
             }
 
             if (asteroidDeathInfo.deathConditions.duringSlowMotion) duringSlowMotion++;
-            if (asteroidDeathInfo.deathConditions.duringDarkRush) duringDarkRush++;
             if (asteroidDeathInfo.deathConditions.duringAttraction) duringAttraction++;
 
             total++;
@@ -164,7 +151,6 @@ public class Metrics
         public int bySword { get; private set; }
         public int byPlayer { get; private set; }
         public int byShip { get; private set; }
-        public int byShield { get; private set; }
         public int byExplosion { get; private set; }
         public int byMissile { get; private set; }
         public int duringSlowMotion { get; private set; }
@@ -184,9 +170,6 @@ public class Metrics
                 case BombExplosionInfo.Trigger.Ship:
                     byShip++;
                     break;
-                case BombExplosionInfo.Trigger.Shield:
-                    byShield++;
-                    break;
                 case BombExplosionInfo.Trigger.Explosion:
                     byExplosion++;
                     break;
@@ -196,7 +179,6 @@ public class Metrics
             }
 
             if (bombExplosionInfo.explosionConditions.duringSlowMotion) duringSlowMotion++;
-            if (bombExplosionInfo.explosionConditions.duringDarkRush) duringDarkRush++;
             if (bombExplosionInfo.explosionConditions.duringAttraction) duringAttraction++;
 
             total++;
@@ -211,7 +193,6 @@ public class Metrics
         public int shield { get; private set; }
         public int attractor { get; private set; }
         public int missileLauncher { get; private set; }
-        public int darkRush { get; private set; }
 
         public void Log(PowerType powerType)
         {
@@ -232,11 +213,6 @@ public class Metrics
             }
 
             total++;
-        }
-
-        public void LogDarkRush()
-        {
-            darkRush++;
         }
     }
 
