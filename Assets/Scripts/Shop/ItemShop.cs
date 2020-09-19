@@ -95,9 +95,12 @@ public class ItemShop : MonoBehaviour
 
     public Item SelectItem(int itemIndex)
     {
-        if(itemIndex == 0 || itemIndex == 10)
+        Item item = Items[itemIndex];
+
+        Analytics.LogItemSelected(item.itemId.ToString());
+
+        if (itemIndex == 0 || itemIndex == 10)
         {
-            Item item = Items[itemIndex];
             ActivateItem(itemIndex);
             return item;
         }
@@ -106,8 +109,6 @@ public class ItemShop : MonoBehaviour
 
         if (isShopReady)
         {
-            Item item = Items[itemIndex];
-
             if (Purchaser.OwnsItem(item))
             {
                 ActivateItem(itemIndex);

@@ -63,12 +63,7 @@ public class Metrics
     {
         Instance.powerUpCollection.Log(powerType);
 
-        FirebaseUtility.RecordCustomEvent("Power Up Collection",
-            new Firebase.Analytics.Parameter[]
-            {
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevel, GameManager.currentLevel),
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterItemName, powerType.ToString())
-            });
+        Analytics.LogPowerUpCollected(powerType.ToString());
     }
 
     public static void LogPlayTime(uint seconds)

@@ -99,13 +99,7 @@ public class Session
 
         Bind();
 
-        FirebaseUtility.RecordCustomEvent("Session Ended",
-            new Firebase.Analytics.Parameter[]
-            {
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevel, GameManager.currentLevel),
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterScore, PersistentScore),
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterCharacter, PlayerStats.Instance.ExperienceLevel)
-            });
+        Analytics.LogSessionEnded(PersistentScore);
     }
 
     public void Restore()
@@ -115,6 +109,8 @@ public class Session
         StartTime = restorableStartTime;
 
         PlayerStats.PocketAstroGold(restorableAstroGold);
+
+        Analytics.LogSessionRestored(volatileScore);
     }
 
 

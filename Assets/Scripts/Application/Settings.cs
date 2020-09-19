@@ -91,7 +91,7 @@ public class Settings : MonoBehaviour
             negativeActionText = "CANCEL"
         };
 
-        UIManager.QueueAlertDialog(alertMessageInfo, FirebaseUtility.SignOut, () => { });
+        UIManager.QueueAlertDialog(alertMessageInfo, ApplicationManager.SignOut, () => { });
     }
 
     public void SyncProgress()

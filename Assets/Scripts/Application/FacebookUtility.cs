@@ -121,4 +121,19 @@ public static class FacebookUtility
             Time.timeScale = 1;
         }
     }
+
+    public static void SignOut()
+    {
+        FB.LogOut();
+    }
+
+    public static void LogAppEvent(string eventName)
+    {
+        FB.LogAppEvent(eventName);
+    }
+
+    public static void LogPurchase(decimal price, string currency)
+    {
+        FB.LogPurchase(price, currency);
+    }
 }

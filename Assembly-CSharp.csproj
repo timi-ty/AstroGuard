@@ -63,6 +63,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Adjust\3rd Party\SimpleJSON.cs" />
+    <Compile Include="Assets\Adjust\Android\AdjustAndroid.cs" />
+    <Compile Include="Assets\Adjust\ExampleGUI\ExampleGUI.cs" />
+    <Compile Include="Assets\Adjust\Unity\Adjust.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustAppStoreSubscription.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustAttribution.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustConfig.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustEnvironment.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustEvent.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustEventFailure.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustEventSuccess.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustLogLevel.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustPlayStoreSubscription.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustSessionFailure.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustSessionSuccess.cs" />
+    <Compile Include="Assets\Adjust\Unity\AdjustUtils.cs" />
+    <Compile Include="Assets\Adjust\Windows\AdjustWindows.cs" />
+    <Compile Include="Assets\Adjust\iOS\AdjustiOS.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\ConsoleBase.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\LogView.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\MenuBase.cs" />
@@ -74,13 +92,16 @@
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
+    <Compile Include="Assets\Scripts\Application\AdjustUtility.cs" />
     <Compile Include="Assets\Scripts\Application\AdsManager.cs" />
     <Compile Include="Assets\Scripts\Application\Analytics.cs" />
     <Compile Include="Assets\Scripts\Application\ApplicationManager.cs" />
+    <Compile Include="Assets\Scripts\Application\FCMClient.cs" />
     <Compile Include="Assets\Scripts\Application\FacebookUtility.cs" />
     <Compile Include="Assets\Scripts\Application\FirebaseUtility.cs" />
     <Compile Include="Assets\Scripts\Application\LeaderboardEntry.cs" />
     <Compile Include="Assets\Scripts\Application\LeaderboardManager.cs" />
+    <Compile Include="Assets\Scripts\Application\NotificationManager.cs" />
     <Compile Include="Assets\Scripts\Application\Purchaser.cs" />
     <Compile Include="Assets\Scripts\Application\Settings.cs" />
     <Compile Include="Assets\Scripts\Asteroids\AsteroidCommander.cs" />
@@ -176,6 +197,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\FacebookSDK\link.xml" />
+    <None Include="Assets\Adjust\Android\AdjustAndroidManifest.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
@@ -437,6 +459,18 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="Win81Interface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win81Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="WinWsInterface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/WinWsInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Win10Interface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win10Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Messaging">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Program Files/Unity/Hub/Editor/2019.4.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -872,6 +906,15 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Notifications.iOS">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/Unity.Notifications.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Notifications.Android">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/Unity.Notifications.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mobile.AndroidLogcat.Editor">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

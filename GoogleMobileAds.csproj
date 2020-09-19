@@ -423,6 +423,21 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="Win81Interface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win81Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="WinWsInterface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/WinWsInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Win10Interface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win10Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Messaging">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Messaging.Editor">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Editor/Firebase.Messaging.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/Program Files/Unity/Hub/Editor/2019.4.8f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
     </Reference>
@@ -768,11 +783,11 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>D:/Program Files/Unity/Hub/Editor/2019.4.8f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

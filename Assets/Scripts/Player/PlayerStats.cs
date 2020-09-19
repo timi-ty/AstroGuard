@@ -117,17 +117,12 @@ public class PlayerStats
         {
             GameManager.SpawnGoldCoin();
         }
-
-        FirebaseUtility.RecordCustomEvent("Gained Experience",
-            new Firebase.Analytics.Parameter[]
-            {
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterValue, xpReward),
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterCharacter, Instance.ExperiencePoints)
-            });
     }
 
     public static void ClaimRewardedAstroGold()
     {
+        if (FirebaseUtility.CurrentUser?.UserId == null) return;
+
         string astroGoldPath = DB_USER_REWARD_PATH + FirebaseUtility.CurrentUser.UserId + "/AstroGold";
 
         FirebaseUtility.ReadFromDatabase(astroGoldPath,
@@ -207,6 +202,8 @@ public class PlayerStats
 
     public static void DepositPocketedAstroGold()
     {
+        if (FirebaseUtility.CurrentUser?.UserId == null) return;
+
         FirebaseUtility.PushToDatabase(DB_USER_REWARD_PATH + FirebaseUtility.CurrentUser.UserId + "/AstroGold", Instance.TempAstroGoldPocket,
             () =>
             {

@@ -257,7 +257,16 @@ public class LevelManager : MonoBehaviour
 
         CurrentLevel = Mathf.Clamp(CurrentLevel, 1, LevelCount);
 
+        bool previouslyFinishedIntro = LevelsState.IsUnlocked(6);
+
         LevelsState.MarkUnlocked(CurrentLevel);
+
+        bool justfinishedIntro = LevelsState.IsUnlocked(6);
+
+        if (!previouslyFinishedIntro && justfinishedIntro)
+        {
+            Analytics.LogIntroLevelsCompleted();
+        }
 
         return CurrentLevel;
     }

@@ -34,6 +34,6 @@ public class ObjectiveListing : MonoBehaviour
         descriptionText.text = objective.Description;
         xpText.text = "XP: " + objective.XpReward.ToString();
         goldText.text = objective.GoldReward.ToString();
-        completionText.text = objective.Completion.ToString() + "%";
+        completionText.text = ((int)objective.Completion).ToString() + "%";
     }
 }

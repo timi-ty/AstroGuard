@@ -74,4 +74,13 @@ public class ApplicationManager : MonoBehaviour
     {
         FacebookUtility.PromptLogIn();
     }
+
+    public static void SignOut()
+    {
+        FirebaseUtility.SignOut();
+
+        FacebookUtility.SignOut();
+
+        Analytics.LogSignOut();
+    }
 }

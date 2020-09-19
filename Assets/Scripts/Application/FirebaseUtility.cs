@@ -57,6 +57,8 @@ public static class FirebaseUtility
 
                 Database = FirebaseDatabase.DefaultInstance;
 
+                FCMClient.Initialize();
+
                 IsFirebaseSafeToUse = true;
 
                 if(inPlayMode)
@@ -676,6 +678,8 @@ public static class FirebaseUtility
               new Parameter(FirebaseAnalytics.ParameterMethod, loginMethod),
           }
         );
+
+        Analytics.LogSignIn();
     }
 
     public static void RecordSignUpEvent(string signUpMethod)
@@ -687,6 +691,8 @@ public static class FirebaseUtility
               new Parameter(FirebaseAnalytics.ParameterMethod, signUpMethod),
           }
         );
+
+        Analytics.LogSignUp();
     }
 
     public static void RecordCustomEvent(string eventName, params Parameter[] parameters)

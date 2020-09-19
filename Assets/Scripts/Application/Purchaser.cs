@@ -337,6 +337,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
         UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, UIManager.instance.ShowStoreUI);
 
+        Analytics.LogItemPurchased(args.purchasedProduct.definition.id, args.purchasedProduct.metadata.localizedPrice, args.purchasedProduct.metadata.isoCurrencyCode);
+
         return PurchaseProcessingResult.Complete;
     }
 

@@ -123,13 +123,7 @@ public class ObjectiveManager : MonoBehaviour
 
                         PlayerStats.ObjectiveReward(objective.XpReward, objective.GoldReward);
 
-                        FirebaseUtility.RecordCustomEvent("Objective Completed",
-                            new Firebase.Analytics.Parameter[]
-                            {
-                                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevel, GameManager.currentLevel),
-                                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterCharacter, PlayerStats.Instance.ExperienceLevel),
-                                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterItemName, objective.Description)
-                            });
+                        Analytics.LogObjectiveCompleted(objective.Description);
                     }
 
                     if (MoreObjectivesAvailable())
