@@ -75,6 +75,7 @@
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
     <Compile Include="Assets\Scripts\Application\AdsManager.cs" />
+    <Compile Include="Assets\Scripts\Application\Analytics.cs" />
     <Compile Include="Assets\Scripts\Application\ApplicationManager.cs" />
     <Compile Include="Assets\Scripts\Application\FacebookUtility.cs" />
     <Compile Include="Assets\Scripts\Application\FirebaseUtility.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Assets\Scripts\Utils\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\ForceNoRotation.cs" />
     <Compile Include="Assets\Scripts\Utils\GeneralSelfDestruct.cs" />
+    <Compile Include="Assets\Scripts\Utils\MyExtensions.cs" />
     <Compile Include="Assets\Scripts\Utils\PartSysSelfDestruct.cs" />
     <Compile Include="Assets\Scripts\Utils\RandomMaterialColor.cs" />
     <Compile Include="Assets\Scripts\Utils\RandomRotate3D.cs" />

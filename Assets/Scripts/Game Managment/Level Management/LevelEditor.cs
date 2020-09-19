@@ -108,7 +108,20 @@ public class LevelEditor : Editor
 
         ListSavedLevels();
 
+        EditorGUILayout.Space(25);
+
+        ShuffleLevels();
+
+        EditorGUILayout.Space(30);
+
         SavedLevelsFooter();
+
+        //EditorGUILayout.Space(25);
+
+        //if (GUILayout.Button("Randomize bg index", minorButtonLayout))
+        //{
+        //    levelCollection.AssignRandomBGIndeces();
+        //}
     }
 
     private GUIStyle BoldStyle()
@@ -557,7 +570,7 @@ public class LevelEditor : Editor
                     () => { Debug.Log("Level Collection Published Successfully!"); });
             }
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(100);
 
             if (GUILayout.Button(new GUIContent("Clear Collection", "Delete all saved levels locally and in the firebase database."), minorButtonLayout))
             {
@@ -566,10 +579,34 @@ public class LevelEditor : Editor
         }
         else
         {
+            EditorGUILayout.Space(100);
+
             if (GUILayout.Button(new GUIContent("Clear Saved Levels", "Delete all saved levels."), minorButtonLayout))
             {
                 levelCollection.ClearAll();
             }
+        }
+    }
+
+    private void ShuffleLevels()
+    {
+        EditorGUILayout.LabelField("Shuffle Levels", bold);
+
+        GUILayout.BeginHorizontal();
+
+        levelCollection.shuffleStartLevel = EditorGUILayout.IntField("Start Level", levelCollection.shuffleStartLevel);
+        levelCollection.shuffleEndLevel = EditorGUILayout.IntField("End Level", levelCollection.shuffleEndLevel);
+
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button(new GUIContent("Shuffle"), majorButtonLayout))
+        {
+            levelCollection.ShuffleCollection();
+        }
+
+        if (GUILayout.Button(new GUIContent("Undo Last Shuffle"), minorButtonLayout))
+        {
+            levelCollection.UndoShuffle();
         }
     }
 

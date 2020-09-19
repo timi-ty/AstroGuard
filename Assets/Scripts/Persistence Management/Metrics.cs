@@ -57,12 +57,6 @@ public class Metrics
     public static void LogPlayerDeath()
     {
         Instance.others.LogPlayerDeath();
-
-        FirebaseUtility.RecordCustomEvent("Player Death", 
-            new Firebase.Analytics.Parameter[] 
-            { 
-                new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevel, GameManager.currentLevel)
-            });
     }
 
     public static void LogPowerUpCollection(PowerType powerType)

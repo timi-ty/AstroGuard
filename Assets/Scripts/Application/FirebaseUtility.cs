@@ -334,7 +334,18 @@ public static class FirebaseUtility
 
         Task uploadTask = storageReference.PutBytesAsync(ByteDataHelper.GameDataToBytes(gameData));
 
-        await uploadTask;
+        try
+        {
+            await uploadTask;
+        }
+        catch(StorageException uploadException)
+        {
+            Debug.Log("Couldn't upload save data because " + uploadException);
+
+            Debug.Log("Game sync failed. Aborting...");
+            IsSyncing = false;
+            return;
+        }
 
         if (uploadTask.Exception is null)
         {

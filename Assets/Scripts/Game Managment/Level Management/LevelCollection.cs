@@ -8,11 +8,12 @@ using UnityEditor;
 public class LevelCollection : ScriptableObject
 {
     #region Constants
-    public const int MAX_DIFFICULTY = 20;
+    public const int MAX_DIFFICULTY = 30;
     #endregion
 
     #region Data
     public List<string> defaultLevelCollection = new List<string>();
+    private List<string> tempUnshuffledLevelCollection = new List<string>();
     #endregion
 
     #region Properties
@@ -26,6 +27,8 @@ public class LevelCollection : ScriptableObject
     public PowerUpOrbSpawnInfo _powerUpOrbSpawnInfo = new PowerUpOrbSpawnInfo();
     public BombSpawnInfo _bombSpawnInfo = new BombSpawnInfo();
     public float _powerUpSpawnDuration;
+    public int shuffleStartLevel;
+    public int shuffleEndLevel;
     #endregion
 
     private void Awake()
@@ -87,6 +90,39 @@ public class LevelCollection : ScriptableObject
 
         Debug.Log(name + " Cleared!");
     }
+
+    public void ShuffleCollection()
+    {
+        if (shuffleEndLevel <= shuffleStartLevel || shuffleEndLevel > defaultLevelCollection.Count || shuffleStartLevel <= 0)
+        {
+            Debug.LogWarning("Invalid shuffle parameters. Level shuffle did not take place.");
+            return;
+        }
+
+        tempUnshuffledLevelCollection = new List<string>();
+        tempUnshuffledLevelCollection.AddRange(defaultLevelCollection);
+
+        defaultLevelCollection.Shuffle(new System.Random(), shuffleStartLevel - 1, shuffleEndLevel - 1);
+
+        EditorUtility.SetDirty(this);
+
+        Debug.Log(string.Format("Levels {0} to {1} shuffled.", shuffleStartLevel, shuffleEndLevel));
+    }
+
+    public void UndoShuffle()
+    {
+        if(tempUnshuffledLevelCollection.Count != defaultLevelCollection.Count)
+        {
+            Debug.LogWarning("No shuffle to undo.");
+            return;
+        }
+
+        defaultLevelCollection = tempUnshuffledLevelCollection;
+
+        EditorUtility.SetDirty(this);
+
+        Debug.Log("Last shuffle undone.");
+    }
     #endregion
 
     #region Random Level Generator Methods
@@ -98,7 +134,7 @@ public class LevelCollection : ScriptableObject
         float maxDurationError = _enemySpawnInfo.enemySize;
 
         _levelInfo.enemyLineup.AddRange(
-            AsteroidCommander.GetRanomEnemyLineup(length: length,
+            AsteroidCommander.GetRanomAsteroidLineup(length: length,
                                                duration: duration,
                                                maxDurationError: maxDurationError,
                                                difficulty: difficulty,
@@ -123,6 +159,22 @@ public class LevelCollection : ScriptableObject
 
         _levelInfo.objectSpawnSettings.bombLineup.AddRange(
             BombSpawner.GetRanomBombLineup(length, duration, maxDurationError));
+    }
+
+    public void AssignRandomBGIndeces()
+    {
+        for (int i = 0; i < defaultLevelCollection.Count; i++)
+        {
+            LevelInfo level = JsonUtility.FromJson<LevelInfo>(defaultLevelCollection[i]);
+
+            level.environmentSettings.backgroundAssetIndex = Background.GetRandomBackgroundIndex();
+
+            defaultLevelCollection[i] = JsonUtility.ToJson(level, true);
+        }
+
+        EditorUtility.SetDirty(this);
+
+        Debug.Log("Background Indeces Randomized.");
     }
     #endregion
 

@@ -140,49 +140,49 @@ public class AsteroidCommander : MonoBehaviour
     }
 
     #region Static Utility Methods
-    public static List<AsteroidSpawnInfo> GetRanomEnemyLineup(int length, float duration, float maxDurationError, int difficulty, int maxDifficulty)
+    public static List<AsteroidSpawnInfo> GetRanomAsteroidLineup(int length, float duration, float maxDurationError, int difficulty, int maxDifficulty)
     {
-        List<AsteroidSpawnInfo> enemyLineup = new List<AsteroidSpawnInfo>();
+        List<AsteroidSpawnInfo> asteroidLineup = new List<AsteroidSpawnInfo>();
 
         float meanSpawnInterval = duration / length;
         float maxIntervalError = maxDurationError / length;
 
         for (int i = 0; i < length; i++)
         {
-            AsteroidSpawnInfo spawnInfo = AsteroidCommander.GetRandomEnemyInfo(difficulty, maxDifficulty);
+            AsteroidSpawnInfo spawnInfo = GetRandomAsteroidInfo(difficulty, maxDifficulty);
 
             float intervalError = UnityEngine.Random.Range(-maxIntervalError, maxIntervalError);
 
             spawnInfo.spawnDelay = Mathf.Clamp(meanSpawnInterval + intervalError, 0, meanSpawnInterval + maxIntervalError);
 
-            enemyLineup.Add(spawnInfo);
+            asteroidLineup.Add(spawnInfo);
         }
 
-        return enemyLineup;
+        return asteroidLineup;
     }
 
-    public static AsteroidSpawnInfo GetRandomEnemyInfo(int difficulty, int maxDifficulty)
+    public static AsteroidSpawnInfo GetRandomAsteroidInfo(int difficulty, int maxDifficulty)
     {
         AsteroidSpawnInfo enemySpawnInfo = new AsteroidSpawnInfo();
-        enemySpawnInfo.spawnPositionIndex = GetRandomEnemySpawnPositionIndex();
-        enemySpawnInfo.enemySize = GetRandomEnemySize();
-        enemySpawnInfo.enemySpeed = GetRandomEnemySpeed(difficulty, maxDifficulty);
+        enemySpawnInfo.spawnPositionIndex = GetRandomAsteroidSpawnPositionIndex();
+        enemySpawnInfo.enemySize = GetRandomAsteroidSize();
+        enemySpawnInfo.enemySpeed = GetRandomAsteroidSpeed(difficulty, maxDifficulty);
         enemySpawnInfo.enemyType = GetRandomEnemyType(difficulty, maxDifficulty);
         return enemySpawnInfo;
     }
 
-    private static int GetRandomEnemySpawnPositionIndex()
+    private static int GetRandomAsteroidSpawnPositionIndex()
     {
         ScreenBounds.RandomXCoord(SPAWN_POSITIONS_COUNT, out int index);
         return index;
     }
 
-    private static float GetRandomEnemySize()
+    private static float GetRandomAsteroidSize()
     {
         return UnityEngine.Random.Range(0.8f, 1.2f); ;
     }
 
-    private static float GetRandomEnemySpeed(int difficulty, int maxDifficulty)
+    private static float GetRandomAsteroidSpeed(int difficulty, int maxDifficulty)
     {
         return 1.0f + (difficulty / maxDifficulty) + UnityEngine.Random.value * ((difficulty / maxDifficulty * 2.5f) +  2.0f);
     }
@@ -191,9 +191,9 @@ public class AsteroidCommander : MonoBehaviour
     {
         Vector3[] enemyTypeDistributions = new Vector3[] { new Vector3(24, 0, 0), new Vector3(20, 4, 0), new Vector3(17, 7, 0), new Vector3(17, 5, 2), new Vector3(15, 6, 3)
                                                          , new Vector3(13, 8, 3), new Vector3(11, 9, 4), new Vector3(10, 10, 4), new Vector3(10, 9, 5), new Vector3(10, 8, 6)
-                                                         , new Vector3(9, 8, 7)};
+                                                         , new Vector3(9, 8, 7), new Vector3(5, 14, 5), new Vector3(2, 11, 11), new Vector3(0, 24, 0), new Vector3(0, 0, 24)};
 
-        int index = Mathf.RoundToInt(difficulty / (maxDifficulty / (enemyTypeDistributions.Length - 1)));
+        int index = Mathf.RoundToInt((difficulty / maxDifficulty) * (enemyTypeDistributions.Length - 1));
 
         Vector3 distribution = enemyTypeDistributions[index];
 
