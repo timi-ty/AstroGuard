@@ -271,6 +271,15 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Win10Interface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win10Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Win81Interface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win81Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="WinWsInterface">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/WinWsInterface.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/FacebookSDK/Plugins/Facebook.Unity.dll</HintPath>
     </Reference>
@@ -352,6 +361,12 @@
     <Reference Include="Firebase.Database">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.database@6.15.2/Firebase/Plugins/Firebase.Database.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Messaging.Editor">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Editor/Firebase.Messaging.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Messaging">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Storage">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.storage@6.15.2/Firebase/Plugins/Firebase.Storage.dll</HintPath>
     </Reference>
@@ -360,21 +375,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="Win81Interface">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win81Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="WinWsInterface">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/WinWsInterface.dll</HintPath>
-    </Reference>
-    <Reference Include="Win10Interface">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Assets/Adjust/Windows/Stubs/Win10Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Messaging">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Messaging.Editor">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.google.firebase.messaging@6.15.2/Firebase/Editor/Firebase.Messaging.Editor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>

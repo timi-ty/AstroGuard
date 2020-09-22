@@ -147,6 +147,8 @@ public class GameManager : MonoBehaviour
 
         ObjectiveManager.Refresh();
 
+        ObjectiveManager.SaveActiveToFirebase();
+
         levelProgress = 0;
 
         Time.timeScale = defaultTimeScale;
@@ -218,6 +220,8 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelFinished()
     {
+        if (Session.Instance.ShipHealth <= 0) return;
+
         Session.Instance.Bind();
 
         AudioManager.TurnUpBgMusic();

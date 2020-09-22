@@ -69,7 +69,7 @@ public class Settings : MonoBehaviour
             negativeActionText = "CANCEL"
         };
 
-        UIManager.QueueAlertDialog(alertMessageInfo, ClearAndRefresh, () => { });
+        UIManager.QueueAlertDialog(alertMessageInfo, ClearAndRefresh, () => { }, "clear_progress");
     }
 
     private void ClearAndRefresh()
@@ -91,7 +91,7 @@ public class Settings : MonoBehaviour
             negativeActionText = "CANCEL"
         };
 
-        UIManager.QueueAlertDialog(alertMessageInfo, ApplicationManager.SignOut, () => { });
+        UIManager.QueueAlertDialog(alertMessageInfo, ApplicationManager.SignOut, () => { }, "log_out");
     }
 
     public void SyncProgress()

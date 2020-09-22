@@ -29,7 +29,7 @@ public struct BombExplosionInfo
     }
 }
 
-public class Bomb : OutsideSpawnable, IExplosionImpactible
+public class Bomb : OutsideSpawnableBase, IExplosionImpactible
 {
     #region Properties
     private float size { get { return transform.localScale.magnitude; } set { transform.localScale = Vector3.one * value; } }

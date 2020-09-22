@@ -33,6 +33,10 @@ public class ObjectiveManager : MonoBehaviour
     public static ObjectiveManager instance { get; private set; }
     #endregion
 
+    #region Properties
+    public static string DbActiveObjectivesPath => ApplicationManager.DbUserPath + "ActiveObjectives/";
+    #endregion
+
     #region Data Sources
     [Header("Data Sources")]
     public ObjectiveCollection objectiveCollection;
@@ -135,6 +139,27 @@ public class ObjectiveManager : MonoBehaviour
 
             activeObjectives[i] = objective;
         }
+    }
+
+    public static void SaveActiveToFirebase()
+    {
+        if (FirebaseUtility.CurrentUser?.UserId == null) return;
+
+
+        List<Dictionary<string, object>> metaObjectives = new List<Dictionary<string, object>>();
+        
+        foreach(Objective objective in instance.activeObjectives)
+        {
+            Dictionary<string, object> objectiveMetaData = new Dictionary<string, object>();
+
+            objectiveMetaData["description"] = objective.Description.Replace('.', ' ');
+            objectiveMetaData["xpReward"] = objective.XpReward;
+            objectiveMetaData["goldReward"] = objective.GoldReward;
+
+            metaObjectives.Add(objectiveMetaData);
+        }
+
+        FirebaseUtility.WriteToDatabase(DbActiveObjectivesPath, metaObjectives, () => Debug.Log("Active Objectives saved to Firebase."));
     }
 
     public static Objective GetActiveObjective(int i)

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileLauncher : PowerUpExtension
+public class MissileLauncher : PowerUpBase
 {
     Dictionary<int, Transform> targets = new Dictionary<int, Transform>();
 

@@ -9,7 +9,10 @@ public class ApplicationManager : MonoBehaviour
     #region Constants
     public const string DB_APP_PATH = "app/";
     public const string DB_DLC_PATH = "app/DLC/";
-    public const string DB_USER_PATH = "users/";
+    #endregion
+
+    #region Properties
+    public static string DbUserPath => "users/" + FirebaseUtility.CurrentUser?.UserId + "/";
     #endregion
 
     #region Events
@@ -45,6 +48,7 @@ public class ApplicationManager : MonoBehaviour
 
         FirebaseUtility.InitializeFirebase(true);
         FacebookUtility.InitializeFacebook();
+        
 
         Debug.Log("Loaded Data: " + GameDataManager.GameData.ToString());
     }

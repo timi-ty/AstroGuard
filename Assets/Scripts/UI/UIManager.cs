@@ -218,9 +218,9 @@ public class UIManager : MonoBehaviour
         instance.leaderBoardButton.interactable = enable;
     }
 
-    public static void QueueAlertDialog(AlertMessageInfo alertMessageInfo, UnityAction positiveAction, UnityAction negativeAction)
+    public static void QueueAlertDialog(AlertMessageInfo alertMessageInfo, UnityAction positiveAction, UnityAction negativeAction, string alertId)
     {
-        instance.alertDialog.Queue(alertMessageInfo, positiveAction, negativeAction);
+        instance.alertDialog.Queue(alertMessageInfo, positiveAction, negativeAction, alertId);
     }
     #endregion
 

@@ -42,4 +42,4 @@ MonoBehaviour:
   TrackedResourceAssets:
   - Id: icon_0
     Type: 1
-    Asset: {fileID: 2800000, guid: 3a44880895072224b927ba0398589ce7, type: 3}
+    Asset: {fileID: 2800000, guid: 7a55551d4d88e1948b4c69e5f9319eb7, type: 3}

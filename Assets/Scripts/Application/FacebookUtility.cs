@@ -51,7 +51,7 @@ public static class FacebookUtility
                 negativeActionText = "Cancel"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, PromptLogIn, () => { } );
+            UIManager.QueueAlertDialog(alertMessageInfo, PromptLogIn, () => { }, "login_prompt");
 
             return;
         }
@@ -87,7 +87,7 @@ public static class FacebookUtility
                 negativeActionText = "Cancel"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, PromptLogIn, () => { });
+            UIManager.QueueAlertDialog(alertMessageInfo, PromptLogIn, () => { }, "login_cancelled");
         }
     }
 

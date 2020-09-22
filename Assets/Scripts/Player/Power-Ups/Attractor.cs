@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Attractor : PowerUpExtension
+public class Attractor : PowerUpBase
 {
     #region Inspector Parameters
     [Header("Field Settings")]

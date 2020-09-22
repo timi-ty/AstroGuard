@@ -130,7 +130,7 @@ public class ItemShop : MonoBehaviour
                 negativeActionText = "Go Home"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, RetrySelect, GameManager.instance.GoHome);
+            UIManager.QueueAlertDialog(alertMessageInfo, RetrySelect, GameManager.instance.GoHome, "shop_not_ready");
             return null;
         }
     }

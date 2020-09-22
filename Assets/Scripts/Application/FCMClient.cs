@@ -1,63 +1,53 @@
 ﻿using UnityEngine;
 using Firebase.Messaging;
 
-public class FCMClient : MonoBehaviour
+public static class FCMClient
 {
-    #region Singleton
-    public static FCMClient instance { get; private set; }
-    #endregion
 
-    private const string NotificationKey = "notification";
-
-    private void Awake()
-    {
-        #region Singleton
-        DontDestroyOnLoad(gameObject);
-
-        if (!instance)
-        {
-            instance = this;
-        }
-        else if (!instance.Equals(this))
-        {
-            Destroy(gameObject);
-        }
-        #endregion
-    }
+    private const string DYNAMIC_OBJECTIVE = "dynamicObjective";
+    private const string TITLE = "title";
 
     public static void Initialize()
     {
         FirebaseMessaging.SubscribeAsync("Game_Notification");
-
-        FirebaseMessaging.TokenReceived += instance.OnTokenReceived;
-        FirebaseMessaging.MessageReceived += instance.OnMessageReceived;
+        
+        FirebaseMessaging.TokenReceived += OnTokenReceived;
+        FirebaseMessaging.MessageReceived += OnMessageReceived;
     }
 
-    public void OnTokenReceived(object sender, TokenReceivedEventArgs token)
+    public static void OnTokenReceived(object sender, TokenReceivedEventArgs token)
     {
         Debug.Log("Received Registration Token: " + token.Token);
     }
 
-    public void OnMessageReceived(object sender, MessageReceivedEventArgs e)
+    public static void OnMessageReceived(object sender, MessageReceivedEventArgs e)
     {
         Debug.Log("Received a new message");
 
         if (e.Message.From.Length > 0)
             Debug.Log("from: " + e.Message.From);
 
-        if (e.Message.Data.Count > 0)
-        {
-            Debug.Log("data:");
+        
+        e.Message.Data.TryGetValue(DYNAMIC_OBJECTIVE, out string objectiveIndexe);
+        Debug.Log("Message Data: " + objectiveIndexe);
 
-            foreach (System.Collections.Generic.KeyValuePair<string, string> messageData in
-                     e.Message.Data)
+        if (e.Message.Notification != null)
+        {
+            Debug.Log("Notification Title: " + e.Message.Notification.Title);
+
+            if (e.Message.Data.TryGetValue(DYNAMIC_OBJECTIVE, out string objectiveIndex))
             {
-                Debug.Log("  " + messageData.Key + ": " + messageData.Value);
-                if (messageData.Key.Equals(NotificationKey))
-                {
-                    NotificationManager.Notify(messageData.Value);
-                }
+                NotificationManager.NotifyObjective(e.Message.Notification.Title, objectiveIndex);
             }
+            else
+            {
+                NotificationManager.Notify(e.Message.Notification.Title, e.Message.Notification.Body);
+            }
+        }
+        else if (e.Message.Data.TryGetValue(DYNAMIC_OBJECTIVE, out string objectiveIndex))
+        {
+            e.Message.Data.TryGetValue(TITLE, out string title);
+            NotificationManager.NotifyObjective(title, objectiveIndex);
         }
     }
 }

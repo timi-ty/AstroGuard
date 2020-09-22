@@ -44,6 +44,8 @@ public class Ship : MonoBehaviour, IShieldable
     {
         if (GameManager.currentLevel <= 0) return;
 
+        if (collision.GetContact(0).point.x < ScreenBounds.min.x || collision.GetContact(0).point.x > ScreenBounds.max.x) return;
+
         OnHit(collision.transform);
     }
     #endregion

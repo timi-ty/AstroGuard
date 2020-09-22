@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GoldCoin : OutsideSpawnable
+public class GoldCoin : OutsideSpawnableBase
 {
 
     #region Inspector Parameters

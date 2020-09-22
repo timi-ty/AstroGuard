@@ -23,8 +23,8 @@ public class PlayerStats
     }
     #endregion
 
-    #region Const
-    public const string DB_USER_REWARD_PATH = ApplicationManager.DB_USER_PATH + "Rewards/";
+    #region Properties
+    public static string DbUserRewardsPath => ApplicationManager.DbUserPath + "Rewards/";
     #endregion
 
     #region Status
@@ -123,7 +123,7 @@ public class PlayerStats
     {
         if (FirebaseUtility.CurrentUser?.UserId == null) return;
 
-        string astroGoldPath = DB_USER_REWARD_PATH + FirebaseUtility.CurrentUser.UserId + "/AstroGold";
+        string astroGoldPath = DbUserRewardsPath + "/AstroGold";
 
         FirebaseUtility.ReadFromDatabase(astroGoldPath,
             (value) =>
@@ -148,7 +148,7 @@ public class PlayerStats
                             {
                                 titleText = "GOLD! GOLD! GOLD!",
 
-                                messageText = "Congrats! you just claimed " + goldValue.ToString() + " Astro Gold. " +
+                                messageText = "Congrats! you just claimed some Astro Gold. " +
                                 "Head to the store to empower your power-ups with your new gold!",
 
                                 positiveActionText = "Go to Store",
@@ -158,7 +158,7 @@ public class PlayerStats
                             };
                             if (goldValue > 0)
                             {
-                                UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, () => { });
+                                UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, () => { }, "claimed_reward");
                             }
                         });
                 }
@@ -176,7 +176,7 @@ public class PlayerStats
                     };
                     if (goldValue > 0)
                     {
-                        UIManager.QueueAlertDialog(alertMessageInfo, FirebaseUtility.SyncGameData, () => { });
+                        UIManager.QueueAlertDialog(alertMessageInfo, FirebaseUtility.SyncGameData, () => { }, "awaiting_reward");
                     }
                 }
                     
@@ -187,7 +187,7 @@ public class PlayerStats
     {
         if (FirebaseUtility.CurrentUser?.UserId == null) return;
 
-        FirebaseUtility.PushToDatabase(DB_USER_REWARD_PATH + FirebaseUtility.CurrentUser.UserId + "/AstroGold", goldReward, null);
+        FirebaseUtility.PushToDatabase(DbUserRewardsPath + "/AstroGold", goldReward, null);
     }
 
     public static void PocketAstroGold(int gold)
@@ -202,9 +202,9 @@ public class PlayerStats
 
     public static void DepositPocketedAstroGold()
     {
-        if (FirebaseUtility.CurrentUser?.UserId == null) return;
+        if (FirebaseUtility.CurrentUser?.UserId == null || Instance.TempAstroGoldPocket < 1) return;
 
-        FirebaseUtility.PushToDatabase(DB_USER_REWARD_PATH + FirebaseUtility.CurrentUser.UserId + "/AstroGold", Instance.TempAstroGoldPocket,
+        FirebaseUtility.PushToDatabase(DbUserRewardsPath + "/AstroGold", Instance.TempAstroGoldPocket,
             () =>
             {
                 Instance.TempAstroGoldPocket = 0;

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using static GameManager;
 
-public class SlowMo : PowerUpExtension
+public class SlowMo : PowerUpBase
 {
     #region Components
     public SlowMoRings slowMoRings;

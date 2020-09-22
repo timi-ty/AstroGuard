@@ -1,7 +1,7 @@
 ﻿//In Progress
 using UnityEngine;
 
-public class PowerUpOrb : OutsideSpawnable
+public class PowerUpOrb : OutsideSpawnableBase
 {
     #region Inspector Parameters
     [Header("Properties")]

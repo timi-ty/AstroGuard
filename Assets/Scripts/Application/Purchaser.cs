@@ -21,21 +21,21 @@ public class Purchaser : MonoBehaviour, IStoreListener
     // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
     // specific mapping to Unity Purchasing's AddProduct, below.
     #region Non Consumable Product Ids
-    public const string kProductIDCore02 = "Core02";
-    public const string kProductIDCore03 = "Core03";
-    public const string kProductIDCore04 = "Core04";
-    public const string kProductIDCore05 = "Core05";
-    public const string kProductIDCore06 = "Core06";
-    public const string kProductIDCore07 = "Core07";
-    public const string kProductIDCore08 = "Core08";
-    public const string kProductIDCore09 = "Core09";
-    public const string kProductIDCore10 = "Core10";
-    public const string kProductIDBlade02 = "Blade02";
-    public const string kProductIDBlade03 = "Blade03";
-    public const string kProductIDBlade04 = "Blade04";
-    public const string kProductIDBlade05 = "Blade05";
+    public const string kProductIDCore02 = "com.cradaptive.astroguard.core02";
+    public const string kProductIDCore03 = "com.cradaptive.astroguard.core03";
+    public const string kProductIDCore04 = "com.cradaptive.astroguard.core04";
+    public const string kProductIDCore05 = "com.cradaptive.astroguard.core05";
+    public const string kProductIDCore06 = "com.cradaptive.astroguard.core06";
+    public const string kProductIDCore07 = "com.cradaptive.astroguard.core07";
+    public const string kProductIDCore08 = "com.cradaptive.astroguard.core08";
+    public const string kProductIDCore09 = "com.cradaptive.astroguard.core09";
+    public const string kProductIDCore10 = "com.cradaptive.astroguard.core10";
+    public const string kProductIDBlade02 = "com.cradaptive.astroguard.blade02";
+    public const string kProductIDBlade03 = "com.cradaptive.astroguard.blade03";
+    public const string kProductIDBlade04 = "com.cradaptive.astroguard.blade04";
+    public const string kProductIDBlade05 = "com.cradaptive.astroguard.blade05";
 
-    public const string kProductIDNoAds = "NoAds";
+    public const string kProductIDNoAds = "com.cradaptive.astroguard.noads";
     #endregion
 
     #region Events
@@ -173,7 +173,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
                 negativeActionText = "Dismiss"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, () => { });
+            UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, () => { }, "already_disabled_ads");
         }
         else
         {
@@ -211,7 +211,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
                     negativeActionText = "Go Home"
                 };
 
-                UIManager.QueueAlertDialog(alertMessageInfo, () => { }, GameManager.instance.GoHome);
+                UIManager.QueueAlertDialog(alertMessageInfo, () => { }, GameManager.instance.GoHome, "shop_not_ready");
             }
         }
         // Otherwise ...
@@ -228,7 +228,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
                 negativeActionText = "Go Home"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, () => { }, GameManager.instance.GoHome);
+            UIManager.QueueAlertDialog(alertMessageInfo, () => { }, GameManager.instance.GoHome, "shop_not_ready");
         }
     }
 
@@ -286,6 +286,10 @@ public class Purchaser : MonoBehaviour, IStoreListener
         m_StoreExtensionProvider = extensions;
 
         PurchaserInitialized?.Invoke();
+
+#if UNITY_IOS
+        RestorePurchases();
+#endif
     }
 
 
@@ -335,7 +339,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
             isCelebratory = true
         };
 
-        UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, UIManager.instance.ShowStoreUI);
+        UIManager.QueueAlertDialog(alertMessageInfo, UIManager.instance.ShowStoreUI, UIManager.instance.ShowStoreUI, "new_purchase");
 
         Analytics.LogItemPurchased(args.purchasedProduct.definition.id, args.purchasedProduct.metadata.localizedPrice, args.purchasedProduct.metadata.isoCurrencyCode);
 
@@ -350,7 +354,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
 
-    #region Utility
+#region Utility
     private static string ProductIdFromItem(Item item)
     {
         switch (item.itemId)
@@ -454,5 +458,5 @@ public class Purchaser : MonoBehaviour, IStoreListener
     {
         return false;
     }
-    #endregion
+#endregion
 }

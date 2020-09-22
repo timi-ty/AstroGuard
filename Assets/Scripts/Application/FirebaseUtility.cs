@@ -101,7 +101,7 @@ public static class FirebaseUtility
                 negativeActionText = "Cancel"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, SignIn, () => { });
+            UIManager.QueueAlertDialog(alertMessageInfo, SignIn, () => { }, "login_failed");
             return;
         }
 
@@ -165,7 +165,7 @@ public static class FirebaseUtility
                 isCelebratory = true
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, SyncGameData, () => { });
+            UIManager.QueueAlertDialog(alertMessageInfo, SyncGameData, () => { }, "sign_in_reward");
 
             PlayerStats.RewardAstroGold(1000);
         }
@@ -181,7 +181,7 @@ public static class FirebaseUtility
             negativeActionText = "Cancel"
         };
 
-        UIManager.QueueAlertDialog(alertMessageInfo, SignIn, () => { });
+        UIManager.QueueAlertDialog(alertMessageInfo, SignIn, () => { }, "login_failed");
     }
 
     public static void AddOnAuthListener(Action<FirebaseUser> onAuthChanged)
@@ -258,13 +258,17 @@ public static class FirebaseUtility
             OnlineGameData = ByteDataHelper.BytesToGameData(downloadTask.Result);
         }
 
-        if (GameDataManager.IsCompatibleWith(OnlineGameData))
+        if (objectNotFound)
+        {
+            UploadGameData();
+        }
+        else if (GameDataManager.IsCompatibleWith(OnlineGameData))
         {
             GameDataManager.GameData = GameDataManager.MoreRecent(OnlineGameData);
 
             UploadGameData();
         }
-        else if (downloadTask.IsCompleted || objectNotFound)
+        else if (downloadTask.IsCompleted)
         {
             AlertMessageInfo alertMessageInfo = new AlertMessageInfo()
             {
@@ -274,7 +278,7 @@ public static class FirebaseUtility
                 negativeActionText = "Keep Online Backup"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, KeepLocalSave, KeepOnlineBackup);
+            UIManager.QueueAlertDialog(alertMessageInfo, KeepLocalSave, KeepOnlineBackup, "sync_prompt_0");
         }
         else
         {
@@ -298,7 +302,7 @@ public static class FirebaseUtility
                 negativeActionText = "Cancel"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, UploadNewGameData, () => { });
+            UIManager.QueueAlertDialog(alertMessageInfo, UploadNewGameData, () => { }, "sync_prompt_1");
         }
     }
 
@@ -322,7 +326,7 @@ public static class FirebaseUtility
                 negativeActionText = "Cancel"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, UploadNewGameData, () => { });
+            UIManager.QueueAlertDialog(alertMessageInfo, UploadNewGameData, () => { }, "sync_prompt_2");
         }
     }
 

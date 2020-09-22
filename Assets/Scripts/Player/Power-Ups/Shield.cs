@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Shield : PowerUpExtension
+public class Shield : PowerUpBase
 {
     #region Shieldables
     [Tooltip("Only gameobjects with Monobehaviours that implement IShieldable can know when the shield is active.")]

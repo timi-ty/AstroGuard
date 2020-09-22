@@ -41,6 +41,8 @@ public class AlertDialog : MonoBehaviour
 
     #region Cache
     private Stack<AlertDialogContainer> alertDialogs { get; set; } = new Stack<AlertDialogContainer>();
+    private Dictionary<string, bool> pendingDialogs { get; set; } = new Dictionary<string, bool>();
+    int cummulatedPendingReward;
     #endregion
 
     #region Animator Parameters
@@ -60,16 +62,27 @@ public class AlertDialog : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Queue(AlertMessageInfo messageInfo, UnityAction positiveAction, UnityAction negativeAction)
+    public void Queue(AlertMessageInfo messageInfo, UnityAction positiveAction, UnityAction negativeAction, string alertId)
     {
+        pendingDialogs.TryGetValue(alertId, out bool alreadyPending);
+
+        bool isRewardMessage = messageInfo.reward > 0;
+
+        if(isRewardMessage) cummulatedPendingReward += messageInfo.reward;
+
+        if (alreadyPending) return;
+
         AlertDialogContainer alertDialog = new AlertDialogContainer()
         {
             messageInfo = messageInfo,
             positiveAction = positiveAction,
-            negativeAction = negativeAction
+            negativeAction = negativeAction,
+            alertId = alertId
         };
 
         alertDialogs.Push(alertDialog);
+
+        pendingDialogs.Add(alertId, true);
     }
 
     private IEnumerator ShowFromQueue()
@@ -90,7 +103,8 @@ public class AlertDialog : MonoBehaviour
             if(alertDialog.messageInfo.reward > 0)
             {
                 astroGoldDisplay.gameObject.SetActive(true);
-                astroGoldDisplay.Refresh(alertDialog.messageInfo.reward);
+                astroGoldDisplay.Refresh(cummulatedPendingReward);
+                cummulatedPendingReward = 0;
             }
             else
             {
@@ -113,6 +127,8 @@ public class AlertDialog : MonoBehaviour
 
             isShowing = true;
 
+            pendingDialogs.Remove(alertDialog.alertId);
+
             yield return new WaitWhile(() => isShowing);
         }
     }
@@ -133,7 +149,7 @@ public class AlertDialog : MonoBehaviour
 
     private void Rest()
     {
-        (dialogBox as RectTransform).localScale = Vector3.zero;
+        dialogBox.localScale = Vector3.zero;
         isShowing = false;
         gameObject.SetActive(false);
     }
@@ -157,5 +173,6 @@ public class AlertDialog : MonoBehaviour
         public AlertMessageInfo messageInfo { get; set; }
         public UnityAction positiveAction { get; set; }
         public UnityAction negativeAction { get; set; }
+        public string alertId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿[System.Serializable]
 public enum ObjectiveCategory
 {
+    #region Ordered
     //#region Asteroid Destruction
     //TotalAsteroidDestruction,
     //LevelZeroAsteroidDestruction,
@@ -47,7 +48,9 @@ public enum ObjectiveCategory
     //PlayerDeaths,
     //ShipHits
     //#endregion
+    #endregion
 
+    #region Unordered
     TotalAsteroidDestruction,
     SwordBombExplosions,
     LevelZeroAsteroidDestruction,
@@ -76,6 +79,7 @@ public enum ObjectiveCategory
     SlowMoPowerUpCollection,
     MissileAsteroidDestruction,
     BombDisposals,
+    #endregion
 }
 [System.Serializable]
 public enum ObjectiveResetCondition

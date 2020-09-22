@@ -58,6 +58,10 @@ public class AdsManager : MonoBehaviour
             UIManager.EnableNoAdsButton(ShowAds);
         });
 
+        //RequestConfiguration.Builder builder = new RequestConfiguration.Builder();
+        //builder.SetTestDeviceIds(new System.Collections.Generic.List<string> { "E1B7E7E9AB7C336509E2FCA9880E8FB4" });
+        //MobileAds.SetRequestConfiguration(builder.build());
+
         MobileAds.Initialize(
             initStatus => 
             {
@@ -77,7 +81,7 @@ public class AdsManager : MonoBehaviour
 
         /***REMEBER TO CHANGE AD UNIT IDS BEFORE PRODUCTION RELEASE***/
         #if UNITY_ANDROID
-                string adUnitId = "ca-app-pub-1923630121694917/3731726873";
+                string adUnitId = "	ca-app-pub-3940256099942544/6300978111";
         #elif UNITY_IPHONE
                 string adUnitId = "ca-app-pub-3940256099942544/2934735716";
         #else
@@ -98,18 +102,20 @@ public class AdsManager : MonoBehaviour
         if (!ShowAds) return;
 
         #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-1923630121694917/2196968133";
-        #elif UNITY_IPHONE
-                string adUnitId = "ca-app-pub-3940256099942544/4411468910";
-        #else
+        string adUnitId = "ca-app-pub-7435320572534602/7085498581";
+#elif UNITY_IPHONE
+                string adUnitId = "ca-app-pub-7435320572534602/2566834925";
+#else
                 string adUnitId = "unexpected_platform";
-        #endif
+#endif
 
         interstitial = new InterstitialAd(adUnitId);
 
         interstitial.OnAdOpening += HandleOnInterstitialOpening;
 
         interstitial.OnAdClosed += HandleOnInterstitialClosed;
+
+        interstitial.OnAdFailedToLoad += HandleAdFailedToLoad;
 
         AdRequest request = new AdRequest.Builder().Build();
 
@@ -119,12 +125,12 @@ public class AdsManager : MonoBehaviour
     private void RequestRewarded()
     {
         #if UNITY_ANDROID
-                string adUnitId = "ca-app-pub-1923630121694917/3348583498";
-        #elif UNITY_IPHONE
-                string adUnitId = "ca-app-pub-3940256099942544/1712485313";
-        #else
+                string adUnitId = "ca-app-pub-7435320572534602/7476380825";
+#elif UNITY_IPHONE
+                string adUnitId = "ca-app-pub-7435320572534602/1586771659";
+#else
                 string adUnitId = "unexpected_platform";
-        #endif
+#endif
 
         rewardedAd = new RewardedAd(adUnitId);
 
@@ -231,6 +237,11 @@ public class AdsManager : MonoBehaviour
 
         IsRewardedAdReady = false;
         instance.RequestRewarded();
+    }
+
+    public void HandleAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        Debug.Log("Ad Failed: " + args.Message);
     }
     #endregion
 
