@@ -130,6 +130,15 @@ public class NotificationManager : MonoBehaviour
             res += "\n deviceToken:  " + req.DeviceToken;
             Debug.Log(res);
         }
+=======
+        var notification = new AndroidNotification();
+        notification.Title = "Astro Guardian!";
+        notification.Text = notificationText;
+        notification.LargeIcon = "icon_0";
+        notification.FireTime = System.DateTime.Now.AddMinutes(1);
+
+        AndroidNotificationCenter.SendNotification(notification, "astroguard_notifications");
+>>>>>>> 37899f878c50e477006ccc20cc90b0b1d95f18fd
 #endif
     }
 }
