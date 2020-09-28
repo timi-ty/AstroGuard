@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Analytics : MonoBehaviour
 {
@@ -9,6 +8,8 @@ public class Analytics : MonoBehaviour
         AdjustUtility.TrackSessionEnded();
 
         FacebookUtility.LogAppEvent("session_ended");
+
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
 
         FirebaseUtility.RecordCustomEvent("session_ended",
             new Firebase.Analytics.Parameter[]
@@ -25,6 +26,8 @@ public class Analytics : MonoBehaviour
 
         FacebookUtility.LogAppEvent("session_restored");
 
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
+
         FirebaseUtility.RecordCustomEvent("session_restored",
             new Firebase.Analytics.Parameter[]
             {
@@ -38,7 +41,7 @@ public class Analytics : MonoBehaviour
     {
         AdjustUtility.TrackItemPurchased(itemId, price, currency);
 
-        FacebookUtility.LogPurchase(price, currency);
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
 
         FirebaseUtility.RecordCustomEvent("item_purchased",
             new Firebase.Analytics.Parameter[]
@@ -55,6 +58,8 @@ public class Analytics : MonoBehaviour
 
         FacebookUtility.LogAppEvent("item_selected");
 
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
+
         FirebaseUtility.RecordCustomEvent("item_selected",
             new Firebase.Analytics.Parameter[]
             {
@@ -69,6 +74,8 @@ public class Analytics : MonoBehaviour
 
         FacebookUtility.LogAppEvent("intro_completed");
 
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
+
         FirebaseUtility.RecordCustomEvent("intro_completed",
             new Firebase.Analytics.Parameter[]
             {
@@ -81,6 +88,8 @@ public class Analytics : MonoBehaviour
         AdjustUtility.TrackPowerUpCollected();
 
         FacebookUtility.LogAppEvent("power_up_collection");
+
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
 
         FirebaseUtility.RecordCustomEvent("power_up_collection",
             new Firebase.Analytics.Parameter[]
@@ -95,6 +104,8 @@ public class Analytics : MonoBehaviour
         AdjustUtility.TrackObjectiveCompleted();
 
         FacebookUtility.LogAppEvent("objective_completed");
+
+        if (!FirebaseUtility.IsFirebaseSafeToUse) return;
 
         FirebaseUtility.RecordCustomEvent("objective_completed",
                             new Firebase.Analytics.Parameter[]

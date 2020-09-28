@@ -29,7 +29,6 @@ public class LevelsUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         UpdateLevelSelectionScreen();
-        RefreshLevelSelectionScreen();
     }
 
     public void Hide()
@@ -39,17 +38,24 @@ public class LevelsUI : MonoBehaviour
 
     public void UpdateLevelSelectionScreen()
     {
-        int buttonCount = Mathf.Max(LevelManager.LevelCount, 500);
+        int buttonCount = LevelManager.LevelCount + 500;
 
         for (int level = contentHolder.childCount + 1; level <= buttonCount; level++)
         {
-            bool isAvailable = level <= LevelManager.LevelCount;
-
-            InitializeLevelButton(level, isAvailable);
+            Instantiate(levelButtonPrefab, contentHolder);
         }
+
+        RefreshLevels();
     }
 
-    public void RefreshLevelSelectionScreen()
+    private void OnLevelButtonClicked(int level)
+    {
+        GameManager.instance.OnPlay(level);
+        AudioManager.PlayUIClip(clickClip);
+    }
+
+    #region Utility
+    public void RefreshLevels()
     {
         int levelButtonsCount = contentHolder.childCount;
 
@@ -64,27 +70,13 @@ public class LevelsUI : MonoBehaviour
             float desiredWidth = (contentHolder.parent as RectTransform).rect.width;
             float desiredHeight = desiredWidth * 0.13333f;
 
-            button.Initialize(level, desiredWidth, desiredHeight, isAvailable);
+            bool isUnlocked = LevelManager.IsLevelUnlocked(level) || GameManager.instance.unlockAllLevels;
+            bool isCompleted = LevelManager.IsLevelCompleted(level);
+
+            button.Initialize(level, desiredWidth, desiredHeight, isAvailable, isUnlocked, isCompleted);
 
             button.SetOnClickListener(OnLevelButtonClicked, level);
         }
-    }
-
-    private void OnLevelButtonClicked(int level)
-    {
-        GameManager.instance.OnPlay(level);
-        AudioManager.PlayUIClip(clickClip);
-    }
-
-    #region Utility
-    private void InitializeLevelButton(int level, bool isAvailable)
-    {
-        float desiredWidth = (contentHolder.parent as RectTransform).rect.width;
-        float desiredHeight = desiredWidth * 0.13333f;
-
-        LevelButton button = Instantiate(levelButtonPrefab, contentHolder);
-
-        button.Initialize(level, desiredWidth, desiredHeight, isAvailable);
     }
     #endregion
 }

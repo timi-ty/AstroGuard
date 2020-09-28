@@ -23,6 +23,7 @@ public class LevelCollection : ScriptableObject
 #if UNITY_EDITOR
     #region Editor Cache
     public List<LevelInfo> _levelInfoCollection = new List<LevelInfo>();
+    public List<float> _durations = new List<float>();
     public LevelInfo _levelInfo = new LevelInfo();
     public AsteroidSpawnInfo _enemySpawnInfo = new AsteroidSpawnInfo();
     public PowerUpOrbSpawnInfo _powerUpOrbSpawnInfo = new PowerUpOrbSpawnInfo();
@@ -56,6 +57,16 @@ public class LevelCollection : ScriptableObject
     public void LoadLevelInfoCollection()
     {
         _levelInfoCollection = GetAll();
+        _durations = new List<float>();
+        foreach(LevelInfo levelInfo in _levelInfoCollection)
+        {
+            float duration = 0;
+            foreach(AsteroidSpawnInfo asteroidSpawnInfo in levelInfo.enemyLineup)
+            {
+                duration += asteroidSpawnInfo.spawnDelay;
+            }
+            _durations.Add(duration);
+        }
         Debug.Log("Editor level list refreshed");
     }
 

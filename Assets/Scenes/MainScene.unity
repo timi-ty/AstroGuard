@@ -29804,7 +29804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 298.4}
+  m_AnchoredPosition: {x: 0, y: 298.4004}
   m_SizeDelta: {x: -20, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &531762095
@@ -30080,6 +30080,8 @@ MonoBehaviour:
     type: 3}
   damageTwo: {fileID: 9105706202936744864, guid: 5d3dd67fec32e4f4f8990e774d79b4d3,
     type: 3}
+  damageClip: {fileID: 8300000, guid: 21c4d09118c4ddc4f82eea29ae3b72c1, type: 3}
+  destroyClip: {fileID: 8300000, guid: 641349e2eaa20254fbac34f09392350b, type: 3}
 --- !u!1 &566423309
 GameObject:
   m_ObjectHideFlags: 0
@@ -37670,6 +37672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5b96937c9367841b88d9c3a469456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unlockAllLevels: 0
+  disableInterstitialAds: 0
+  rewardsWithoutAds: 0
 --- !u!1 &768351549
 GameObject:
   m_ObjectHideFlags: 0
@@ -83974,7 +83979,7 @@ MonoBehaviour:
   launchDeferredDeeplink: 1
   appToken: 7rnv0zhmocjk
   logLevel: 1
-  environment: 0
+  environment: 1
 --- !u!4 &8275317125836228009
 Transform:
   m_ObjectHideFlags: 0

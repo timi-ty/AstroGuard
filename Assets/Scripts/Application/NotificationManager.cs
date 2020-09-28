@@ -41,7 +41,7 @@ public class NotificationManager : MonoBehaviour
         androidNotification.Title = notificationTitle;
         androidNotification.Text = notificationText;
         androidNotification.LargeIcon = "icon_0";
-        androidNotification.FireTime = System.DateTime.Now.AddMinutes(1);
+        androidNotification.FireTime = DateTime.Now.AddMinutes(1);
         androidNotification.ShouldAutoCancel = true;
         androidNotification.Style = NotificationStyle.BigTextStyle;
 
@@ -83,7 +83,7 @@ public class NotificationManager : MonoBehaviour
                 notification.Title = notificationTitle;
                 notification.Text = description + string.Format("to get {0} Astro Gold Coins and {1} Experience Points!", goldReward, xpReward);
                 notification.LargeIcon = "icon_0";
-                notification.FireTime = System.DateTime.Now.AddMinutes(1);
+                notification.FireTime = DateTime.Now.AddMinutes(1);
                 notification.ShouldAutoCancel = true;
                 notification.Style = NotificationStyle.BigTextStyle;
 
@@ -116,7 +116,7 @@ public class NotificationManager : MonoBehaviour
         yield break;
 #elif UNITY_IOS
         var authorizationOption = AuthorizationOption.Alert | AuthorizationOption.Badge;
-        using (var req = new AuthorizationRequest(authorizationOption, true))
+        using (var req = new AuthorizationRequest(authorizationOption, false))
         {
             while (!req.IsFinished)
             {
@@ -130,15 +130,6 @@ public class NotificationManager : MonoBehaviour
             res += "\n deviceToken:  " + req.DeviceToken;
             Debug.Log(res);
         }
-=======
-        var notification = new AndroidNotification();
-        notification.Title = "Astro Guardian!";
-        notification.Text = notificationText;
-        notification.LargeIcon = "icon_0";
-        notification.FireTime = System.DateTime.Now.AddMinutes(1);
-
-        AndroidNotificationCenter.SendNotification(notification, "astroguard_notifications");
->>>>>>> 37899f878c50e477006ccc20cc90b0b1d95f18fd
 #endif
     }
 }

@@ -21,9 +21,9 @@ public class ExperienceBar : ProgressBar
 
         string currentLevelText = currentLevel.ToString("D2");
 
-        base.SetProgress(progress, "LEVEL " + currentLevelText);
+        base.SetProgress(progress, "XP LEVEL " + currentLevelText);
 
-        progressText.text = PlayerStats.Instance.ExperiencePoints.ToString() + "/" + xpCeil;
+        progressText.text = "XP " + PlayerStats.Instance.ExperiencePoints.ToString() + "/" + xpCeil;
     }
 
     protected override IEnumerator AnimateProgress(float progress)

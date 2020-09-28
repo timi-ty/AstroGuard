@@ -97,7 +97,6 @@ public class ObjectiveManager : MonoBehaviour
     public static void Refresh()
     {
         if (!GameManager.IsPlayerAlive()) return;
-
         instance.UpdateObjectives();
     } 
 

@@ -44,6 +44,8 @@ public class LevelEditor : Editor
 
         majorButtonLayout = new GUILayoutOption[] { GUILayout.MinHeight(30), GUILayout.MaxHeight(40), GUILayout.ExpandHeight(true) };
         minorButtonLayout = new GUILayoutOption[] { GUILayout.MinHeight(20), GUILayout.MaxHeight(30), GUILayout.ExpandHeight(true) };
+
+        levelCollection.LoadLevelInfoCollection();
     }
 
     public override void OnInspectorGUI()
@@ -534,6 +536,7 @@ public class LevelEditor : Editor
 
                 //EditorGUILayout.EndScrollView();
 
+                EditorGUILayout.FloatField("Duration", levelCollection._durations[i]);
                 EditorGUILayout.IntField("Enemies", levelCollection._levelInfoCollection[i].enemyLineup.Count);
                 EditorGUILayout.IntField("PowerUps", levelCollection._levelInfoCollection[i].objectSpawnSettings.powerUpOrbLineup.Count);
                 EditorGUILayout.IntField("Bombs", levelCollection._levelInfoCollection[i].objectSpawnSettings.bombLineup.Count);

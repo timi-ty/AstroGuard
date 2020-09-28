@@ -50,7 +50,7 @@ public class ApplicationManager : MonoBehaviour
         FacebookUtility.InitializeFacebook();
         
 
-        Debug.Log("Loaded Data: " + GameDataManager.GameData.ToString());
+        Debug.Log("Loaded Data: " + GameDataManager.GameData?.ToString());
     }
 
     public static void AddOnApplicationQuitListener(System.Action onApplicationQuit)
@@ -63,7 +63,7 @@ public class ApplicationManager : MonoBehaviour
         if (!focus)
         {
             GameDataManager.SaveGameData();
-            Debug.Log("Saved Data: " + GameDataManager.GameData.ToString());
+            Debug.Log("Saved Data: " + GameDataManager.GameData?.ToString());
         }
     }
 

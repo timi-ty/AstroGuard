@@ -314,7 +314,7 @@ public static class FirebaseUtility
 
             GameDataManager.GameData = OnlineGameData;
 
-            IsSyncing = false;
+            UploadGameData();
         }
         else
         {
@@ -661,6 +661,8 @@ public static class FirebaseUtility
     #region Analytics
     public static void RecordAuthEvent()
     {
+        if (!IsFirebaseSafeToUse) return;
+
         if (CurrentUser.Metadata.CreationTimestamp == CurrentUser.Metadata.LastSignInTimestamp)
         {
             RecordSignUpEvent(CurrentUser.ProviderId);
@@ -675,6 +677,8 @@ public static class FirebaseUtility
 
     public static void RecordLoginEvent(string loginMethod)
     {
+        if (!IsFirebaseSafeToUse) return;
+
         FirebaseAnalytics.LogEvent(
           FirebaseAnalytics.EventLogin, 
           new Parameter[] 
@@ -688,6 +692,8 @@ public static class FirebaseUtility
 
     public static void RecordSignUpEvent(string signUpMethod)
     {
+        if (!IsFirebaseSafeToUse) return;
+
         FirebaseAnalytics.LogEvent(
           FirebaseAnalytics.EventSignUp,
           new Parameter[]
@@ -701,6 +707,8 @@ public static class FirebaseUtility
 
     public static void RecordCustomEvent(string eventName, params Parameter[] parameters)
     {
+        if (!IsFirebaseSafeToUse) return;
+
         FirebaseAnalytics.LogEvent(eventName, parameters);
     }
     #endregion

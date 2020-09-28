@@ -17,7 +17,7 @@ public class LeaderboardListing : MonoBehaviour
 
         nameRankText.text = rank + ". " + leaderboardEntry.displayName;
         scoreText.text = leaderboardEntry.score.ToString("D3");
-        levelText.text = "Level " + leaderboardEntry.expLevel.ToString("D2");
+        levelText.text = "XP Level " + leaderboardEntry.expLevel.ToString("D2");
 
         highlitorImage.enabled = highllght;
         Color textColor = highllght ? new Color(0.5333334f, 0.854902f, 1, 1) : Color.white;

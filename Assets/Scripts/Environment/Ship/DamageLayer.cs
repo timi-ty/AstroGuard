@@ -18,6 +18,10 @@ public class DamageLayer : MonoBehaviour
     [Header("Sprites")]
     public Sprite damageOne;
     public Sprite damageTwo;
+
+    [Header("SFX")]
+    public AudioClip damageClip;
+    public AudioClip destroyClip;
     #endregion
 
     private void Awake()
@@ -35,11 +39,13 @@ public class DamageLayer : MonoBehaviour
             case 2:
                 smallDamageFX.Play();
                 mSpriteRenderer.sprite = damageOne;
+                AudioManager.PlayGameClip(damageClip);
                 break;
 
             case 1:
                 bigDamageFX.Play();
                 mSpriteRenderer.sprite = damageTwo;
+                AudioManager.PlayGameClip(damageClip);
                 break;
         }
     }
@@ -48,7 +54,7 @@ public class DamageLayer : MonoBehaviour
     {
         mAnimator.enabled = true;
         destroyFX.Play();
-        Debug.Log("Ship Gone");
+        AudioManager.PlayGameClip(destroyClip);
     }
 
     public void RemoveAllDamage()

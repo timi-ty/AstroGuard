@@ -10,6 +10,16 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     #endregion
 
+    #region Developer Settings
+    [Header("Developer Settings")]
+    [Tooltip("DEVELOPER ONLY! Disable for production build.")]
+    public bool unlockAllLevels;
+    [Tooltip("DEVELOPER ONLY! Disable for production build.")]
+    public bool disableInterstitialAds;
+    [Tooltip("DEVELOPER ONLY! Disable for production build.")]
+    public bool rewardsWithoutAds;
+    #endregion
+
     #region Basic Settings
     private static float _scale;
     public static float universalGameScale
@@ -207,7 +217,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.AbortRetryCountdown();
 
-        bool showInterstitial = Random.Range(0, 3) == 0;
+        bool showInterstitial = Random.Range(0, 2) == 0;
 
         UIManager.Transition(
             () =>
@@ -234,7 +244,7 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.NextLevel();
 
-            bool showInterstitial = Random.Range(0, 3) == 0;
+            bool showInterstitial = Random.Range(0, 2) == 0;
 
             UIManager.Transition(
             () =>

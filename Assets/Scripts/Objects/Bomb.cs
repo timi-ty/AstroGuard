@@ -91,23 +91,23 @@ public class Bomb : OutsideSpawnableBase, IExplosionImpactible
     {
         if (transform.CompareTag("Player"))
         {
-            trigger = BombExplosionInfo.Trigger.Space;
+            trigger = BombExplosionInfo.Trigger.Player;
         }
         else if (transform.CompareTag("Weapon"))
         {
-            trigger = BombExplosionInfo.Trigger.Space;
+            trigger = BombExplosionInfo.Trigger.Sword;
         }
         else if (transform.CompareTag("Ship"))
         {
-            trigger = BombExplosionInfo.Trigger.Space;
+            trigger = BombExplosionInfo.Trigger.Ship;
         }
         else if (transform.CompareTag("Explosion"))
         {
-            trigger = BombExplosionInfo.Trigger.Space;
+            trigger = BombExplosionInfo.Trigger.Explosion;
         }
         else if (transform.CompareTag("Projectile"))
         {
-            trigger = BombExplosionInfo.Trigger.Space;
+            trigger = BombExplosionInfo.Trigger.Projectile;
         }
         else
         {

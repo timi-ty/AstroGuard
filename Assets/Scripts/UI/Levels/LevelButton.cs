@@ -10,7 +10,7 @@ public class LevelButton : Button
     private int eventArg;
 
 
-    public void Initialize(int level, float width, float height, bool isAvailable)
+    public void Initialize(int level, float width, float height, bool isAvailable, bool isUnlocked, bool isCompleted)
     {
         (transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
         (transform as RectTransform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
@@ -20,9 +20,6 @@ public class LevelButton : Button
 
         tmp.text = isAvailable ? "LEVEL " + level.ToString("D2") : "COMING SOON     LEVEL " + level.ToString("D2");
         tickMark.enabled = false;
-
-        bool isUnlocked = LevelManager.IsLevelUnlocked(level);
-        bool isCompleted = LevelManager.IsLevelCompleted(level);
 
         Color txtColor = tmp.color;
 

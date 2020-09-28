@@ -91,6 +91,7 @@ public abstract class PlayerBase : MonoBehaviour
 
     private void GetInput()
     {
+#if UNITY_EDITOR
         if (Input.GetMouseButton(0))
         {
             worldInputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -104,6 +105,23 @@ public abstract class PlayerBase : MonoBehaviour
         {
             OnScreenReleased();
         }
+#else
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            worldInputPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                OnScreenPressed();
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                OnScreenReleased();
+            }
+        }
+#endif
     }
     #endregion
 }

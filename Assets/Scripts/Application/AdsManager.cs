@@ -65,8 +65,6 @@ public class AdsManager : MonoBehaviour
         MobileAds.Initialize(
             initStatus => 
             {
-                //RequestBanner();
-
                 Debug.Log("Ads Requested.");
 
                 RequestInterstitial();
@@ -75,38 +73,16 @@ public class AdsManager : MonoBehaviour
             });
     }
 
-    private void RequestBanner()
-    {
-        if (!ShowAds) return;
-
-        /***REMEBER TO CHANGE AD UNIT IDS BEFORE PRODUCTION RELEASE***/
-        #if UNITY_ANDROID
-                string adUnitId = "	ca-app-pub-3940256099942544/6300978111";
-        #elif UNITY_IPHONE
-                string adUnitId = "ca-app-pub-3940256099942544/2934735716";
-        #else
-                string adUnitId = "unexpected_platform";
-        #endif
-
-        bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
-
-        AdRequest request = new AdRequest.Builder().Build();
-
-        bannerView.LoadAd(request);
-
-        bannerView.Show();
-    }
-
     private void RequestInterstitial()
     {
         if (!ShowAds) return;
 
-        #if UNITY_ANDROID
+#if UNITY_ANDROID
         string adUnitId = "ca-app-pub-7435320572534602/7085498581";
 #elif UNITY_IPHONE
-                string adUnitId = "ca-app-pub-7435320572534602/2566834925";
+        string adUnitId = "ca-app-pub-7435320572534602/2566834925";
 #else
-                string adUnitId = "unexpected_platform";
+        string adUnitId = "unexpected_platform";
 #endif
 
         interstitial = new InterstitialAd(adUnitId);
@@ -124,12 +100,12 @@ public class AdsManager : MonoBehaviour
 
     private void RequestRewarded()
     {
-        #if UNITY_ANDROID
-                string adUnitId = "ca-app-pub-7435320572534602/7476380825";
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-7435320572534602/7476380825";
 #elif UNITY_IPHONE
-                string adUnitId = "ca-app-pub-7435320572534602/1586771659";
+        string adUnitId = "ca-app-pub-7435320572534602/1586771659";
 #else
-                string adUnitId = "unexpected_platform";
+        string adUnitId = "unexpected_platform";
 #endif
 
         rewardedAd = new RewardedAd(adUnitId);
@@ -149,7 +125,7 @@ public class AdsManager : MonoBehaviour
 
     public static void ShowInterstitial()
     {
-        if (!ShowAds) return;
+        if (!ShowAds || GameManager.instance.disableInterstitialAds) return;
 
         if (instance.interstitial?.IsLoaded() ?? false)
         {
@@ -161,15 +137,18 @@ public class AdsManager : MonoBehaviour
 
     public void ShowRewarded(RewardType rewardType)
     {
-        #if UNITY_EDITOR
-        switch (rewardType)
+        if (GameManager.instance.rewardsWithoutAds)
         {
-            case RewardType.Continue:
-                OnRewarded = OnRewardedContinue;
-                break;
+            switch (rewardType)
+            {
+                case RewardType.Continue:
+                    OnRewarded = OnRewardedContinue;
+                    break;
+            }
+            OnRewarded?.Invoke();
+
+            return;
         }
-        OnRewarded?.Invoke();
-        #endif
 
         if (instance.rewardedAd?.IsLoaded() ?? false)
         {
@@ -212,8 +191,6 @@ public class AdsManager : MonoBehaviour
     {
         instance.bannerView?.Hide();
         ShowingFullScreenAd = true;
-
-        Debug.Log("Showing full screen ad = " + ShowingFullScreenAd);
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -232,8 +209,6 @@ public class AdsManager : MonoBehaviour
         instance.bannerView?.Show();
 
         ShowingFullScreenAd = false;
-
-        Debug.Log("Showing full screen ad = " + ShowingFullScreenAd);
 
         IsRewardedAdReady = false;
         instance.RequestRewarded();
