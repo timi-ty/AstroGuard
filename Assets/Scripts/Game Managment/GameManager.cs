@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         }
         else if (isInInfiniteMode)
         {
-            OnPlay();
+            OnPlayInfinite();
         }
         else if (currentLevel > 0)
         {
@@ -163,6 +163,29 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnPlay()
+    {
+
+        LevelInfo levelInfo = LevelManager.GetLevelInfo();
+
+
+        if (currentLevel == 1 && !gameFrozen)
+        {
+            UIManager.Transition(
+            () =>
+            {
+                PlayLevel(levelInfo);
+            },
+            "First Level!", currentLevel.ToString("D2"),
+            showInterstitial: false);
+        }
+        else
+        {
+            PlayLevel(levelInfo);// (1) This case will ensure that a new transition is not started because a 
+            //frozen game most likely means a transition is already in progress.
+        }
+    }
+
+    public void OnPlayInfinite()
     {
         LevelManager.StartInfiniteLevel();
 

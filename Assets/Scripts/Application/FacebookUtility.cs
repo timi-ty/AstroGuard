@@ -124,16 +124,22 @@ public static class FacebookUtility
 
     public static void SignOut()
     {
+        if (!FB.IsInitialized) return;
+
         FB.LogOut();
     }
 
     public static void LogAppEvent(string eventName)
     {
+        if (!FB.IsInitialized) return;
+
         FB.LogAppEvent(eventName);
     }
 
     public static void LogPurchase(decimal price, string currency)
     {
+        if (!FB.IsInitialized) return;
+
         FB.LogPurchase(price, currency);
     }
 }
