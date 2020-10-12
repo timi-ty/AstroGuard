@@ -35,7 +35,6 @@ public class UIManager : MonoBehaviour
     public Button watchAdContinueButton;
     public Button noAdsButton;
     public Button facebookButton;
-    public Button appleButton;
     public Button leaderBoardButton;
     public TransitionPanel transitionPanel;
 
@@ -91,13 +90,8 @@ public class UIManager : MonoBehaviour
             yield return new WaitUntil(() => mainUIDirty);
             RefreshGreetings(FirebaseUtility.CurrentUser?.DisplayName);
             EnableFacebookButton(FirebaseUtility.CurrentUser == null);
-            EnableAppleButton(FirebaseUtility.CurrentUser == null);
             EnableLeaderboardButton(FirebaseUtility.CurrentUser != null);
-#if UNITY_ANDROID
-            appleButton.gameObject.SetActive(false);
-#elif UNITY_EDITOR
-            appleButton.gameObject.SetActive(false);
-#endif
+
             mainUIDirty = false;
             yield return new WaitForSecondsRealtime(2.0f);
         }
@@ -218,11 +212,6 @@ public class UIManager : MonoBehaviour
         Animator dancerAnim = instance.facebookButton.GetComponent<Animator>();
         instance.facebookButton.interactable = enable;
         dancerAnim.enabled = enable;
-    }
-
-    public static void EnableAppleButton(bool enable)
-    {
-        instance.appleButton.interactable = enable;
     }
 
     public static void EnableLeaderboardButton(bool enable)
