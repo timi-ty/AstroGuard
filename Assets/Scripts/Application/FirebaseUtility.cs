@@ -215,6 +215,8 @@ public static class FirebaseUtility
     #region Game Data Operations
     public static async void SyncGameData()
     {
+        return; //Disabled game data syncing
+
         if (!IsFirebaseSafeToUse || IsSyncing || CurrentUser == null)
         {
             Debug.Log("Game sync aborted because: isFirebaseNotSafeToUse = " + !IsFirebaseSafeToUse + " or isSyncing " + IsSyncing +" or isSignedOut " + CurrentUser == null);

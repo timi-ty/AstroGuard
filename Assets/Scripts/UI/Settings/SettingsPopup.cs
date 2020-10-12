@@ -37,7 +37,10 @@ public class SettingsPopup : MonoBehaviour
         vibrationToggle.isOn = Settings.isVibrationEnabled;
         bgMusicToggle.isOn = Settings.isBgMusicEnabled;
 
-        syncProgressButton.interactable = FirebaseUtility.CurrentUser != null;
+
+        syncProgressButton.interactable = false; //sync progress feature disabled
+        syncProgressButton.gameObject.SetActive(false);
+
         logOutButton.interactable = FirebaseUtility.CurrentUser != null;
     }
 

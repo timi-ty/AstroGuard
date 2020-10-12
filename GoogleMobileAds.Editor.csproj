@@ -742,11 +742,11 @@
     <Reference Include="Boo.Lang">
       <HintPath>D:/Program Files/Unity/Hub/Editor/2019.4.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/User/Documents/Projects/Unity/Active/AstroGuard/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

@@ -123,9 +123,9 @@ public class LevelManager : MonoBehaviour
     {
         LoadDefaultLevels();
 
-        LoadCachedDLCLevels();
+        //LoadCachedDLCLevels(); //Disabled remote levels
 
-        FirebaseUtility.AddDatabaseReadyListener(LoadNewDLCLevels);
+        //FirebaseUtility.AddDatabaseReadyListener(LoadNewDLCLevels);
     }
 
     private void LoadDefaultLevels()
