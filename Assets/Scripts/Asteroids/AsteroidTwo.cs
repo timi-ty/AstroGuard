@@ -7,7 +7,7 @@ public class AsteroidTwo : AteroidBase
     protected override void Start()
     {
         base.Start();
-        type = Type.Two;
+        type = AsteroidType.Two;
     }
 
     protected override void Move()
@@ -26,6 +26,6 @@ public class AsteroidTwo : AteroidBase
 
         Vector2 attackVector = decider == 0 ? leftAttackVector : rightAttackVector;
 
-        mRigidBody.AddForce(attackVector * speed, ForceMode2D.Impulse);
+        mRigidBody.AddForce(attackVector * speed * 1.5f, ForceMode2D.Impulse);
     }
 }

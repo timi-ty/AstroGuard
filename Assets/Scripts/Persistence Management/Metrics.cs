@@ -32,7 +32,7 @@ public class Metrics
     #endregion
 
     #region Logging Methods
-    public static void LogAsteroidDeath(AsteroidDeathInfo asteroidDeathInfo, AteroidBase.Type enemyType)
+    public static void LogAsteroidDeath(AsteroidDeathInfo asteroidDeathInfo, AteroidBase.AsteroidType enemyType)
     {
         if(asteroidDeathInfo.killer == AsteroidDeathInfo.Killer.Space)
         {
@@ -57,6 +57,11 @@ public class Metrics
     public static void LogPlayerDeath()
     {
         Instance.others.LogPlayerDeath();
+    }
+
+    public static void LogShipHit()
+    {
+        Instance.others.LogShipHit();
     }
 
     public static void LogPowerUpCollection(PowerType powerType)
@@ -95,17 +100,17 @@ public class Metrics
         public int duringDarkRush { get; private set; }
         public int duringAttraction { get; private set; }
 
-        public void Log(AsteroidDeathInfo asteroidDeathInfo, AteroidBase.Type type)
+        public void Log(AsteroidDeathInfo asteroidDeathInfo, AteroidBase.AsteroidType type)
         {
             switch (type)
             {
-                case AteroidBase.Type.Zero:
+                case AteroidBase.AsteroidType.Zero:
                     levelZero++;
                     break;
-                case AteroidBase.Type.One:
+                case AteroidBase.AsteroidType.One:
                     levelOne++;
                     break;
-                case AteroidBase.Type.Two:
+                case AteroidBase.AsteroidType.Two:
                     levelTwo++;
                     break;
             }

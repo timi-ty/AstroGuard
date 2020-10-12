@@ -24,8 +24,14 @@ public class SpawnerManager : MonoBehaviour
 
     public void OnPlay(ObjectSpawnSettings objectSpawnSettings)
     {
-        if (!mutePowerUps) powerUpOrbSpawner.StartSpawning(objectSpawnSettings.powerUpOrbLineup, objectSpawnSettings.powerUpOrbGenerosity);
-        if (!muteBombs) bombSpawner.StartSpawning(objectSpawnSettings.bombLineup, 0);
+        if (!mutePowerUps) powerUpOrbSpawner.StartSpawning(objectSpawnSettings.powerUpOrbLineup);
+        if (!muteBombs) bombSpawner.StartSpawning(objectSpawnSettings.bombLineup);
+    }
+
+    public void OnPlay()
+    {
+        if (!mutePowerUps) powerUpOrbSpawner.StartSpawning();
+        if (!muteBombs) bombSpawner.StartSpawning();
     }
 
     public void SpawnGoldCoin()

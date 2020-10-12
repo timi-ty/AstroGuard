@@ -12,24 +12,37 @@ public struct BombSpawnInfo
 
 public class BombSpawner : OutsideSpawnerBase<Bomb>
 {
-    #region Internal
+    #region Worker Parameters
     internal Vector2 bombSize;
     internal Vector2[] spawnPoints = new Vector2[2];
+    private bool isDoneSpawning { get; set; }
     #endregion
 
 
     #region Abstract Methods
-    public override void StartSpawning<J>(List<J> bombLineup, float extraSpawnGenerosity)
+    public override void StartSpawning<J>(List<J> bombLineup)
+    {
+        PreSpawn();
+
+        StartCoroutine(SpawnRoutine(bombLineup));
+    }
+
+    public override void StartSpawning()
+    {
+        PreSpawn();
+
+        StartCoroutine(InfiniteSpawnRoutine());
+    }
+
+    protected override void PreSpawn()
     {
         if (prefabs.Count > 0)
         {
             bombSize = prefabs[0].GetComponentInChildren<Collider2D>().bounds.size * bombSize;
         }
 
-        spawnPoints[0] = ScreenBounds.leftEdge.middle + Vector2.up * ScreenBounds.height/4 + Vector2.left * bombSize.x;
+        spawnPoints[0] = ScreenBounds.leftEdge.middle + Vector2.up * ScreenBounds.height / 4 + Vector2.left * bombSize.x;
         spawnPoints[1] = ScreenBounds.rightEdge.middle + Vector2.up * ScreenBounds.height / 4 + Vector2.right * bombSize.x;
-
-        StartCoroutine(SpawnRoutine(bombLineup));
     }
     #endregion
 
@@ -43,6 +56,27 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
             yield return new WaitForSeconds(delay);
 
             SpawnBomb(spawnInfo);
+        }
+
+        isDoneSpawning = true;
+    }
+
+    private IEnumerator InfiniteSpawnRoutine()
+    {
+        while (true)
+        {
+            isDoneSpawning = false;
+
+            int length = Random.Range(5, 20);
+            float duration = Random.Range(1f, 10f) * length;
+            float maxDurationError = Random.Range(0f, duration / 5);
+
+
+            List<BombSpawnInfo> powerUpLineup = GetRanomBombLineup(length, duration, maxDurationError);
+
+            StartCoroutine(SpawnRoutine(powerUpLineup));
+
+            yield return new WaitUntil(() => isDoneSpawning);
         }
     }
 

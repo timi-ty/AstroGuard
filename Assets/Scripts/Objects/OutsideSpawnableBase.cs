@@ -66,7 +66,9 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
 
     public void OnEnterAttractionField()
     {
-        if(mRigidBody)
+        if (mRigidBody == null) return;
+
+        if (mRigidBody)
         {
             mRigidBody.gravityScale = -0.5f;
         }
@@ -74,6 +76,8 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
 
     public void RecieveAttractionForce(Vector2 sourcePoint, float forceMagnitude)
     {
+        if (mRigidBody == null) return;
+
         Vector2 forceDirection = (sourcePoint - mRigidBody.position).normalized;
 
         mRigidBody.AddForce(forceDirection * forceMagnitude, ForceMode2D.Force);
@@ -81,6 +85,8 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
 
     public void OnExitAttractionField()
     {
+        if (mRigidBody == null) return;
+
         if (mRigidBody)
         {
             mRigidBody.gravityScale = 1;

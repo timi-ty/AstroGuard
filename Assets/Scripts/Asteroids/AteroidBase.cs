@@ -46,8 +46,8 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
     private bool isDead { get; set; }
     protected bool isInAttractionField { get; set; }
 
-    public enum Type { Zero, One, Two}
-    public Type type { get; set; }
+    public enum AsteroidType { Zero, One, Two}
+    public AsteroidType type { get; set; }
 
     private AsteroidCommander mEnemyCommander { get; set; }
     #endregion

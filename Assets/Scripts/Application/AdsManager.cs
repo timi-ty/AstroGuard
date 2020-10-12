@@ -20,7 +20,6 @@ public class AdsManager : MonoBehaviour
     #endregion
 
     #region Ad Views
-    private BannerView bannerView;
     private InterstitialAd interstitial;
     private RewardedAd rewardedAd;
     #endregion
@@ -170,13 +169,11 @@ public class AdsManager : MonoBehaviour
     #region Event Handlers
     public static void HandleOnInterstitialOpening(object sender, System.EventArgs args)
     {
-        instance.bannerView?.Hide();
         ShowingFullScreenAd = true;
     }
 
     public static void HandleOnInterstitialClosed(object sender, System.EventArgs args)
     {
-        instance.bannerView?.Show();
         ShowingFullScreenAd = false;
 
         instance.RequestInterstitial();
@@ -189,7 +186,6 @@ public class AdsManager : MonoBehaviour
 
     public void HandleOnRewardedOpening(object sender, System.EventArgs args)
     {
-        instance.bannerView?.Hide();
         ShowingFullScreenAd = true;
     }
 
@@ -206,7 +202,6 @@ public class AdsManager : MonoBehaviour
 
     public void HandleOnRewardedClosed(object sender, System.EventArgs args)
     {
-        instance.bannerView?.Show();
 
         ShowingFullScreenAd = false;
 
@@ -227,7 +222,6 @@ public class AdsManager : MonoBehaviour
 
     public static void CleanUp()
     {
-        instance.bannerView?.Destroy();
         instance.interstitial?.Destroy();
     }
 }

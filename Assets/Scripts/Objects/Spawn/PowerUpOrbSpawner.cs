@@ -13,9 +13,11 @@ public struct PowerUpOrbSpawnInfo
 
 public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
 {
-    #region Internal
-    internal Vector2 powerUpOrbSize;
-    internal Vector2[] spawnPoints = new Vector2[2];
+
+    #region Worker Parameters
+    private Vector2 powerUpOrbSize;
+    private Vector2[] spawnPoints = new Vector2[2];
+    private bool isDoneSpawning { get; set; }
     #endregion
 
     #region Probability Parameters
@@ -24,7 +26,21 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
     #endregion
 
     #region Abstract Methods
-    public override void StartSpawning<J>(List<J> powerUpOrbLineup, float extraSpawnGenerosity)
+    public override void StartSpawning<J>(List<J> powerUpOrbLineup)
+    {
+        PreSpawn();
+
+        StartCoroutine(SpawnRoutine(powerUpOrbLineup));
+    }
+
+    public override void StartSpawning()
+    {
+        PreSpawn();
+
+        StartCoroutine(InfiniteSpawnRoutine());
+    }
+
+    protected override void PreSpawn()
     {
         if (prefabs.Count > 0)
         {
@@ -33,12 +49,6 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
 
         spawnPoints[0] = ScreenBounds.leftEdge.middle + Vector2.left * powerUpOrbSize.x;
         spawnPoints[1] = ScreenBounds.rightEdge.middle + Vector2.right * powerUpOrbSize.x;
-
-        ComputeSpawnSuccessOdds(extraSpawnGenerosity);
-
-        InvokeRepeating("PowerUpOrbSpawnLottery", SPAWN_ATTEMPT_INTERVAL, SPAWN_ATTEMPT_INTERVAL);
-
-        StartCoroutine(SpawnRoutine(powerUpOrbLineup));
     }
     #endregion
 
@@ -53,6 +63,27 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
             yield return new WaitForSeconds(delay);
 
             SpawnPowerUp(spawnInfo);
+        }
+
+        isDoneSpawning = true;
+    }
+
+    private IEnumerator InfiniteSpawnRoutine()
+    {
+        while (true)
+        {
+            isDoneSpawning = false;
+
+            int length = Random.Range(5, 20);
+            float duration = Random.Range(5f, 20f) * length;
+            float maxDurationError = Random.Range(0f, duration / 5);
+
+
+            List<PowerUpOrbSpawnInfo> powerUpLineup = GetRanomPowerUpOrbLineup(length, duration, maxDurationError);
+
+            StartCoroutine(SpawnRoutine(powerUpLineup));
+
+            yield return new WaitUntil(() => isDoneSpawning);
         }
     }
 

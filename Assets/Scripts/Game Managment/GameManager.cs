@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     #region Global Static Parameters
     public static int currentLevel => LevelManager.CurrentLevel;
+    public static bool isInInfiniteMode => LevelManager.IsCurrentLevelInfinite;
     public static float levelProgress { get; set; }
     public static bool isInGame => currentLevel != 0;
     public static bool gameFrozen { get; set; }
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     #region Worker Parameters
     private float _cachedTimeScale { get; set; }
+    private int adCounter;
     #endregion
 
     #region Unity Runtime
@@ -99,14 +101,17 @@ public class GameManager : MonoBehaviour
 
         ScaleGameToScreenScreen();
 
-        Time.timeScale = defaultTimeScale;
-
+        restoreTimeScale();
 
         player.OnInitialize();
 
         if (currentLevel <= 0)
         {
             UIManager.ShowMainUI();
+        }
+        else if (isInInfiniteMode)
+        {
+            OnPlay();
         }
         else if (currentLevel > 0)
         {
@@ -139,17 +144,45 @@ public class GameManager : MonoBehaviour
 
         LevelInfo levelInfo = LevelManager.GetLevelInfo(level);
 
-        PlayLevel(levelInfo);
+
+        if(currentLevel == 1 && !gameFrozen)
+        {
+            UIManager.Transition(
+            () =>
+            {
+                PlayLevel(levelInfo);
+            },
+            "First Level!", currentLevel.ToString("D2"),
+            showInterstitial: false);
+        }
+        else
+        {
+            PlayLevel(levelInfo);// (1) This case will ensure that a new transition is not started because a 
+            //frozen game most likely means a transition is already in progress.
+        }
     }
 
     public void OnPlay()
     {
-        LevelInfo levelInfo = LevelManager.GetLevelInfo();
+        LevelManager.StartInfiniteLevel();
 
-        PlayLevel(levelInfo);
+        if (gameFrozen)
+        {
+            PlayInfinite(); // Same as above in (1)
+        }
+        else
+        {
+            UIManager.Transition(
+            () =>
+            {
+                PlayInfinite();
+            },
+            "Infinite Level!", "Survival",
+            showInterstitial: false);
+        }
     }
 
-    private void PlayLevel(LevelInfo levelInfo)
+    private void StagePlay()
     {
         Session.Instance.Resume();
 
@@ -161,15 +194,31 @@ public class GameManager : MonoBehaviour
 
         levelProgress = 0;
 
-        Time.timeScale = defaultTimeScale;
+        restoreTimeScale();
 
         UIManager.ShowPlayUI();
+    }
+
+    private void PlayLevel(LevelInfo levelInfo)
+    {
+        StagePlay();
 
         background.OnPlay(levelInfo.environmentSettings.backgroundAssetIndex);
         player.OnPlay();
         ship.OnPlay();
         asteroidCoordinator.OnPlay(levelInfo.enemyLineup);
         spawnerCoordinator.OnPlay(levelInfo.objectSpawnSettings);
+    }
+
+    private void PlayInfinite()
+    {
+        StagePlay();
+
+        background.OnPlay();
+        player.OnPlay();
+        ship.OnPlay();
+        asteroidCoordinator.OnPlay();
+        spawnerCoordinator.OnPlay();
     }
 
     public void OnPause()
@@ -217,15 +266,15 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.AbortRetryCountdown();
 
-        bool showInterstitial = Random.Range(0, 2) == 0;
+        string levelText = isInInfiniteMode ? "Infite Level" : "Level " + currentLevel.ToString("D2");
 
         UIManager.Transition(
             () =>
             {
                 SceneManager.LoadScene(0);
             },
-            "Let's Try That Again", "Level " + currentLevel.ToString("D2"),
-            showInterstitial: showInterstitial);
+            "Let's Try That Again", levelText,
+            showInterstitial: shouldShowInterstitial());
     }
 
     public void OnLevelFinished()
@@ -244,8 +293,6 @@ public class GameManager : MonoBehaviour
         {
             LevelManager.NextLevel();
 
-            bool showInterstitial = Random.Range(0, 2) == 0;
-
             UIManager.Transition(
             () =>
             {
@@ -255,7 +302,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             },
             "Next Level!", currentLevel.ToString("D2"),
-            showInterstitial: showInterstitial);
+            showInterstitial: shouldShowInterstitial());
         }
     }
 
@@ -378,8 +425,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("GM: Showing full screen ad = " + AdsManager.ShowingFullScreenAd);
             yield return new WaitForSecondsRealtime(1.0f);
         }
-        //yield return new WaitWhile(() => AdsManager.ShowingFullScreenAd);
-        //Debug.Log("Waited While");
+
         UnfreezeGame();
         activeRewardEvent?.Invoke();
         activeRewardEvent = null;
@@ -413,9 +459,29 @@ public class GameManager : MonoBehaviour
         return;
     }
 
+    public static void restoreTimeScale()
+    {
+        if (gameFrozen) FreezeGame();//keep game frozen if it is flagged as frozen.
+        else
+        {
+            Time.timeScale = defaultTimeScale;//restore default time scale otherwise.
+        }
+    }
+
     public static bool IsPlayerAlive()
     {
         return isInGame && instance.player.gameObject.activeInHierarchy;
+    }
+
+    private bool shouldShowInterstitial()
+    {
+        adCounter++;
+        if (adCounter >= 4)
+        {
+            adCounter = 0;
+            return true;
+        }
+        return false;
     }
     #endregion
 }

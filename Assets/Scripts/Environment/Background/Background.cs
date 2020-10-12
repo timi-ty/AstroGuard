@@ -29,6 +29,11 @@ public class Background : MonoBehaviour
         SetBackground(backgroundIndex);
     }
 
+    public void OnPlay()
+    {
+        SetBackground(Random.Range(0, backgroundSets.Count));
+    }
+
     #region Utitlity
     public static int GetRandomBackgroundIndex()
     {

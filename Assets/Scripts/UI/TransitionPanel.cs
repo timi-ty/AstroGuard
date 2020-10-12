@@ -41,7 +41,14 @@ public class TransitionPanel : MonoBehaviour
         titleText.text = title;
         subTitleText.text = subTitle;
 
-        tipText.text = showTip ? tips[Random.Range(0, tips.Count)] : "";
+        if(GameManager.currentLevel == 1)
+        {
+            tipText.text = tips[4];
+        }
+        else
+        {
+            tipText.text = showTip ? tips[Random.Range(0, tips.Count)] : "";
+        }
     }
 
     private void EffectTransitionProgress(float progress)

@@ -29,7 +29,17 @@ public class GoldCoinSpawner : OutsideSpawnerBase<GoldCoin>
         Instantiate(prefabs[0], pos, Quaternion.identity, transform);
     }
 
-    public override void StartSpawning<J>(List<J> spawnLineup, float extraSpawnGenerosity)
+    public override void StartSpawning<J>(List<J> spawnLineup)
+    {
+        //Do Nothing
+    }
+
+    public override void StartSpawning()
+    {
+        //Do Nothing
+    }
+
+    protected override void PreSpawn()
     {
         //Do Nothing
     }

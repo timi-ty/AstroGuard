@@ -28,8 +28,8 @@ public class AsteroidCommander : MonoBehaviour
 
     #region Worker Parameters
     private int nEnemyLineup { get; set; } //total number of enemies for the current lineup
-    private int nSpawnedEnemies { get; set; }//number of enemies spawned so far
-    private int nLiveEnemies { get; set; } //current number of alive enemies in play
+    private int nSpawnedAsteroids { get; set; }//number of enemies spawned so far
+    private int nLiveAsteroids { get; set; } //current number of alive enemies in play
     private bool isDoneSpawning { get; set; }
     public PlayerBehaviour player { get; set; }
     #endregion
@@ -46,14 +46,47 @@ public class AsteroidCommander : MonoBehaviour
         player = GameManager.instance.player;
     }
 
-    public void OnPlay(List<AsteroidSpawnInfo> enemyLineup)
+    public void OnPlay(List<AsteroidSpawnInfo> asteroidLineup)
     {
-        nEnemyLineup = enemyLineup.Count;
-        nSpawnedEnemies = 0;
-        nLiveEnemies = 0;
+        nEnemyLineup = asteroidLineup.Count;
+        nSpawnedAsteroids = 0;
+        nLiveAsteroids = 0;
 
-        StartCoroutine(SpawnRoutine(enemyLineup));
+        StartCoroutine(SpawnRoutine(asteroidLineup));
     }
+
+    public void OnPlay()
+    {
+        StartCoroutine(InfiniteSpawnRoutine());
+    }
+
+
+    private IEnumerator InfiniteSpawnRoutine()
+    {
+        nSpawnedAsteroids = 0;
+        nLiveAsteroids = 0;
+        int difficulty = 0;
+        while (true)
+        {
+            isDoneSpawning = false;
+
+            int length = UnityEngine.Random.Range(20, 500);
+            float duration = UnityEngine.Random.Range(0.4f, 0.6f) * length;
+            float maxDurationError = UnityEngine.Random.Range(0f, duration/5);
+
+
+            List<AsteroidSpawnInfo> asteroidLineup = GetRanomAsteroidLineup(length, duration, maxDurationError, difficulty, LevelCollection.MAX_DIFFICULTY);
+
+            nEnemyLineup += asteroidLineup.Count;
+
+            difficulty = Mathf.Clamp(difficulty++, 0, LevelCollection.MAX_DIFFICULTY);
+
+            StartCoroutine(SpawnRoutine(asteroidLineup));
+
+            yield return new WaitUntil(() => isDoneSpawning);
+        }
+    }
+
 
     private IEnumerator SpawnRoutine(List<AsteroidSpawnInfo> enemyLineup)
     {
@@ -100,19 +133,19 @@ public class AsteroidCommander : MonoBehaviour
                         speed: spawnInfo.enemySpeed,
                         size: spawnInfo.enemySize);
 
-        nLiveEnemies++;
-        nSpawnedEnemies++;
+        nLiveAsteroids++;
+        nSpawnedAsteroids++;
     }
 
-    public void OnAsteroidDeath(AsteroidDeathInfo deathInfo, AteroidBase.Type enemyType, Vector2 position)
+    public void OnAsteroidDeath(AsteroidDeathInfo deathInfo, AteroidBase.AsteroidType enemyType, Vector2 position)
     {
-        nLiveEnemies--;
+        nLiveAsteroids--;
 
         Metrics.LogAsteroidDeath(deathInfo, enemyType);
 
         Session.RecordScoreBump();
 
-        float destroyedRocks = nSpawnedEnemies - nLiveEnemies;
+        float destroyedRocks = nSpawnedAsteroids - nLiveAsteroids;
         float progress = destroyedRocks / nEnemyLineup;
 
         GameManager.UpdateLevelProgress(progress);
@@ -126,7 +159,7 @@ public class AsteroidCommander : MonoBehaviour
                 break;
         }
 
-        if (isDoneSpawning && nLiveEnemies <= 0)
+        if (isDoneSpawning && nLiveAsteroids <= 0)
         {
             Invoke("NotifyLevelComplete", 3);
         }
@@ -136,6 +169,8 @@ public class AsteroidCommander : MonoBehaviour
 
     private void NotifyLevelComplete()
     {
+        if (GameManager.isInInfiniteMode) return;
+
         GameManager.instance.OnLevelFinished();
     }
 

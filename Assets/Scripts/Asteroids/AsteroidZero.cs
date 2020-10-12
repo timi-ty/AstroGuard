@@ -3,21 +3,27 @@ using UnityEngine;
 
 public class AsteroidZero : AteroidBase
 {
+    #region Worker Parameters
+    private Vector2 targetPoint;
+    #endregion
+
     protected override void Start()
     {
         base.Start();
-        type = Type.Zero;
+        type = AsteroidType.Zero;
     }
 
     protected override void StartMove()
     {
-        //Do nothing.
+        targetPoint = new Vector2(ScreenBounds.RandomXCoord(15, out _), ScreenBounds.centre.y);
     }
 
     protected override void Move()
     {
         if (isInAttractionField) return;
 
-        mRigidBody.MovePosition(Vector2.MoveTowards(mRigidBody.position, Vector2.down * 100, speed * Time.fixedDeltaTime));
+        Vector2 force = (targetPoint - mRigidBody.position) * speed * 0.3f;
+        mRigidBody.AddForce(force, ForceMode2D.Force);
+
     }
 }

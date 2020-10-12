@@ -87,6 +87,8 @@ public class Ship : MonoBehaviour, IShieldable
         {
             health--;
         }
+
+        Metrics.LogShipHit();
     }
 
     private void Destroy()

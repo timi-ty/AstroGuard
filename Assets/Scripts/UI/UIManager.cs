@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     public Button watchAdContinueButton;
     public Button noAdsButton;
     public Button facebookButton;
+    public Button appleButton;
     public Button leaderBoardButton;
     public TransitionPanel transitionPanel;
 
@@ -90,7 +91,13 @@ public class UIManager : MonoBehaviour
             yield return new WaitUntil(() => mainUIDirty);
             RefreshGreetings(FirebaseUtility.CurrentUser?.DisplayName);
             EnableFacebookButton(FirebaseUtility.CurrentUser == null);
+            EnableAppleButton(FirebaseUtility.CurrentUser == null);
             EnableLeaderboardButton(FirebaseUtility.CurrentUser != null);
+#if UNITY_ANDROID
+            appleButton.gameObject.SetActive(false);
+#elif UNITY_EDITOR
+            appleButton.gameObject.SetActive(false);
+#endif
             mainUIDirty = false;
             yield return new WaitForSecondsRealtime(2.0f);
         }
@@ -115,9 +122,9 @@ public class UIManager : MonoBehaviour
 
         EnableContinueButton(AdsManager.IsRewardedAdReady);
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         EnableContinueButton(true);
-        #endif
+#endif
 
         instance.sessionScoreText.text = Session.Score.ToString();
 
@@ -177,9 +184,9 @@ public class UIManager : MonoBehaviour
     {
         instance.playHud.UpdateHud(immediately: false);
     }
-    #endregion
+#endregion
 
-    #region Application UI
+#region Application UI
     public static void RefreshGreetings(string userName)
     {
         if (userName != null)
@@ -213,6 +220,11 @@ public class UIManager : MonoBehaviour
         dancerAnim.enabled = enable;
     }
 
+    public static void EnableAppleButton(bool enable)
+    {
+        instance.appleButton.interactable = enable;
+    }
+
     public static void EnableLeaderboardButton(bool enable)
     {
         instance.leaderBoardButton.interactable = enable;
@@ -222,9 +234,9 @@ public class UIManager : MonoBehaviour
     {
         instance.alertDialog.Queue(alertMessageInfo, positiveAction, negativeAction, alertId);
     }
-    #endregion
+#endregion
 
-    #region Utility Methods
+#region Utility Methods
     private static void HideAllUIScreens()
     {
         instance.homeScreen.SetActive(false);
@@ -264,14 +276,19 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
 
-        GameManager.PauseGame();
+        GameManager.FreezeGame();//must use freeze to flag the game manager that a blocking transition is in progress
+        Debug.Log("Transition Pause...");
+
+        transitionCallback?.Invoke();
 
         if (wait)
         {
             yield return new WaitForSecondsRealtime(3.0f);
         }
 
-        GameManager.ResumeGame();
+        GameManager.UnfreezeGame();//must only unfreeze well after the transition callback has bee invoked to ensure 
+        //that all events that need to respond to the freeze flag have been executed.
+        Debug.Log("Transition Resume...");
 
         #region Interstitial Ad
         if (showInterstitial)
@@ -283,7 +300,7 @@ public class UIManager : MonoBehaviour
         }
         #endregion
 
-        transitionCallback?.Invoke();
+
 
         while (progress > 0)
         {
@@ -294,9 +311,9 @@ public class UIManager : MonoBehaviour
 
         transitionPanel.FinishTransition();
     }
-    #endregion
+#endregion
 
-    #region Control Methods
+#region Control Methods
     private IEnumerator CountDownToRetry()
     {
         retryCountdownBar.SetProgressImmediate(1, RETRY_COUNT_DOWN_DURATION.ToString());
@@ -331,5 +348,5 @@ public class UIManager : MonoBehaviour
             StopCoroutine(retryCountdownCoroutine);
         }
     }
-    #endregion
+#endregion
 }

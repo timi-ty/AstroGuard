@@ -79,6 +79,7 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Global Static Parameters
+    public static bool IsCurrentLevelInfinite => CurrentLevel == int.MaxValue;
     public static int CurrentLevel { get; private set; }
     public static int LevelCount => instance.liveLevels.Count;
     #endregion
@@ -210,6 +211,11 @@ public class LevelManager : MonoBehaviour
             throw DebugHelper.ThrowException("There is no level indexed with level " + level + ". " +
                 "Ensure that level " + level + " is loaded.", instance.gameObject);
         }
+    }
+
+    public static void StartInfiniteLevel()
+    {
+        CurrentLevel = int.MaxValue;
     }
 
     public static LevelInfo GetLevelInfo()

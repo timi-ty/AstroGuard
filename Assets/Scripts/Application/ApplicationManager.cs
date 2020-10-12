@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SignInWithApple;
 
 public class ApplicationManager : MonoBehaviour
 {
@@ -74,9 +75,32 @@ public class ApplicationManager : MonoBehaviour
         OnApplicationQuitEvent?.Invoke();
     }
 
-    public void AttemptLogin()
+    public void AttemptLoginWithFacebook()
     {
         FacebookUtility.PromptLogIn();
+    }
+
+    public void AttemptLoginWithApple()
+    {
+        var siwa = gameObject.GetComponentInChildren<SignInWithApple>();
+        siwa.Login(OnLogin);
+    }
+
+    private void OnLogin(SignInWithApple.CallbackArgs args)
+    {
+        if (args.error != null)
+        {
+            Debug.Log("Errors occurred: " + args.error);
+            return;
+        }
+
+        UserInfo userInfo = args.userInfo;
+
+        FirebaseUtility.AuthneticateWithApple(userInfo.idToken);
+
+        Debug.Log(
+            string.Format("Display Name: {0}\nEmail: {1}\nUser ID: {2}\nID Token: {3}", userInfo.displayName ?? "",
+                userInfo.email ?? "", userInfo.userId ?? "", userInfo.idToken ?? ""));
     }
 
     public static void SignOut()

@@ -32,7 +32,16 @@ public class PlayHUD : MonoBehaviour
 
         scoreText.text = Session.Score.ToString();
 
-        string levelText = "LEVEL " + GameManager.currentLevel.ToString("D2");
+        string levelText;
+
+        if (GameManager.isInInfiniteMode)
+        {
+            levelText = "INFINITE LEVEL";
+        }
+        else
+        {
+            levelText = "LEVEL " + GameManager.currentLevel.ToString("D2");
+        }
 
         if (immediately) levelProgressBar.SetProgressImmediate(levelProgress, levelText);
         else levelProgressBar.SetProgress(levelProgress, levelText);

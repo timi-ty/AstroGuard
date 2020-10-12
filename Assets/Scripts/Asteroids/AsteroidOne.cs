@@ -14,7 +14,7 @@ public class AsteroidOne : AteroidBase
     protected override void Start()
     {
         base.Start();
-        type = Type.One;
+        type = AsteroidType.One;
     }
 
     protected override void Move()
@@ -23,7 +23,8 @@ public class AsteroidOne : AteroidBase
 
         if (mRigidBody.position.y > triggerYCoordinate && !triggered)
         {
-            mRigidBody.MovePosition(Vector3.MoveTowards(mRigidBody.position, fakeTargetPoint, speed * Time.fixedDeltaTime));
+            Vector2 force = (fakeTargetPoint - mRigidBody.position) * speed * 0.6f;
+            mRigidBody.AddForce(force, ForceMode2D.Force);
         }
         else if(!triggered)
         {

@@ -54,11 +54,10 @@ public class Bomb : OutsideSpawnableBase, IExplosionImpactible
     #region Overriden Methods
     protected override void ApplyImpulse()
     {
-        //modify to remove randomness
         Vector2 destination = ScreenBounds.topEdge.middle;
         Vector2 direction = (destination - mRigidBody.position).normalized;
 
-        float impulseMagnitude = UnityEngine.Random.Range(minImpulseMagnitude, maxImpulseMagnitude);
+        float impulseMagnitude = UnityEngine.Random.Range(minImpulseMagnitude * 0.2f, maxImpulseMagnitude);
 
         mRigidBody.AddForce(direction * impulseMagnitude, ForceMode2D.Impulse);
     }

@@ -8,6 +8,7 @@ using Firebase.Database;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using System.Security.Cryptography;
 
 public static class FirebaseUtility
 {
@@ -19,7 +20,7 @@ public static class FirebaseUtility
     #region Auth
     public static FirebaseUser CurrentUser { get; set; }
     private static FirebaseAuth Auth { get; set; }
-    private static string FacebookAccessToken { get; set; }
+    private static Credential Credential { get; set; }
     #endregion
 
     #region Storage
@@ -89,28 +90,63 @@ public static class FirebaseUtility
     #region Authentication
     public static void AuthneticateWithFacebook(string accessToken)
     {
-        FacebookAccessToken = accessToken;
-
         if (!IsFirebaseSafeToUse)
         {
             AlertMessageInfo alertMessageInfo = new AlertMessageInfo()
             {
                 titleText = "Ooops...",
                 messageText = "Sorry, we couldn't log you in.",
-                positiveActionText = "Retry",
+                positiveActionText = "Dismiss",
                 negativeActionText = "Cancel"
             };
 
-            UIManager.QueueAlertDialog(alertMessageInfo, SignIn, () => { }, "login_failed");
+            UIManager.QueueAlertDialog(alertMessageInfo, () => { }, () => { }, "login_failed");
             return;
         }
+
+        Credential credential = FacebookAuthProvider.GetCredential(accessToken);
 
         SignIn();
     }
 
+    public static void AuthneticateWithApple(string appleIdToken)
+    {
+        if (!IsFirebaseSafeToUse)
+        {
+            AlertMessageInfo alertMessageInfo = new AlertMessageInfo()
+            {
+                titleText = "Ooops...",
+                messageText = "Sorry, we couldn't log you in.",
+                positiveActionText = "Dismiss",
+                negativeActionText = "Cancel"
+            };
+
+            UIManager.QueueAlertDialog(alertMessageInfo, () => { }, () => { }, "login_failed");
+            return;
+        }
+
+        Credential credential = OAuthProvider.GetCredential("apple.com", appleIdToken, CalculateNonce(), null);//**See below
+
+        SignIn();
+    }
+
+    private static string CalculateNonce()//** This has to be tested because the nonce is meant to be passed to the apple sign in but Unity doesn't allow for it in their API.
+    {
+        //Allocate a buffer
+        var ByteArray = new byte[20];
+        //Generate a cryptographically random set of bytes
+        using (var Rnd = RandomNumberGenerator.Create())
+        {
+            Rnd.GetBytes(ByteArray);
+        }
+        //Base64 encode and then return
+        return Convert.ToBase64String(ByteArray);
+    }
+
+
     private static void SignIn()
     {
-        if (FacebookAccessToken == null)
+        if (Credential == null)
         {
             Debug.Log("Access token is not ready. Sign in will be called when it is.");
 
@@ -122,9 +158,7 @@ public static class FirebaseUtility
             return;
         }
 
-        Credential credential = FacebookAuthProvider.GetCredential(FacebookAccessToken);
-
-        Auth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+        Auth.SignInWithCredentialAsync(Credential).ContinueWith(task => {
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInWithCredentialAsync was canceled.");
