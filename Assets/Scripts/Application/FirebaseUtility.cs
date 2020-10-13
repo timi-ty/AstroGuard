@@ -104,7 +104,7 @@ public static class FirebaseUtility
             return;
         }
 
-        Credential credential = FacebookAuthProvider.GetCredential(accessToken);
+        Credential = FacebookAuthProvider.GetCredential(accessToken);
 
         SignIn();
     }
@@ -125,7 +125,7 @@ public static class FirebaseUtility
             return;
         }
 
-        Credential credential = OAuthProvider.GetCredential("apple.com", appleIdToken, CalculateNonce(), null);//**See below
+        Credential = OAuthProvider.GetCredential("apple.com", appleIdToken, CalculateNonce(), null);//**See below
 
         SignIn();
     }
