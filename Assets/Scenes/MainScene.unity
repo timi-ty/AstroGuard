@@ -16419,7 +16419,7 @@ MonoBehaviour:
   watchAdContinueButton: {fileID: 44628832}
   noAdsButton: {fileID: 1947668379}
   facebookButton: {fileID: 654377387}
-  appleSignInButton: {fileID: 0}
+  appleSignInButton: {fileID: 1276458481}
   leaderBoardButton: {fileID: 467550464}
   transitionPanel: {fileID: 1755462053}
   alertDialog: {fileID: 307799967}
