@@ -194,9 +194,6 @@
     <Compile Include="Assets\Scripts\Utils\Rotate.cs" />
     <Compile Include="Assets\Scripts\Utils\ScaleWithUniversal.cs" />
     <Compile Include="Assets\Scripts\Utils\ScreenBounds.cs" />
-    <Compile Include="Assets\Unity Technologies\SignInWithApple\API\SignInWithApple.cs" />
-    <Compile Include="Assets\Unity Technologies\SignInWithApple\Samples\Scripts\SignInWithAppleTest_Callbacks.cs" />
-    <Compile Include="Assets\Unity Technologies\SignInWithApple\Samples\Scripts\SignInWithAppleTest_EventSystem.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\FacebookSDK\link.xml" />

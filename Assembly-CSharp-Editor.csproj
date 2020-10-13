@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Adjust\Editor\AdjustEditor.cs" />
-    <Compile Include="Assets\Unity Technologies\SignInWithApple\Editor\AddFrameworkAndEntitlement.cs" />
     <None Include="Assets\FacebookSDK\Plugins\Editor\Dependencies.xml" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program Files/Unity/Hub/Editor/2019.4.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
