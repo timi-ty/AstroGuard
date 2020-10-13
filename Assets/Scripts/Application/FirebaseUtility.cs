@@ -8,6 +8,7 @@ using Firebase.Database;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using System.Security.Cryptography;
 
 public static class FirebaseUtility
 {

@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     public Button watchAdContinueButton;
     public Button noAdsButton;
     public Button facebookButton;
+    public Button appleSignInButton;
     public Button leaderBoardButton;
     public TransitionPanel transitionPanel;
 
@@ -90,6 +91,7 @@ public class UIManager : MonoBehaviour
             yield return new WaitUntil(() => mainUIDirty);
             RefreshGreetings(FirebaseUtility.CurrentUser?.DisplayName);
             EnableFacebookButton(FirebaseUtility.CurrentUser == null);
+            EnableAppleSignInButton(FirebaseUtility.CurrentUser == null);
             EnableLeaderboardButton(FirebaseUtility.CurrentUser != null);
 
             mainUIDirty = false;
@@ -214,6 +216,15 @@ public class UIManager : MonoBehaviour
         dancerAnim.enabled = enable;
     }
 
+    public static void EnableAppleSignInButton(bool enable)
+    {
+#if UNITY_IOS
+        instance.appleSignInButton.interactable = enable;
+#elif UNITY_ANDROID
+        instance.appleSignInButton.gameObject.SetActive(false);
+#endif
+    }
+
     public static void EnableLeaderboardButton(bool enable)
     {
         instance.leaderBoardButton.interactable = enable;
@@ -279,7 +290,7 @@ public class UIManager : MonoBehaviour
         //that all events that need to respond to the freeze flag have been executed.
         Debug.Log("Transition Resume...");
 
-        #region Interstitial Ad
+#region Interstitial Ad
         if (showInterstitial)
         {
             Debug.Log("Showing Interstitial...");
@@ -287,7 +298,7 @@ public class UIManager : MonoBehaviour
 
             yield return new WaitWhile(() => GameManager.gameFrozen);
         }
-        #endregion
+#endregion
 
 
 
