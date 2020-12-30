@@ -1,0 +1,766 @@
+fileFormatVersion: 2
+guid: 0fc1ea8c3e81183419ae485dbd38e2cb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7721314325064715991
+    second: AstroUI_0
+  - first:
+      213: 3939692961811484652
+    second: AstroUI_1
+  - first:
+      213: -4265773130094336974
+    second: AstroUI_2
+  - first:
+      213: -3658679080801485506
+    second: AstroUI_3
+  - first:
+      213: 6318961948745228279
+    second: AstroUI_4
+  - first:
+      213: -4443805176782702761
+    second: AstroUI_5
+  - first:
+      213: -9074154297997338086
+    second: AstroUI_6
+  - first:
+      213: 3693801599009855473
+    second: AstroUI_7
+  - first:
+      213: 7639296283286042804
+    second: AstroUI_8
+  - first:
+      213: -7425124785043963107
+    second: AstroUI_9
+  - first:
+      213: 8182916781675550948
+    second: AstroUI_10
+  - first:
+      213: 302733814626170997
+    second: AstroUI_11
+  - first:
+      213: 6687774091138380588
+    second: AstroUI_12
+  - first:
+      213: -3907869136665525887
+    second: AstroUI_13
+  - first:
+      213: 4573068446173985607
+    second: AstroUI_14
+  - first:
+      213: -8058835017389786607
+    second: AstroUI_15
+  - first:
+      213: -5746250484943890894
+    second: AstroUI_16
+  - first:
+      213: -5294536541463785379
+    second: AstroUI_17
+  - first:
+      213: -3263892905731366584
+    second: AstroUI_18
+  - first:
+      213: 1125128270068167724
+    second: AstroUI_19
+  - first:
+      213: 5282688964050615280
+    second: AstroUI_20
+  - first:
+      213: 401702451126845045
+    second: AstroUI_21
+  - first:
+      213: -2650427652215052931
+    second: AstroUI_22
+  - first:
+      213: 3380248635639174221
+    second: AstroUI_23
+  - first:
+      213: 8695409411977919652
+    second: AstroUI_24
+  - first:
+      213: 7147525170431980595
+    second: AstroUI_25
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AstroUI_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3543
+        width: 538
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 921f167d78168d490800000000000000
+      internalID: -7721314325064715991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_1
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 3544
+        width: 538
+        height: 541
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cef41e810e99ca630800000000000000
+      internalID: 3939692961811484652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_2
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 4011
+        width: 1068
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 15, z: 50, w: 15}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 234225070fdecc4c0800000000000000
+      internalID: -4265773130094336974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_3
+      rect:
+        serializedVersion: 2
+        x: 2258
+        y: 966
+        width: 1604
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 32, z: 50, w: 30}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3dbca1b2c2c93dc0800000000000000
+      internalID: -3658679080801485506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_4
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 3927
+        width: 1072
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 20, z: 50, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ff5b20c96671b750800000000000000
+      internalID: 6318961948745228279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_5
+      rect:
+        serializedVersion: 2
+        x: 2633
+        y: 3827
+        width: 914
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75733da6cbe6452c0800000000000000
+      internalID: -4443805176782702761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_6
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 3765
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1ad8ce2eb0221280800000000000000
+      internalID: -9074154297997338086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_7
+      rect:
+        serializedVersion: 2
+        x: 1461
+        y: 3619
+        width: 1042
+        height: 213
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f790c3dbf4034330800000000000000
+      internalID: 3693801599009855473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_8
+      rect:
+        serializedVersion: 2
+        x: 2739
+        y: 3713
+        width: 702
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b8f933be7b340a60800000000000000
+      internalID: 7639296283286042804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_9
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1473
+        width: 996
+        height: 2042
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 50, z: 50, w: 50}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1381861958a4f890800000000000000
+      internalID: -7425124785043963107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_10
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 3367
+        width: 374
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 155, y: 45, z: 155, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e89a5e357f8f8170800000000000000
+      internalID: 8182916781675550948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_11
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 3336
+        width: 928
+        height: 273
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 199, y: 97, z: 198, w: 111}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 578ba4aecc6833400800000000000000
+      internalID: 302733814626170997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_12
+      rect:
+        serializedVersion: 2
+        x: 2635
+        y: 3427
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c233d504a1fbfcc50800000000000000
+      internalID: 6687774091138380588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_13
+      rect:
+        serializedVersion: 2
+        x: 2981
+        y: 3311
+        width: 324
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 181c65899b574c9c0800000000000000
+      internalID: -3907869136665525887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_14
+      rect:
+        serializedVersion: 2
+        x: 3419
+        y: 3232
+        width: 477
+        height: 477
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74b7fbbc58dc67f30800000000000000
+      internalID: 4573068446173985607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_15
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 1175
+        width: 1438
+        height: 2126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11ab00dcf34492090800000000000000
+      internalID: -8058835017389786607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_16
+      rect:
+        serializedVersion: 2
+        x: 2609
+        y: 2993
+        width: 322
+        height: 322
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 236d08ef0a73140b0800000000000000
+      internalID: -5746250484943890894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_17
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 2917
+        width: 324
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d50d9b331170686b0800000000000000
+      internalID: -5294536541463785379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_18
+      rect:
+        serializedVersion: 2
+        x: 2739
+        y: 2493
+        width: 324
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 841e6f0f1b254b2d0800000000000000
+      internalID: -3263892905731366584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_19
+      rect:
+        serializedVersion: 2
+        x: 2625
+        y: 2171
+        width: 134
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c24b92053324d9f00800000000000000
+      internalID: 1125128270068167724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_20
+      rect:
+        serializedVersion: 2
+        x: 2053
+        y: 601
+        width: 2009
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fbfc19bf91ef4940800000000000000
+      internalID: 5282688964050615280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_21
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 27
+        width: 1849
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 105, z: 100, w: 140}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57eb1d04042239500800000000000000
+      internalID: 401702451126845045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_22
+      rect:
+        serializedVersion: 2
+        x: 3755
+        y: 1563
+        width: 270
+        height: 272
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7569d6c71ac73bd0800000000000000
+      internalID: -2650427652215052931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_23
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 92
+        width: 1810
+        height: 769
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4495cb893e09ee20800000000000000
+      internalID: 3380248635639174221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_24
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 906
+        width: 540
+        height: 542
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ac38893acc4ca870800000000000000
+      internalID: 8695409411977919652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_25
+      rect:
+        serializedVersion: 2
+        x: 3540
+        y: 2560
+        width: 384
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 334f2c6f54c113360800000000000000
+      internalID: 7147525170431980595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
