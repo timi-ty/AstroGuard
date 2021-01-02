@@ -44,7 +44,7 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
         } 
     }
     private bool isDead { get; set; }
-    protected bool isInAttractionField { get; set; }
+    public bool isInAttractionField { get; set; }
 
     public enum AsteroidType { Zero, One, Two}
     public AsteroidType type { get; set; }
@@ -186,7 +186,12 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
 
     private bool HitByKiller(Transform hitterTransform, out AsteroidDeathInfo.Killer killer)
     {
-        if (IsHitterShielded(hitterTransform))
+        if (IsHitterRepelling(hitterTransform))
+        {
+            killer = AsteroidDeathInfo.Killer.Space;
+            return false;
+        }
+        else if (IsHitterShielded(hitterTransform))
         {
             killer = AsteroidDeathInfo.Killer.Shield;
         }
@@ -236,6 +241,18 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
         if(shieldable != null)
         {
             return shieldable.IsShielded();
+        }
+
+        return false;
+    }
+
+    private bool IsHitterRepelling(Transform hitter)
+    {
+        IRepeller repeller = hitter.GetComponent<IRepeller>();
+
+        if (repeller != null)
+        {
+            return repeller.isRepelling;
         }
 
         return false;

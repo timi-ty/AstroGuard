@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Ship : MonoBehaviour, IShieldable
+public class Ship : MonoBehaviour, IShieldable, IRepeller
 {
     #region Constants
     public const int FULL_HEALTH = 3;
@@ -9,6 +9,7 @@ public class Ship : MonoBehaviour, IShieldable
 
     #region Components
     public SpriteRenderer shieldSpriteRenderer;
+    public SpriteRenderer repellerSpriteRenderer;
     public DamageLayer damageLayer;
     public Transform particleFloor;
     #endregion
@@ -27,17 +28,13 @@ public class Ship : MonoBehaviour, IShieldable
         }
     }
     private bool isDestroyed { get; set; }
+    public bool isRepelling { get; set; }
     #endregion
 
     #region Unity Runtime
     private void Start()
     {
         StartShip();
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -146,7 +143,7 @@ public class Ship : MonoBehaviour, IShieldable
             HideShield(
             onShieldHidden: () => 
             { 
-                isInvincible = isShielded; 
+                isInvincible = isShielded || isRepelling; 
             }
             ));
     }
@@ -191,7 +188,60 @@ public class Ship : MonoBehaviour, IShieldable
 
     public bool IsShielded()
     {
-        return isInvincible;
+        return isInvincible && !isRepelling;
+    }
+    #endregion
+
+    #region Repeller Interface Methods
+    public void OnStartRepelling()
+    {
+        isRepelling = true;
+        isInvincible = true;
+
+        StartCoroutine(ShowRepeller());
+    }
+
+    public void OnStopRepelling()
+    {
+        isRepelling = false;
+
+        StartCoroutine(
+            HideRepeller(
+            onRepellerHidden: () =>
+            {
+                isInvincible = isRepelling || isShielded;
+            }
+            ));
+    }
+
+    private IEnumerator ShowRepeller()
+    {
+        Color color = repellerSpriteRenderer.color;
+
+        while (color.a < 1 && isRepelling)
+        {
+            color.a = Mathf.Lerp(color.a, 1.2f, Time.deltaTime);
+
+            repellerSpriteRenderer.color = color;
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator HideRepeller(System.Action onRepellerHidden)
+    {
+        Color color = repellerSpriteRenderer.color;
+
+        while (color.a > 0 && !isRepelling)
+        {
+            color.a = Mathf.Lerp(color.a, -0.2f, Time.deltaTime);
+
+            repellerSpriteRenderer.color = color;
+
+            yield return null;
+        }
+
+        onRepellerHidden?.Invoke();
     }
     #endregion
 }

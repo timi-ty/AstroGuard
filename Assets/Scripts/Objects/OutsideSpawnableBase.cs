@@ -15,6 +15,10 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
     public float minImpulseMagnitude;
     #endregion
 
+    #region Properties
+    public bool isInAttractionField { get; set; }
+    #endregion
+
     #region Virtual Methods
 
     #region Unity Runtime
@@ -66,6 +70,8 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
 
     public void OnEnterAttractionField()
     {
+        isInAttractionField = true;
+
         if (mRigidBody == null) return;
 
         if (mRigidBody)
@@ -85,6 +91,8 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
 
     public void OnExitAttractionField()
     {
+        isInAttractionField = false;
+
         if (mRigidBody == null) return;
 
         if (mRigidBody)

@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class Attractor : PowerUpBase
 {
+    #region Repellers
+    [Tooltip("Only gameobjects with Monobehaviours that implement IRepeller can know when the attractor is active.")]
+    public List<GameObject> repellerObjects = new List<GameObject>();
+    #endregion
+
     #region Inspector Parameters
     [Header("Field Settings")]
     public float fieldStrength;
@@ -16,6 +21,7 @@ public class Attractor : PowerUpBase
     #region Properties
     private float currentFieldRadius { get; set; }
     private Dictionary<int, IAttractible> attractiblesInField { get; set; } = new Dictionary<int, IAttractible>();
+    private bool repellersActive { get; set; }
     #endregion
 
     #region Components
@@ -53,6 +59,8 @@ public class Attractor : PowerUpBase
         float durationUpgrade = 5.0f * (PlayerStats.Instance.Upgradables[PowerType.Attractor].upgradeProgress / (float)Upgradable.FULL_UPGRADE);
 
         controlAttractionRoutine = StartCoroutine(ControlAttractionField(duration: baseDuration + durationUpgrade));
+
+        EnableRepellers();
     }
 
     public override void Deactivate()
@@ -64,6 +72,8 @@ public class Attractor : PowerUpBase
         fieldTransform.gameObject.SetActive(false);
 
         fieldTransform.transform.localScale = Vector3.zero;
+
+        DisableRepellers();
     }
 
     #region Coroutines
@@ -123,13 +133,17 @@ public class Attractor : PowerUpBase
 
         foreach (Collider2D collider in collidersInField)
         {
-            IAttractible attractible = collider.GetComponent<IAttractible>();
+            IAttractible attractible = null;
+            if (collider != null)
+            {
+                attractible = collider?.GetComponent<IAttractible>();
+            }
 
             if (attractible != null)
             {
                 persistInField.Add(attractible.GetHashCode(), attractible);
 
-                if (!attractiblesInField.ContainsKey(attractible.GetHashCode()))
+                if (!attractible.isInAttractionField)
                 {
                     attractible.OnEnterAttractionField();
                     attractiblesInField.Add(attractible.GetHashCode(), attractible);
@@ -139,14 +153,46 @@ public class Attractor : PowerUpBase
             }
         }
 
-        foreach (IAttractible attractible in attractiblesInField.Values)
+        foreach (int key in attractiblesInField.Keys)
         {
-            attractible.OnExitAttractionField();
+            if (!persistInField.ContainsKey(key) && attractiblesInField[key] != null)
+            {
+                attractiblesInField[key]?.OnExitAttractionField();
+            }
         }
 
-        foreach (IAttractible attractible in persistInField.Values)
+        attractiblesInField = persistInField;
+    }
+
+    private void EnableRepellers()
+    {
+        if (repellersActive) return;
+
+        foreach (GameObject shieldableObject in repellerObjects)
         {
-            attractible.OnEnterAttractionField();
+            IRepeller repeller = shieldableObject.GetComponent<IRepeller>();
+            if (repeller != null)
+            {
+                repeller.OnStartRepelling();
+            }
         }
+
+        repellersActive = true;
+    }
+
+    private void DisableRepellers()
+    {
+        if (!repellersActive) return;
+
+        foreach (GameObject shieldableObject in repellerObjects)
+        {
+            IRepeller repeller = shieldableObject.GetComponent<IRepeller>();
+            if (repeller != null)
+            {
+                repeller.OnStopRepelling();
+            }
+        }
+
+        repellersActive = false;
     }
 }

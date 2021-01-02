@@ -4,6 +4,8 @@
 /// </summary>
 public interface IAttractible
 {
+    bool isInAttractionField { get; set; }
+
     void OnEnterAttractionField();
 
     void RecieveAttractionForce(Vector2 sourcePoint, float forceMagnitude);
