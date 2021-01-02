@@ -75,6 +75,7 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
         SetTrailColor();
 
         InvokeRepeating("DieIfLostInSpace", 3.0f, 3.0f);
+        Invoke("DieOfOldAge", 15.0f);
 
         StartMove();
     }
@@ -179,6 +180,14 @@ public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttrac
     private void DieIfLostInSpace()
     {
         if (ScreenBounds.IsOutOfPlayableArea(mCollider.bounds))
+        {
+            Die(AsteroidDeathInfo.Killer.Space);
+        }
+    }
+
+    private void DieOfOldAge()
+    {
+        if (isActiveAndEnabled)
         {
             Die(AsteroidDeathInfo.Killer.Space);
         }

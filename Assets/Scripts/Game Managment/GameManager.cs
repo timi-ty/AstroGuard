@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         ScaleGameToScreenScreen();
 
-        restoreTimeScale();
+        RestoreTimeScale();
 
         player.OnInitialize();
 
@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
 
         levelProgress = 0;
 
-        restoreTimeScale();
+        RestoreTimeScale();
 
         UIManager.ShowPlayUI();
     }
@@ -297,7 +297,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             },
             "Let's Try That Again", levelText,
-            showInterstitial: shouldShowInterstitial());
+            showInterstitial: ShouldShowInterstitial());
     }
 
     public void OnLevelFinished()
@@ -325,7 +325,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             },
             "Next Level!", currentLevel.ToString("D2"),
-            showInterstitial: shouldShowInterstitial());
+            showInterstitial: ShouldShowInterstitial());
         }
     }
 
@@ -345,6 +345,18 @@ public class GameManager : MonoBehaviour
     public static void SpawnGoldCoin(Vector2 position)
     {
         instance.spawnerCoordinator.SpawnGoldCoin(position);
+    }
+
+    public static void ActivateExpedientSlowMo()
+    {
+        if (!IsPlayerAlive()) return;
+
+        PowerUpOrb slowMoPowerUpOrb = instance.spawnerCoordinator.powerUpOrbSpawner.
+            SpawnPowerUp(PowerType.SlowMo, (Vector2)instance.player.transform.position + Vector2.up);
+
+        instance.player.powerUps.ActivatePowerUp(slowMoPowerUpOrb);
+
+        slowMoPowerUpOrb.OnCollected();
     }
 
     public static void ActivateContent(int itemIndex)
@@ -482,7 +494,7 @@ public class GameManager : MonoBehaviour
         return;
     }
 
-    public static void restoreTimeScale()
+    public static void RestoreTimeScale()
     {
         if (gameFrozen) FreezeGame();//keep game frozen if it is flagged as frozen.
         else
@@ -496,7 +508,7 @@ public class GameManager : MonoBehaviour
         return isInGame && instance.player.gameObject.activeInHierarchy;
     }
 
-    private bool shouldShowInterstitial()
+    private bool ShouldShowInterstitial()
     {
         adCounter++;
         if (adCounter >= 4)

@@ -16560,6 +16560,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 138929194}
   m_CullTransparentMesh: 0
+--- !u!1 &147256795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 147256796}
+  - component: {fileID: 147256797}
+  - component: {fileID: 147256798}
+  m_Layer: 10
+  m_Name: Proximity Sensor
+  m_TagString: Ship
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &147256796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147256795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1071368996}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &147256797
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147256795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -6.44}
+  serializedVersion: 2
+  m_Radius: 8.97
+--- !u!114 &147256798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147256795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c71ed2fd557b84594025408ce8a9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSensedSingle:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSensedMultiple:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSensedSpacedMultiple:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 763045932}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ActivateExpedientSlowMo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &160994420
 GameObject:
   m_ObjectHideFlags: 0
@@ -24277,7 +24358,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1071368996}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1 &424204096
 GameObject:
@@ -30497,7 +30578,7 @@ Transform:
   - {fileID: 72394301}
   - {fileID: 1801653594}
   m_Father: {fileID: 1071368996}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &566035421
 SpriteRenderer:
@@ -35863,7 +35944,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1071368996}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &599158553
 GameObject:
@@ -38273,9 +38354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5b96937c9367841b88d9c3a469456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockAllLevels: 1
+  unlockAllLevels: 0
   disableInterstitialAds: 0
-  rewardsWithoutAds: 1
+  rewardsWithoutAds: 0
 --- !u!1 &768351549
 GameObject:
   m_ObjectHideFlags: 0
@@ -49970,6 +50051,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children:
   - {fileID: 1237954842}
+  - {fileID: 147256796}
   - {fileID: 598476192}
   - {fileID: 1776685792}
   - {fileID: 412304862}
@@ -61701,12 +61783,13 @@ MonoBehaviour:
   tipText: {fileID: 403543350}
   bgImage: {fileID: 948455461}
   tips:
-  - 'TIP: Collecting coins while offline is futile and wasteful.'
-  - 'TIP: Allow Power-Up Orbs to do some  destruction for you, for special bonuses.'
-  - 'TIP: You are only rewarded for completing objectives when you''re signed in
+  - 'TIP: Collecting COINS while offline is futile and wasteful.'
+  - 'TIP: Allow POWER-UP ORBS to do some destruction for you, for special bonuses.'
+  - 'TIP: You are only rewarded for completing OBJECTIVES when you''re signed in
     and online.'
-  - 'TIP: Bombs can be dangerous, but they can also be your most valuable weapon.'
-  - MISSION! Destroy All Asteroids With Your Blades Before They Touch The Ship!
+  - 'TIP: BOMBS can be dangerous, but they can also be your most valuable weapon.'
+  - 'TIP: TIME will SLOW DOWN to help you tackle particularly hairy situations.'
+  - MISSION! Destroy All ASTEROIDS With Your Blades Before They Touch The Ship!
 --- !u!222 &1755462054
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -62004,7 +62087,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1071368996}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!212 &1776685793
 SpriteRenderer:

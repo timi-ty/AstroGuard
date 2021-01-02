@@ -15,7 +15,7 @@ public class SlowMo : PowerUpBase
     #endregion
 
     #region Worker Parameters
-    private Coroutine controlAttractionRoutine;
+    private Coroutine controlSlowMoRoutine;
     private Coroutine GoSlowCoroutine;
     private Coroutine GoNormalCoroutine;
     private bool _doneSlowing;
@@ -26,12 +26,12 @@ public class SlowMo : PowerUpBase
     {
         base.Activate();
 
-        if (controlAttractionRoutine != null) StopCoroutine(controlAttractionRoutine);
+        if (controlSlowMoRoutine != null) StopCoroutine(controlSlowMoRoutine);
 
         float baseDuration = 0.25f;
         float durationUpgrade = 0.25f * (PlayerStats.Instance.Upgradables[PowerType.SlowMo].upgradeProgress / (float) Upgradable.FULL_UPGRADE);
 
-        controlAttractionRoutine = StartCoroutine(ControlAttractionField(duration: baseDuration + durationUpgrade));
+        controlSlowMoRoutine = StartCoroutine(ControlSlowMo(duration: baseDuration + durationUpgrade));
     }
 
     public override void Deactivate()
@@ -45,7 +45,7 @@ public class SlowMo : PowerUpBase
         _doneSlowing = false;
     }
 
-    private IEnumerator ControlAttractionField(float duration)
+    private IEnumerator ControlSlowMo(float duration)
     {
         if (GoNormalCoroutine != null) StopCoroutine(GoNormalCoroutine);
 

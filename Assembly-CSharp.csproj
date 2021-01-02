@@ -141,6 +141,7 @@
     <Compile Include="Assets\Scripts\Utils\PartSysSelfDestruct.cs" />
     <Compile Include="Assets\Scripts\Utils\ForceNoRotation.cs" />
     <Compile Include="Assets\Scripts\Objects\Spawn\BombSpawner.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IRepeller.cs" />
     <Compile Include="Assets\Adjust\Unity\AdjustAttribution.cs" />
     <Compile Include="Assets\Adjust\Unity\AdjustSessionFailure.cs" />
     <Compile Include="Assets\Adjust\Android\AdjustAndroid.cs" />
@@ -187,7 +188,7 @@
     <Compile Include="Assets\Scripts\Utils\RandomRotate3D.cs" />
     <Compile Include="Assets\Scripts\Application\FacebookUtility.cs" />
     <Compile Include="Assets\Scripts\Persistence Management\Metrics.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IRepeller.cs" />
+    <Compile Include="Assets\Scripts\Environment\Ship\ProximitySensor.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

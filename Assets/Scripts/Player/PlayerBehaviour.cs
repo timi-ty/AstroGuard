@@ -38,13 +38,13 @@ public class PlayerBehaviour : PlayerBase
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PowerUpOrb powerUpBox = collision.collider.GetComponent<PowerUpOrb>();
+        PowerUpOrb powerUpOrb = collision.collider.GetComponent<PowerUpOrb>();
 
-        if (powerUpBox)
+        if (powerUpOrb)
         {
-            powerUps.ActivatePowerUp(powerUpBox);
+            powerUps.ActivatePowerUp(powerUpOrb);
 
-            powerUpBox.OnCollected();
+            powerUpOrb.OnCollected();
 
             return;
         }

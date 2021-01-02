@@ -91,7 +91,17 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
     {
         spawnInfo.spawnSide = Mathf.Clamp(spawnInfo.spawnSide, 0, 1);
 
+        if (spawnInfo.powerType == PowerType.SlowMo)
+        {
+            return; //***Hot-Fix to disable random spawning of slowmo.
+        }
+
         Instantiate(GetPowerUpOrbPrefab(spawnInfo.powerType), spawnPoints[spawnInfo.spawnSide], Quaternion.identity, transform);
+    }
+
+    public PowerUpOrb SpawnPowerUp(PowerType powerType, Vector2 position)
+    {
+        return Instantiate(GetPowerUpOrbPrefab(powerType), position, Quaternion.identity, transform);
     }
 
     private PowerUpOrb GetPowerUpOrbPrefab(PowerType powerType)
