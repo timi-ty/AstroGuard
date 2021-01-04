@@ -23,7 +23,7 @@ public class AsteroidOne : AteroidBase
 
         if (mRigidBody.position.y > triggerYCoordinate && !triggered)
         {
-            Vector2 force = (fakeTargetPoint - mRigidBody.position) * speed * 0.6f;
+            Vector2 force = (fakeTargetPoint - mRigidBody.position) * speed * 0.1f;
             mRigidBody.AddForce(force, ForceMode2D.Force);
         }
         else if(!triggered)
@@ -41,6 +41,6 @@ public class AsteroidOne : AteroidBase
         launchForce.y = Mathf.Abs(launchForce.y);
         launchForce.y = Mathf.Clamp(launchForce.y, 1, 20);
 
-        triggerYCoordinate = Random.Range(ScreenBounds.centre.y + 0.05f * ScreenBounds.height, ScreenBounds.centre.y + 0.25f * ScreenBounds.height);
+        triggerYCoordinate = Random.Range(ScreenBounds.topEdge.middle.y - 0.15f * ScreenBounds.height, ScreenBounds.topEdge.middle.y - 0.35f * ScreenBounds.height);
     }
 }
