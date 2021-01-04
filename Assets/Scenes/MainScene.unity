@@ -38651,7 +38651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlockAllLevels: 0
   disableInterstitialAds: 0
-  rewardsWithoutAds: 0
+  rewardsWithoutAds: 1
 --- !u!1 &768351549
 GameObject:
   m_ObjectHideFlags: 0

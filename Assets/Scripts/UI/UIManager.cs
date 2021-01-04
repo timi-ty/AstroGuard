@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
 
         instance.sessionScoreText.GetComponent<Animator>().enabled = Session.Score > PlayerStats.Instance.HighScore;
 
-        instance.retryHighscoreDisplay.Refresh();
+        instance.retryHighscoreDisplay.Refresh(Session.Score > PlayerStats.Instance.HighScore ? Session.Score : PlayerStats.Instance.HighScore);
 
         instance.retryCountdownCoroutine = instance.StartCoroutine(instance.CountDownToRetry());
     }

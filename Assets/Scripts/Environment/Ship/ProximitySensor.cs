@@ -27,15 +27,27 @@ public class ProximitySensor : MonoBehaviour
         contactFilter = new ContactFilter2D();
         contactFilter.SetLayerMask(sensorLayerMask);
         nearbyObjects = new Collider2D[8];
+
+        InvokeRepeating("ProximitySense", 0.5f, 0.5f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        OnSensedSingle?.Invoke();
+        ProximitySense();
+    }
 
-        if(CountNearbyObjects() >= 2)
+    private void ProximitySense()
+    {
+        int nearbyObjectsCount = CountNearbyObjects();
+
+        if (nearbyObjectsCount >= 1)
         {
-            TriggerMultiSensor();
+            OnSensedSingle?.Invoke();
+
+            if(nearbyObjectsCount >= 2)
+            {
+                TriggerMultiSensor();
+            }
         }
     }
 
