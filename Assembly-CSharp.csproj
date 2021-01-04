@@ -189,6 +189,7 @@
     <Compile Include="Assets\Scripts\Utils\RandomRotate3D.cs" />
     <Compile Include="Assets\Scripts\Application\FacebookUtility.cs" />
     <Compile Include="Assets\Scripts\Persistence Management\Metrics.cs" />
+    <Compile Include="Assets\Scripts\UI\Player Stats\HighscoreDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

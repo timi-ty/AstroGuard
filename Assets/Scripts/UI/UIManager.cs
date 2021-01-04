@@ -27,11 +27,14 @@ public class UIManager : MonoBehaviour
     public GameObject creditsScreen;
 
     [Header("Mutable UI Elemets")]
+    public TextMeshProUGUI newHighscoreLabel;
     public TextMeshProUGUI sessionScoreText;
     public TextMeshProUGUI greetingsText;
     public ExperienceBar experienceBar;
     public ProgressBar retryCountdownBar;
     public AstroGoldDisplay astroGoldDisplay;
+    public HighscoreDisplay homeHighscoreDisplay;
+    public HighscoreDisplay retryHighscoreDisplay;
     public Button watchAdContinueButton;
     public Button noAdsButton;
     public Button facebookButton;
@@ -82,6 +85,7 @@ public class UIManager : MonoBehaviour
         instance.homeScreen.SetActive(true);
         instance.experienceBar.Refresh();
         instance.astroGoldDisplay.Refresh();
+        instance.homeHighscoreDisplay.Refresh();
     }
 
     private IEnumerator RefreshMainUICoroutine()
@@ -123,6 +127,12 @@ public class UIManager : MonoBehaviour
 #endif
 
         instance.sessionScoreText.text = Session.Score.ToString();
+
+        instance.newHighscoreLabel.gameObject.SetActive(Session.Score > PlayerStats.Instance.HighScore);
+
+        instance.sessionScoreText.GetComponent<Animator>().enabled = Session.Score > PlayerStats.Instance.HighScore;
+
+        instance.retryHighscoreDisplay.Refresh();
 
         instance.retryCountdownCoroutine = instance.StartCoroutine(instance.CountDownToRetry());
     }

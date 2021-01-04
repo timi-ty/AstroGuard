@@ -40,12 +40,25 @@ public class PlayerStats
         }
     }
     public int AstroGold { get; private set; }
+    public int HighScore 
+    { 
+        get 
+        {
+            int highestScore = 0;
+
+            foreach (LeaderboardEntry entry in Instance.HighScores.Values)
+            {
+                highestScore = Mathf.Max(highestScore, entry.score);
+            }
+
+            return highestScore;
+        } 
+    }
     public int TempAstroGoldPocket { get; private set; }
     public int activeCoreIndex { get; set; }
     public int activeBladeIndex { get; set; }
     public Dictionary<PowerType, Upgradable> Upgradables { get; set; }
     #endregion
-
 
     #region Utitlity Methods
     public static void InsertHighScore(int score, long sessionStartTimeInMillis)
