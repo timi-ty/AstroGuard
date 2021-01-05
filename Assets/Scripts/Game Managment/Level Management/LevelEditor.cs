@@ -114,6 +114,10 @@ public class LevelEditor : Editor
 
         //ShuffleLevels();
 
+        EditorGUILayout.Space(25);
+
+        SortLevels();
+
         EditorGUILayout.Space(30);
 
         SavedLevelsFooter();
@@ -630,6 +634,16 @@ public class LevelEditor : Editor
         if (GUILayout.Button(new GUIContent("Undo Last Shuffle"), minorButtonLayout))
         {
             levelCollection.UndoShuffle();
+        }
+    }
+
+    private void SortLevels()
+    {
+        EditorGUILayout.LabelField("Sort Levels", bold);
+
+        if (GUILayout.Button(new GUIContent("Sort"), majorButtonLayout))
+        {
+            levelCollection.ShuffleCollection();
         }
     }
 

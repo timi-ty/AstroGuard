@@ -153,6 +153,27 @@ public class LevelCollection : ScriptableObject
 
         Debug.Log("Last shuffle undone.");
     }
+
+    public void SortLevels()
+    {
+        int i, key, j;
+        for (i = 1; i < defaultLevelCollection.Count; i++)
+        {
+            string keyString = defaultLevelCollection[i];
+            key = defaultLevelCollection[i].Length;
+            j = i - 1;
+
+            /* Move elements of arr[0..i-1], that are  
+            greater than key, to one position ahead  
+            of their current position */
+            while (j >= 0 && defaultLevelCollection[j].Length > key)
+            {
+                defaultLevelCollection[j + 1] = defaultLevelCollection[j];
+                j -= 1;
+            }
+            defaultLevelCollection[j + 1] = keyString;
+        }
+    }
     #endregion
 
     #region Random Level Generator Methods
