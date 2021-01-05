@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "RZ8M92GZZGE",
         "name": "com.cradaptive.astroguard",
-        "processId": 9427,
+        "processId": 5074,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -96,6 +96,12 @@
             "deviceId": "RZ8M92GZZGE",
             "name": "com.cradaptive.astroguard",
             "processId": 9427,
+            "exited": false
+        },
+        {
+            "deviceId": "RZ8M92GZZGE",
+            "name": "com.cradaptive.astroguard",
+            "processId": 5074,
             "exited": false
         }
     ],

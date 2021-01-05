@@ -173,6 +173,12 @@ public class LevelCollection : ScriptableObject
             }
             defaultLevelCollection[j + 1] = keyString;
         }
+
+        LoadLevelInfoCollection();
+
+        EditorUtility.SetDirty(this);
+
+        Debug.Log("Levels Sorted.");
     }
     #endregion
 

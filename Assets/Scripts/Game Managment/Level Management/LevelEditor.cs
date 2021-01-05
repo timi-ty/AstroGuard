@@ -643,7 +643,7 @@ public class LevelEditor : Editor
 
         if (GUILayout.Button(new GUIContent("Sort"), majorButtonLayout))
         {
-            levelCollection.ShuffleCollection();
+            levelCollection.SortLevels();
         }
     }
 
