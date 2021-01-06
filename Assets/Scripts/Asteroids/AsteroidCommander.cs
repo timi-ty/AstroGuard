@@ -31,7 +31,7 @@ public class AsteroidCommander : MonoBehaviour
     private int nSpawnedAsteroids { get; set; }//number of enemies spawned so far
     private int nLiveAsteroids { get; set; } //current number of alive enemies in play
     private bool isDoneSpawning { get; set; }
-    public PlayerBehaviour player { get; set; }
+    public PlayerBehaviour player => GameManager.instance.player;
     #endregion
 
     #region Debug Parameters
@@ -40,11 +40,6 @@ public class AsteroidCommander : MonoBehaviour
     public bool muteEnemyOne;
     public bool muteEnemyTwo;
     #endregion
-
-    private void Start()
-    {
-        player = GameManager.instance.player;
-    }
 
     public void OnPlay(List<AsteroidSpawnInfo> asteroidLineup)
     {
@@ -102,7 +97,7 @@ public class AsteroidCommander : MonoBehaviour
         isDoneSpawning = true;
     }
 
-    private void SpawnEnemey(AsteroidSpawnInfo spawnInfo, int spawnIndex)
+    public void SpawnEnemey(AsteroidSpawnInfo spawnInfo, int spawnIndex)
     {
         if(enemyPrefabs.Count < 1)
         {
@@ -148,14 +143,14 @@ public class AsteroidCommander : MonoBehaviour
         float destroyedRocks = nSpawnedAsteroids - nLiveAsteroids;
         float progress = destroyedRocks / nEnemyLineup;
 
-        GameManager.UpdateLevelProgress(progress);
+        GameManager.UpdateLevelProgress(progress, forTutorial: false);
 
         switch (deathInfo.killer)
         {
             case AsteroidDeathInfo.Killer.Projectile:
             case AsteroidDeathInfo.Killer.Explosion:
             case AsteroidDeathInfo.Killer.PowerUpOrb:
-                GameManager.SpawnGoldCoin(position);
+                SpawnerManager.SpawnGoldCoin(position);
                 break;
         }
 

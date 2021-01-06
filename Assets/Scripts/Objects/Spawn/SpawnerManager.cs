@@ -13,14 +13,44 @@ public struct ObjectSpawnSettings
 
 public class SpawnerManager : MonoBehaviour
 {
+    #region Singleton
+    public static SpawnerManager instance { get; private set; }
+    #endregion
+
+    #region Components
     public PowerUpOrbSpawner powerUpOrbSpawner;
     public BombSpawner bombSpawner;
     public GoldCoinSpawner coinSpawner;
+    #endregion
 
+    #region Debug
     [Header("Debug Settings")]
     public bool muteBombs;
     public bool mutePowerUps;
+    #endregion
 
+    #region Unity Runtime
+    private void Awake()
+    {
+        #region Singleton
+        if (!instance)
+        {
+            instance = this;
+        }
+        else if (!instance.Equals(this))
+        {
+            Destroy(gameObject);
+        }
+        #endregion
+    }
+
+    private void OnDestroy()
+    {
+        #region Singleton
+        instance = null;
+        #endregion
+    }
+#endregion
 
     public void OnPlay(ObjectSpawnSettings objectSpawnSettings)
     {
@@ -34,13 +64,31 @@ public class SpawnerManager : MonoBehaviour
         if (!muteBombs) bombSpawner.StartSpawning();
     }
 
-    public void SpawnGoldCoin()
+    public static void SpawnGoldCoin()
     {
-        coinSpawner.SpawnGoldCoin();
+        if (!instance) return;
+
+        instance.coinSpawner.SpawnGoldCoin();
     }
 
-    public void SpawnGoldCoin(Vector2 position)
+    public static void SpawnGoldCoin(Vector2 position)
     {
-        coinSpawner.SpawnGoldCoin(position);
+        if (!instance) return;
+
+        instance.coinSpawner.SpawnGoldCoin(position);
+    }
+
+    public void SpawnBomb()
+    {
+        if (!instance) return;
+
+        bombSpawner.SpawnBomb(new BombSpawnInfo(0, UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0.8f, 1.0f)));
+    }
+
+    public void SpawnPowerUp(PowerType powerType)
+    {
+        if (!instance) return;
+
+        powerUpOrbSpawner.SpawnPowerUp(new PowerUpOrbSpawnInfo(0, UnityEngine.Random.Range(0, 2), powerType));
     }
 }

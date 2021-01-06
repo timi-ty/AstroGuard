@@ -38,7 +38,7 @@ public class LevelsUI : MonoBehaviour
 
     public void UpdateLevelSelectionScreen()
     {
-        int buttonCount = LevelManager.LevelCount + 500;
+        int buttonCount = LevelManager.LevelCount + 501;
 
         for (int level = contentHolder.childCount + 1; level <= buttonCount; level++)
         {
@@ -61,7 +61,7 @@ public class LevelsUI : MonoBehaviour
 
         for (int i = 0; i < levelButtonsCount; i++)
         {
-            int level = i + 1;
+            int level = i == 0 ? LevelManager.TUTORIAL_LEVEL : i;
 
             bool isAvailable = level <= LevelManager.LevelCount;
 

@@ -57,6 +57,31 @@ public class PowerUps : MonoBehaviour
         AudioManager.PlayGameClip(powerUpClip);
     }
 
+    public void ActivatePowerUp(PowerType powerType)
+    {
+        switch (powerType)
+        {
+            case PowerType.Attractor:
+                attractor.Activate();
+                break;
+            case PowerType.MissileLauncher:
+                missileLauncher.Activate();
+                break;
+            case PowerType.SlowMo:
+                slowMo.Activate();
+                break;
+            case PowerType.Shield:
+                shield.Activate();
+                break;
+        }
+
+        Metrics.LogPowerUpCollection(powerType);
+
+        ObjectiveManager.Refresh();
+
+        AudioManager.PlayGameClip(powerUpClip);
+    }
+
     public void ActivateShield()
     {
         shield.Activate();

@@ -76,6 +76,7 @@ public class LevelManager : MonoBehaviour
 
     #region Constants
     public const string DLC_LEVELS_PATH = ApplicationManager.DB_DLC_PATH + "Levels";
+    public const int TUTORIAL_LEVEL = -1;
     #endregion
 
     #region Global Static Parameters
@@ -198,13 +199,13 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Data Access Methods
-    public static LevelInfo GetLevelInfo(int level)
+    public static void StartLevel(int level, out LevelInfo levelInfo)
     {
         if(IsLevelValid(level))
         {
             CurrentLevel = level;
 
-            return instance.liveLevels[level - 1];
+            levelInfo = instance.liveLevels[level - 1];
         }
         else
         {
@@ -213,12 +214,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public static void StartInfiniteLevel()
-    {
-        CurrentLevel = int.MaxValue;
-    }
-
-    public static LevelInfo GetLevelInfo()
+    public static void StartLevel(out LevelInfo levelInfo)
     {
         int nextLevel = LastLevelCompleted + 1;
 
@@ -226,14 +222,24 @@ public class LevelManager : MonoBehaviour
 
         CurrentLevel = nextLevel;
 
-        return instance.liveLevels[nextLevel - 1];
+        levelInfo = instance.liveLevels[nextLevel - 1];
+    }
+
+    public static void StartInfiniteLevel()
+    {
+        CurrentLevel = int.MaxValue;
+    }
+
+    public static void StartTutorialLevel()
+    {
+        CurrentLevel = TUTORIAL_LEVEL;
     }
 
     public static bool IsLevelValid(int level)
     {
         int levelIndex = level - 1;
 
-        return level > 0 && levelIndex < instance.liveLevels.Count;
+        return (level > 0 && levelIndex < instance.liveLevels.Count) || IsTutorialLevel(level);
     }
 
     public static bool IsLastLevel(int level)
@@ -248,20 +254,32 @@ public class LevelManager : MonoBehaviour
 
     public static bool IsLevelUnlocked(int level)
     {
-        return LevelsState.IsUnlocked(level);
+        return LevelsState.IsUnlocked(level) || IsTutorialLevel(level);
+    }
+
+    public static bool IsTutorialLevel(int level)
+    {
+        return level == TUTORIAL_LEVEL;
     }
     #endregion
 
     #region Action Methods
     public static int NextLevel()
     {
-        LastLevelCompleted = CurrentLevel;
+        if (IsTutorialLevel(CurrentLevel))
+        {
+            CurrentLevel = 1;
+        }
+        else
+        {
+            LastLevelCompleted = CurrentLevel;
 
-        LevelsState.MarkCompleted(LastLevelCompleted);
+            LevelsState.MarkCompleted(LastLevelCompleted);
 
-        CurrentLevel++;
+            CurrentLevel++;
 
-        CurrentLevel = Mathf.Clamp(CurrentLevel, 1, LevelCount);
+            CurrentLevel = Mathf.Clamp(CurrentLevel, 1, LevelCount);
+        }
 
         bool previouslyFinishedIntro = LevelsState.IsUnlocked(6);
 

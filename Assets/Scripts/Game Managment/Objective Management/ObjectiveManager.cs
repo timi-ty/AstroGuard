@@ -124,7 +124,7 @@ public class ObjectiveManager : MonoBehaviour
 
                         UIManager.Notify(objective);
 
-                        PlayerStats.ObjectiveReward(objective.XpReward, objective.GoldReward);
+                        GrantObjectiveReward(objective.XpReward, objective.GoldReward);
 
                         Analytics.LogObjectiveCompleted(objective.Description);
                     }
@@ -191,6 +191,24 @@ public class ObjectiveManager : MonoBehaviour
     private bool MoreObjectivesAvailable()
     {
         return lastPulledObjetiveIndex < objectiveCollection.Count - 1;
+    }
+    #endregion
+
+    #region Action Methods
+    public void GrantObjectiveReward(int xpReward, int goldReward)
+    {
+        PlayerStats.AddExperiencePoints(xpReward);
+
+        int physicalGoldReward = 10;
+
+        for (int i = 0; i < physicalGoldReward; i++)
+        {
+            SpawnerManager.SpawnGoldCoin();
+        }
+
+        int gold = Mathf.Clamp(goldReward - physicalGoldReward, 0, int.MaxValue);
+
+        PlayerStats.RewardAstroGold(gold);
     }
     #endregion
 }

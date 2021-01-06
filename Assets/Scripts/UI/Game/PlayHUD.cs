@@ -3,11 +3,14 @@ using TMPro;
 
 public class PlayHUD : MonoBehaviour
 {
+    #region HUD Components
     public TextMeshProUGUI scoreText;
     public ProgressBar levelProgressBar;
     public GameObject pausePanel;
     public ObjectiveUI objectiveUi;
-    
+    #endregion
+
+    #region HUD Actions
     public void Toggle(bool isPlaying)
     {
         gameObject.SetActive(true);
@@ -37,6 +40,10 @@ public class PlayHUD : MonoBehaviour
         if (GameManager.isInInfiniteMode)
         {
             levelText = "INFINITE LEVEL";
+        }
+        else if (GameManager.isInTutorialMode)
+        {
+            levelText = "TUTORIAL";
         }
         else
         {
@@ -68,4 +75,5 @@ public class PlayHUD : MonoBehaviour
     {
         objectiveUi.Notify(objective);
     }
+    #endregion
 }

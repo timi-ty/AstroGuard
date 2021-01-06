@@ -58,9 +58,15 @@ public class PlayerStats
     public int activeCoreIndex { get; set; }
     public int activeBladeIndex { get; set; }
     public Dictionary<PowerType, Upgradable> Upgradables { get; set; }
+    public bool HasSeenTutorial { get; private set; }
     #endregion
 
     #region Utitlity Methods
+    public static void MarkTutorialFinished()
+    {
+        Instance.HasSeenTutorial = true;
+    }
+
     public static void InsertHighScore(int score, long sessionStartTimeInMillis)
     {
         Debug.Log("Now Time: " + sessionStartTimeInMillis);
@@ -118,18 +124,9 @@ public class PlayerStats
         }
     }
 
-    public static void ObjectiveReward(int xpReward, int goldReward)
+    public static void AddExperiencePoints(int xpGain)
     {
-        Instance.ExperiencePoints += xpReward;
-
-        int gold = Mathf.Clamp(goldReward - 10, 0, int.MaxValue);
-
-        RewardAstroGold(gold);
-
-        for (int i = 0; i < 10; i++)
-        {
-            GameManager.SpawnGoldCoin();
-        }
+        Instance.ExperiencePoints += xpGain;
     }
 
     public static void ClaimRewardedAstroGold()

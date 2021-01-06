@@ -88,6 +88,13 @@ public class Ship : MonoBehaviour, IShieldable, IRepeller
         Metrics.LogShipHit();
     }
 
+    public void ActivateProximityDefense()
+    {
+        if (!GameManager.IsPlayerAlive()) return;
+
+        GameManager.instance.player.powerUps.ActivatePowerUp(PowerType.SlowMo);
+    }
+
     private void Destroy()
     {
         damageLayer.ShowDestruction();

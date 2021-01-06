@@ -8,6 +8,13 @@ public struct BombSpawnInfo
     public float spawnDelay;
     public int spawnSide;
     public float bombSize;
+
+    public BombSpawnInfo(float spawnDelay, int spawnSide, float bombSize)
+    {
+        this.spawnDelay = spawnDelay;
+        this.spawnSide = spawnSide;
+        this.bombSize = bombSize;
+    }
 }
 
 public class BombSpawner : OutsideSpawnerBase<Bomb>
@@ -71,7 +78,6 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
             float duration = Random.Range(1f, 10f) * length;
             float maxDurationError = Random.Range(0f, duration / 5);
 
-
             List<BombSpawnInfo> powerUpLineup = GetRanomBombLineup(length, duration, maxDurationError);
 
             StartCoroutine(SpawnRoutine(powerUpLineup));
@@ -80,7 +86,7 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
         }
     }
 
-    private void SpawnBomb(BombSpawnInfo spawnInfo)
+    public void SpawnBomb(BombSpawnInfo spawnInfo)
     {
         if(prefabs.Count != 1)
         {

@@ -36,18 +36,19 @@ public class GameManager : MonoBehaviour
     #region Global Static Parameters
     public static int currentLevel => LevelManager.CurrentLevel;
     public static bool isInInfiniteMode => LevelManager.IsCurrentLevelInfinite;
-    public static float levelProgress { get; set; }
+    public static bool isInTutorialMode => LevelManager.IsTutorialLevel(currentLevel);
+    public static float levelProgress { get; private set; }
     public static bool isInGame => currentLevel != 0;
-    public static bool gameFrozen { get; set; }
+    public static bool gameFrozen { get; private set; }
     #endregion
 
     #region Game Components
-    public Background background { get; set; }
-    public PlayerBehaviour player { get; set; }
-    public Ship ship { get; set; }
-    public AsteroidCommander asteroidCoordinator { get; set; }
-    public SpawnerManager spawnerCoordinator { get; set; }
-    public ItemShop shop { get; set; }
+    public Background background { get; private set; }
+    public PlayerBehaviour player { get; private set; }
+    public Ship ship { get; private set; }
+    public AsteroidCommander asteroidCoordinator { get; private set; }
+    public SpawnerManager spawnerCoordinator { get; private set; }
+    public ItemShop shop { get; private set; }
     #endregion
 
     #region Worker Parameters
@@ -105,7 +106,7 @@ public class GameManager : MonoBehaviour
 
         player.OnInitialize();
 
-        if (currentLevel <= 0)
+        if (!isInGame)
         {
             UIManager.ShowMainUI();
         }
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
         {
             OnPlayInfinite();
         }
-        else if (currentLevel > 0)
+        else if (isInGame)
         {
             OnPlay(currentLevel);
         }
@@ -142,8 +143,14 @@ public class GameManager : MonoBehaviour
     {
         if (!LevelManager.IsLevelValid(level)) return;
 
-        LevelInfo levelInfo = LevelManager.GetLevelInfo(level);
+        if (LevelManager.IsTutorialLevel(level))
+        {
+            LevelManager.StartTutorialLevel();
+            PlayTutorial();
+            return;
+        }
 
+        LevelManager.StartLevel(level, out LevelInfo levelInfo);
 
         if(currentLevel == 1 && !gameFrozen)
         {
@@ -164,9 +171,14 @@ public class GameManager : MonoBehaviour
 
     public void OnPlay()
     {
+        if (!PlayerStats.Instance.HasSeenTutorial)
+        {
+            LevelManager.StartTutorialLevel();
+            PlayTutorial();
+            return;
+        }
 
-        LevelInfo levelInfo = LevelManager.GetLevelInfo();
-
+        LevelManager.StartLevel(out LevelInfo levelInfo);
 
         if (currentLevel == 1 && !gameFrozen)
         {
@@ -187,6 +199,13 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayInfinite()
     {
+        if (!PlayerStats.Instance.HasSeenTutorial)
+        {
+            LevelManager.StartTutorialLevel();
+            PlayTutorial();
+            return;
+        }
+
         LevelManager.StartInfiniteLevel();
 
         if (gameFrozen)
@@ -242,6 +261,17 @@ public class GameManager : MonoBehaviour
         ship.OnPlay();
         asteroidCoordinator.OnPlay();
         spawnerCoordinator.OnPlay();
+    }
+
+    private void PlayTutorial()
+    {
+        StagePlay();
+
+        background.OnPlay();
+        player.OnPlay();
+        ship.OnPlay();
+
+        TutorialManager.StartTutorial();
     }
 
     public void OnPause()
@@ -337,28 +367,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Game Operations
-    public static void SpawnGoldCoin()
-    {
-        instance.spawnerCoordinator.SpawnGoldCoin();
-    }
-
-    public static void SpawnGoldCoin(Vector2 position)
-    {
-        instance.spawnerCoordinator.SpawnGoldCoin(position);
-    }
-
-    public static void ActivateExpedientSlowMo()
-    {
-        if (!IsPlayerAlive()) return;
-
-        PowerUpOrb slowMoPowerUpOrb = instance.spawnerCoordinator.powerUpOrbSpawner.
-            SpawnPowerUp(PowerType.SlowMo, (Vector2)instance.player.transform.position + Vector2.up);
-
-        instance.player.powerUps.ActivatePowerUp(slowMoPowerUpOrb);
-
-        slowMoPowerUpOrb.OnCollected();
-    }
-
     public static void ActivateContent(int itemIndex)
     {
         Item item = instance.shop.Items[itemIndex];
@@ -376,11 +384,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void UpdateLevelProgress(float progress)
+    public static void UpdateLevelProgress(float progress, bool forTutorial)
     {
-        levelProgress = progress;
+        if (!(forTutorial ^ isInTutorialMode))
+        {
+            levelProgress = progress;
 
-        UIManager.UpdateHUD();
+            UIManager.UpdateHUD();
+        }
     }
     #endregion
 

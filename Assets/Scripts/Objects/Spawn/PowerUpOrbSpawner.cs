@@ -9,6 +9,13 @@ public struct PowerUpOrbSpawnInfo
     public float spawnDelay;
     public int spawnSide;
     public PowerType powerType;
+
+    public PowerUpOrbSpawnInfo(float spawnDelay, int spawnSide, PowerType powerType)
+    {
+        this.spawnDelay = spawnDelay;
+        this.spawnSide = spawnSide;
+        this.powerType = powerType;
+    }
 }
 
 public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
@@ -87,7 +94,7 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
         }
     }
 
-    private void SpawnPowerUp(PowerUpOrbSpawnInfo spawnInfo)
+    public void SpawnPowerUp(PowerUpOrbSpawnInfo spawnInfo)
     {
         spawnInfo.spawnSide = Mathf.Clamp(spawnInfo.spawnSide, 0, 1);
 
@@ -97,11 +104,6 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
         }
 
         Instantiate(GetPowerUpOrbPrefab(spawnInfo.powerType), spawnPoints[spawnInfo.spawnSide], Quaternion.identity, transform);
-    }
-
-    public PowerUpOrb SpawnPowerUp(PowerType powerType, Vector2 position)
-    {
-        return Instantiate(GetPowerUpOrbPrefab(powerType), position, Quaternion.identity, transform);
     }
 
     private PowerUpOrb GetPowerUpOrbPrefab(PowerType powerType)

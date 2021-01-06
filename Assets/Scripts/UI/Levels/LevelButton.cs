@@ -18,7 +18,9 @@ public class LevelButton : Button
         TextMeshProUGUI tmp = GetComponentInChildren<TextMeshProUGUI>();
         Image tickMark = transform.GetChild(1).GetComponent<Image>();
 
-        tmp.text = isAvailable ? "LEVEL " + level.ToString("D2") : "COMING SOON     LEVEL " + level.ToString("D2");
+        if (LevelManager.IsTutorialLevel(level)) tmp.text = "TUTORIAL";
+        else tmp.text = isAvailable ? "LEVEL " + level.ToString("D2") : "COMING SOON     LEVEL " + level.ToString("D2");
+
         tickMark.enabled = false;
 
         Color txtColor = tmp.color;
