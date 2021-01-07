@@ -212,13 +212,8 @@ public class PlayerStats
 
     public static void DepositPocketedAstroGold()
     {
-        if (FirebaseUtility.CurrentUser?.UserId == null || Instance.TempAstroGoldPocket < 1) return;
-
-        FirebaseUtility.PushToDatabase(DbUserRewardsPath + "/AstroGold", Instance.TempAstroGoldPocket,
-            () =>
-            {
-                Instance.TempAstroGoldPocket = 0;
-            });
+        Instance.AstroGold += Instance.TempAstroGoldPocket;
+        Instance.TempAstroGoldPocket = 0;
     }
 
     public static bool HasAstroGold()

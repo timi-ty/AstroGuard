@@ -29,14 +29,12 @@ public class AlertDialog : MonoBehaviour
     public AstroGoldDisplay astroGoldDisplay;
     public Button positiveButton;
     public Button negativeButton;
-    public ParticleSystem celebrationPS;
 
     private Animator dialogAnimator;
     #endregion
 
     #region Extras
     public AudioClip popClip;
-    public AudioClip celebrationClip;
     #endregion
 
     #region Cache
@@ -112,8 +110,7 @@ public class AlertDialog : MonoBehaviour
             }
             if (alertDialog.messageInfo.isCelebratory)
             {
-                celebrationPS.Play();
-                AudioManager.PlayUIClip(celebrationClip);
+                UIManager.Celebrate();
             }
 
             alertDialog.positiveAction += Hide;

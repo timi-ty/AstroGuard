@@ -333,6 +333,8 @@ public class GameManager : MonoBehaviour
     {
         if (Session.Instance.ShipHealth <= 0) return;
 
+        int pocketedAstroGold = PlayerStats.Instance.TempAstroGoldPocket;
+
         Session.Instance.Bind();
 
         AudioManager.TurnUpBgMusic();
@@ -351,10 +353,12 @@ public class GameManager : MonoBehaviour
                 if (currentLevel % 3 == 0)
                     FirebaseUtility.SyncGameData();
 
+                UIManager.Celebrate();
+
                 SceneManager.LoadScene(0);
             },
             "Next Level!", currentLevel.ToString("D2"),
-            showInterstitial: ShouldShowInterstitial());
+            showInterstitial: ShouldShowInterstitial(), pocketedAstroGold);
         }
     }
 

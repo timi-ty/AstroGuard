@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
     #region Audio Clips
     public AudioClip uiButttonClip;
     public AudioClip uiPopAudioClip;
+    public AudioClip celebrationClip;
     #endregion
 
     #region Properties
@@ -64,6 +65,13 @@ public class AudioManager : MonoBehaviour
         if (!isSfxEnabled) return;
 
         instance.uiAudioSource.PlayOneShot(audioClip);
+    }
+
+    public static void PlayCelebrationSFX()
+    {
+        if (!isSfxEnabled) return;
+
+        instance.uiAudioSource.PlayOneShot(instance.celebrationClip);
     }
 
     public static void PlayUILooping(AudioClip audioClip)

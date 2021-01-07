@@ -23,7 +23,11 @@ public class TransitionPanel : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI subTitleText;
     public TextMeshProUGUI tipText;
-    public Image bgImage;
+    public List<Image> bgImages;
+    public AstroGoldDisplay goldDisplay;
+    public GameObject tip;
+    public GameObject main;
+    public GameObject overlay;
     #endregion
 
     #region Resources
@@ -32,7 +36,7 @@ public class TransitionPanel : MonoBehaviour
     #endregion
 
 
-    public void StartTransition(string title, string subTitle, bool showTip)
+    public void StartTransition(string title, string subTitle, bool showTip, int astroGold = -1)
     {
         gameObject.SetActive(true);
 
@@ -49,6 +53,14 @@ public class TransitionPanel : MonoBehaviour
         {
             tipText.text = showTip ? tips[Random.Range(0, tips.Count)] : "";
         }
+
+        goldDisplay.Refresh(astroGold);
+        goldDisplay.gameObject.SetActive(astroGold > 0);
+
+        tip.SetActive(!string.IsNullOrEmpty(tipText.text));
+        main.SetActive(!string.IsNullOrEmpty(titleText.text) || !string.IsNullOrEmpty(subTitleText.text));
+
+        overlay.SetActive(!main.activeSelf);
     }
 
     private void EffectTransitionProgress(float progress)
@@ -56,14 +68,27 @@ public class TransitionPanel : MonoBehaviour
         Color titleColor = titleText.color;
         Color subTitleColor = subTitleText.color;
         Color tipColor = tipText.color;
-        Color bgColor = bgImage.color;
+        List<Color> bgColors = new List<Color>();
+        foreach(Image image in bgImages)
+        {
+            bgColors.Add(image.color);
+        }
 
-        titleColor.a = subTitleColor.a = tipColor.a = bgColor.a = progress;
+        titleColor.a = subTitleColor.a = tipColor.a = progress;
+        for (int i = 0; i < bgColors.Count; i++)
+        {
+            Color color = bgColors[i];
+            color.a = progress;
+        }
 
         titleText.color = titleColor;
         subTitleText.color = subTitleColor;
         tipText.color = tipColor;
-        bgImage.color = bgColor;
+        for (int i = 0; i < bgImages.Count; i++)
+        {
+            Image image = bgImages[i];
+            image.color = bgColors[i];
+        }
     }
 
     public void FinishTransition()

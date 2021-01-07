@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Application UI Elements")]
     public AlertDialog alertDialog;
+    public ParticleSystem celebrationPS;
     #endregion
 
     #region Worker Parameters
@@ -263,9 +264,9 @@ public class UIManager : MonoBehaviour
         instance.playHud.Notify(objective);
     }
 
-    public static void Transition(UnityAction transitionCallback, string title, string subTitle, bool showInterstitial)
+    public static void Transition(UnityAction transitionCallback, string title, string subTitle, bool showInterstitial, int astroGold = -1)
     {
-        instance.StartCoroutine(instance.TransitionCoroutine(transitionCallback, title, subTitle, true, showInterstitial));
+        instance.StartCoroutine(instance.TransitionCoroutine(transitionCallback, title, subTitle, true, showInterstitial, astroGold));
     }
 
     public static void Transition(UnityAction transitionCallback, bool showInterstitial)
@@ -273,9 +274,9 @@ public class UIManager : MonoBehaviour
         instance.StartCoroutine(instance.TransitionCoroutine(transitionCallback, "", "", false, showInterstitial));
     }
 
-    public IEnumerator TransitionCoroutine(UnityAction transitionCallback, string title, string subTitle, bool wait, bool showInterstitial)
+    public IEnumerator TransitionCoroutine(UnityAction transitionCallback, string title, string subTitle, bool wait, bool showInterstitial, int astroGold = -1)
     {
-        transitionPanel.StartTransition(title, subTitle, wait);
+        transitionPanel.StartTransition(title, subTitle, wait, astroGold);
 
         float progress = 0;
 
@@ -320,6 +321,12 @@ public class UIManager : MonoBehaviour
         }
 
         transitionPanel.FinishTransition();
+    }
+
+    public static void Celebrate()
+    {
+        instance.celebrationPS.Play();
+        AudioManager.PlayCelebrationSFX();
     }
 #endregion
 
