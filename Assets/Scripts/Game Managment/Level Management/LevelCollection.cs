@@ -191,7 +191,7 @@ public class LevelCollection : ScriptableObject
         float maxDurationError = _enemySpawnInfo.enemySize;
 
         _levelInfo.enemyLineup.AddRange(
-            AsteroidCommander.GetRanomAsteroidLineup(length: length,
+            AsteroidCommander.GetRandomAsteroidLineup(length: length,
                                                duration: duration,
                                                maxDurationError: maxDurationError,
                                                difficulty: difficulty,

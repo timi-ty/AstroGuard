@@ -59,7 +59,7 @@
     <Compile Include="Assets\Scripts\UI\Shop\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\Player\Sword.cs" />
     <Compile Include="Assets\Scripts\Asteroids\AsteroidCommander.cs" />
-    <Compile Include="Assets\Scripts\Asteroids\AteroidBase.cs" />
+    <Compile Include="Assets\Scripts\Asteroids\AsteroidBase.cs" />
     <Compile Include="Assets\Scripts\Game Managment\Level Management\LevelCollection.cs" />
     <Compile Include="Assets\Scripts\Application\Settings.cs" />
     <Compile Include="Assets\Scripts\Objects\Spawn\GoldCoinSpawner.cs" />
@@ -141,6 +141,7 @@
     <Compile Include="Assets\Scripts\Environment\Background\Background.cs" />
     <Compile Include="Assets\Scripts\Utils\PartSysSelfDestruct.cs" />
     <Compile Include="Assets\Scripts\Utils\ForceNoRotation.cs" />
+    <Compile Include="Assets\Scripts\Game Managment\Tutorial Management\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UI\Player Stats\HighscoreDisplay.cs" />
     <Compile Include="Assets\Scripts\Objects\Spawn\BombSpawner.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IRepeller.cs" />
@@ -190,7 +191,9 @@
     <Compile Include="Assets\Scripts\Utils\RandomRotate3D.cs" />
     <Compile Include="Assets\Scripts\Application\FacebookUtility.cs" />
     <Compile Include="Assets\Scripts\Persistence Management\Metrics.cs" />
-    <Compile Include="Assets\Scripts\Game Managment\Tutorial Management\TutorialManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Game\TutorialUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Animation\AnimatedText.cs" />
+    <Compile Include="Assets\Scripts\UI\General\DynamicBG.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

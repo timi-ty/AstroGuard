@@ -87,7 +87,7 @@ public class PlayerBehaviour : PlayerBase
     {
         base.OnContinue();
 
-        powerUps.ActivateShield();
+        powerUps.ActivatePowerUp(PowerType.Shield);
     }
 
     protected override void Respawn()

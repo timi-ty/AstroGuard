@@ -10,6 +10,7 @@ public class Ship : MonoBehaviour, IShieldable, IRepeller
     #region Components
     public SpriteRenderer shieldSpriteRenderer;
     public SpriteRenderer repellerSpriteRenderer;
+    public ProximitySensor proximitySensor;
     public DamageLayer damageLayer;
     public Transform particleFloor;
     #endregion
@@ -39,7 +40,7 @@ public class Ship : MonoBehaviour, IShieldable, IRepeller
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (GameManager.currentLevel <= 0) return;
+        if (!GameManager.isInGame || GameManager.isInTutorialMode) return;
 
         if (collision.GetContact(0).point.x < ScreenBounds.min.x || collision.GetContact(0).point.x > ScreenBounds.max.x) return;
 

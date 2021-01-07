@@ -30,7 +30,7 @@ public struct AsteroidDeathInfo
     }
 }
 
-public abstract class AteroidBase : MonoBehaviour, IExplosionImpactible, IAttractible
+public abstract class AsteroidBase : MonoBehaviour, IExplosionImpactible, IAttractible
 {
     #region Properties
     protected float speed { get; set; }

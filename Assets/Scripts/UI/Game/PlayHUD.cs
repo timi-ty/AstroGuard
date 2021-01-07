@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayHUD : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayHUD : MonoBehaviour
     #region HUD Components
     public TextMeshProUGUI scoreText;
     public ProgressBar levelProgressBar;
+    public Button pauseButton;
     public GameObject pausePanel;
     public ObjectiveUI objectiveUi;
     #endregion
@@ -25,6 +27,11 @@ public class PlayHUD : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public void ShowPauseButton(bool show)
+    {
+        pauseButton.gameObject.SetActive(show);
     }
 
     public void UpdateHud(bool immediately)

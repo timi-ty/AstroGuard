@@ -80,7 +80,7 @@ public class OutsideSpawnableBase : MonoBehaviour, IAttractible
         }
     }
 
-    public void RecieveAttractionForce(Vector2 sourcePoint, float forceMagnitude)
+    public virtual void RecieveAttractionForce(Vector2 sourcePoint, float forceMagnitude)
     {
         if (mRigidBody == null) return;
 

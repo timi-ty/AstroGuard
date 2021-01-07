@@ -12,6 +12,15 @@ public struct AsteroidSpawnInfo
     public int enemyType;
     public float enemySpeed;
     public float enemySize;
+
+    public AsteroidSpawnInfo(float spawnDelay, int spawnPositionIndex, int enemyType, float enemySpeed, float enemySize)
+    {
+        this.spawnDelay = spawnDelay;
+        this.spawnPositionIndex = spawnPositionIndex;
+        this.enemyType = enemyType;
+        this.enemySpeed = enemySpeed;
+        this.enemySize = enemySize;
+    }
 }
 
 
@@ -23,7 +32,7 @@ public class AsteroidCommander : MonoBehaviour
 
     #region Prefabs
     [Header("Prefabs")]
-    public List<AteroidBase> enemyPrefabs;
+    public List<AsteroidBase> enemyPrefabs;
     #endregion
 
     #region Worker Parameters
@@ -39,6 +48,10 @@ public class AsteroidCommander : MonoBehaviour
     public bool muteEnemyZero;
     public bool muteEnemyOne;
     public bool muteEnemyTwo;
+    #endregion
+
+    #region Global Static Parameters
+    public static AsteroidDeathInfo.Killer lastAsteroidKiller;
     #endregion
 
     public void OnPlay(List<AsteroidSpawnInfo> asteroidLineup)
@@ -70,7 +83,7 @@ public class AsteroidCommander : MonoBehaviour
             float maxDurationError = UnityEngine.Random.Range(0f, duration/5);
 
 
-            List<AsteroidSpawnInfo> asteroidLineup = GetRanomAsteroidLineup(length, duration, maxDurationError, difficulty, LevelCollection.MAX_DIFFICULTY);
+            List<AsteroidSpawnInfo> asteroidLineup = GetRandomAsteroidLineup(length, duration, maxDurationError, difficulty, LevelCollection.MAX_DIFFICULTY);
 
             nEnemyLineup += asteroidLineup.Count;
 
@@ -91,18 +104,18 @@ public class AsteroidCommander : MonoBehaviour
             float delay = enemyInfo.spawnDelay;
             yield return new WaitForSeconds(delay);
 
-            SpawnEnemey(enemyInfo, i);
+            SpawnEnemy(enemyInfo, i);
         }
 
         isDoneSpawning = true;
     }
 
-    public void SpawnEnemey(AsteroidSpawnInfo spawnInfo, int spawnIndex)
+    public AsteroidBase SpawnEnemy(AsteroidSpawnInfo spawnInfo, int spawnIndex = -1)
     {
         if(enemyPrefabs.Count < 1)
         {
             DebugHelper.LogError("Enemy spawn failed. Check that enemyPrefabs list in AsteroidCommander is not empty.", gameObject);
-            return;
+            return null;
         }
 
         int enemyTypeIndex = spawnInfo.enemyType;
@@ -119,10 +132,10 @@ public class AsteroidCommander : MonoBehaviour
         Vector2 spawnPosition = new Vector2(ScreenBounds.SpecificXCoord(spawnInfo.spawnPositionIndex, SPAWN_POSITIONS_COUNT), ScreenBounds.max.y + 2);
 
         #region Mute Spawn For Debugging
-        if ((enemyTypeIndex == 0 && muteEnemyZero) || (enemyTypeIndex == 1 && muteEnemyOne) || (enemyTypeIndex == 2 && muteEnemyTwo)) return;
+        if ((enemyTypeIndex == 0 && muteEnemyZero) || (enemyTypeIndex == 1 && muteEnemyOne) || (enemyTypeIndex == 2 && muteEnemyTwo)) return null;
         #endregion
 
-        AteroidBase enemy = Instantiate(enemyPrefabs[enemyTypeIndex], spawnPosition, Quaternion.identity, transform);
+        AsteroidBase enemy = Instantiate(enemyPrefabs[enemyTypeIndex], spawnPosition, Quaternion.identity, transform);
 
         enemy.SetParams(enemyCommander: this,
                         speed: spawnInfo.enemySpeed,
@@ -130,11 +143,15 @@ public class AsteroidCommander : MonoBehaviour
 
         nLiveAsteroids++;
         nSpawnedAsteroids++;
+
+        return enemy;
     }
 
-    public void OnAsteroidDeath(AsteroidDeathInfo deathInfo, AteroidBase.AsteroidType enemyType, Vector2 position)
+    public void OnAsteroidDeath(AsteroidDeathInfo deathInfo, AsteroidBase.AsteroidType enemyType, Vector2 position)
     {
         nLiveAsteroids--;
+
+        lastAsteroidKiller = deathInfo.killer;
 
         Metrics.LogAsteroidDeath(deathInfo, enemyType);
 
@@ -170,7 +187,7 @@ public class AsteroidCommander : MonoBehaviour
     }
 
     #region Static Utility Methods
-    public static List<AsteroidSpawnInfo> GetRanomAsteroidLineup(int length, float duration, float maxDurationError, int difficulty, int maxDifficulty)
+    public static List<AsteroidSpawnInfo> GetRandomAsteroidLineup(int length, float duration, float maxDurationError, int difficulty, int maxDifficulty)
     {
         List<AsteroidSpawnInfo> asteroidLineup = new List<AsteroidSpawnInfo>();
 

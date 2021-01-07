@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AsteroidOne : AteroidBase
+public class AsteroidOne : AsteroidBase
 {
     #region Worker Parameters
     private Vector2 fakeTargetPoint;

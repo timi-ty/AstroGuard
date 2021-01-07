@@ -93,4 +93,9 @@ public class ProximitySensor : MonoBehaviour
             OnSensedSpacedMultiple?.Invoke();
         }
     }
+
+    public bool IsInProximity(Collider2D collider2D)
+    {
+        return mCollider.IsTouching(collider2D);
+    }
 }

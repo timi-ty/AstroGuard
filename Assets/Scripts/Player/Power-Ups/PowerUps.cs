@@ -82,11 +82,6 @@ public class PowerUps : MonoBehaviour
         AudioManager.PlayGameClip(powerUpClip);
     }
 
-    public void ActivateShield()
-    {
-        shield.Activate();
-    }
-
     public void DeactivateAll()
     {
         attractor.Deactivate();

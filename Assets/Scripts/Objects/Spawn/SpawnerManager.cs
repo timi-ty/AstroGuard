@@ -78,17 +78,17 @@ public class SpawnerManager : MonoBehaviour
         instance.coinSpawner.SpawnGoldCoin(position);
     }
 
-    public void SpawnBomb()
+    public Bomb SpawnBomb()
     {
-        if (!instance) return;
+        if (!instance) return null;
 
-        bombSpawner.SpawnBomb(new BombSpawnInfo(0, UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0.8f, 1.0f)));
+        return bombSpawner.SpawnBomb(new BombSpawnInfo(0, UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0.8f, 1.0f)));
     }
 
-    public void SpawnPowerUp(PowerType powerType)
+    public PowerUpOrb SpawnPowerUp(PowerType powerType)
     {
-        if (!instance) return;
+        if (!instance) return null;
 
-        powerUpOrbSpawner.SpawnPowerUp(new PowerUpOrbSpawnInfo(0, UnityEngine.Random.Range(0, 2), powerType));
+        return powerUpOrbSpawner.SpawnPowerUp(new PowerUpOrbSpawnInfo(0, UnityEngine.Random.Range(0, 2), powerType));
     }
 }

@@ -268,7 +268,6 @@ public class GameManager : MonoBehaviour
         StagePlay();
 
         background.OnPlay();
-        player.OnPlay();
         ship.OnPlay();
 
         TutorialManager.StartTutorial();

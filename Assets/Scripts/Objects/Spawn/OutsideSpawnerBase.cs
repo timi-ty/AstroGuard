@@ -10,4 +10,11 @@ public abstract class OutsideSpawnerBase<T> : MonoBehaviour
     public abstract void StartSpawning();
 
     protected abstract void PreSpawn();
+
+    #region Unity Runtime
+    protected void Start()
+    {
+        PreSpawn();
+    }
+    #endregion
 }

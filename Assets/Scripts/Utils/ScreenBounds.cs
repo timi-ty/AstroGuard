@@ -242,7 +242,7 @@ struct ScreenBounds
 
     /// <summary>
     /// The exact X coordinate that corresponds to the given index, out of <b>sampleSapce</b> possible points.
-    /// Where if index is between 1 and sampleSpace (inclusive) the returned coordinate will be within the screen bounds. 
+    /// Where if index is between 1 (inclusive) and sampleSpace (inclusive) the returned coordinate will be within the screen bounds. 
     /// </summary>
     /// <param name="sampleSpace"></param>
     /// <param name="index"></param>

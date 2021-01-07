@@ -21,4 +21,11 @@ public class PowerUpOrb : OutsideSpawnableBase
         Instantiate(collectionFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
+    #region Overriden Methods
+    public override void RecieveAttractionForce(Vector2 sourcePoint, float forceMagnitude)
+    {
+        //do nothing.
+    }
+    #endregion
 }

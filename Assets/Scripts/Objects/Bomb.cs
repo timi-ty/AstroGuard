@@ -70,9 +70,15 @@ public class Bomb : OutsideSpawnableBase, IExplosionImpactible
     }
     #endregion
 
+    #region Global Static Parameters
+    public static BombExplosionInfo.Trigger lastBombTrigger;
+    #endregion
+
     #region Sealed Methods
     private void Explode(BombExplosionInfo.Trigger trigger)
     {
+        lastBombTrigger = trigger;
+
         isExploded = true;
 
         Explosion explosion = Instantiate(explosionFX, transform.position, Quaternion.identity);

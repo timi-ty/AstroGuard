@@ -25,7 +25,6 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
     private bool isDoneSpawning { get; set; }
     #endregion
 
-
     #region Abstract Methods
     public override void StartSpawning<J>(List<J> bombLineup)
     {
@@ -45,7 +44,7 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
     {
         if (prefabs.Count > 0)
         {
-            bombSize = prefabs[0].GetComponentInChildren<Collider2D>().bounds.size * bombSize;
+            bombSize = prefabs[0].GetComponentInChildren<Collider2D>().bounds.size;
         }
 
         spawnPoints[0] = ScreenBounds.leftEdge.middle + Vector2.up * ScreenBounds.height / 4 + Vector2.left * bombSize.x;
@@ -86,7 +85,7 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
         }
     }
 
-    public void SpawnBomb(BombSpawnInfo spawnInfo)
+    public Bomb SpawnBomb(BombSpawnInfo spawnInfo)
     {
         if(prefabs.Count != 1)
         {
@@ -97,6 +96,8 @@ public class BombSpawner : OutsideSpawnerBase<Bomb>
 
         Bomb bomb = Instantiate(prefabs[0], spawnPoints[spawnInfo.spawnSide], Quaternion.identity, transform);
         bomb.SetSize(spawnInfo.bombSize);
+
+        return bomb;
     }
     #endregion
 

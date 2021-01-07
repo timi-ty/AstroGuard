@@ -80,6 +80,9 @@ TextureImporter:
   - first:
       213: 7147525170431980595
     second: AstroUI_25
+  - first:
+      213: -2780131512342928070
+    second: AstroUI_26
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -744,6 +747,27 @@ TextureImporter:
       bones: []
       spriteID: 334f2c6f54c113360800000000000000
       internalID: 7147525170431980595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AstroUI_26
+      rect:
+        serializedVersion: 2
+        x: 2733
+        y: 1359
+        width: 812
+        height: 478
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a352ee98e1dfa69d0800000000000000
+      internalID: -2780131512342928070
       vertices: []
       indices: 
       edges: []

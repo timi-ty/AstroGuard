@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AsteroidTwo : AteroidBase
+public class AsteroidTwo : AsteroidBase
 {
 
     protected override void Start()
