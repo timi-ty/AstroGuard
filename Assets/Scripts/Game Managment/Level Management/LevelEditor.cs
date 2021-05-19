@@ -503,8 +503,8 @@ public class LevelEditor : Editor
         }
         if (GUILayout.Button(new GUIContent("Overwrite Last Saved Level", "Overwrite all values to the last saved default level."), minorButtonLayout))
         {
-            levelCollection.DeleteLevel(levelCollection.Count - 1);
-            levelCollection.InsertLevel(levelCollection.Count - 1);
+            levelCollection.DeleteLevel(levelCollection.Size - 1);
+            levelCollection.InsertLevel(levelCollection.Size - 1);
         }
 
         EditorGUILayout.Space();

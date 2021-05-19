@@ -6,13 +6,6 @@ public class GoldCoinSpawner : OutsideSpawnerBase<GoldCoin>
 {
     internal Vector2[] spawnPoints = new Vector2[2];
 
-
-    private void Start()
-    {
-        spawnPoints[0] = ScreenBounds.leftEdge.middle + Vector2.left;
-        spawnPoints[1] = ScreenBounds.rightEdge.middle + Vector2.right;
-    }
-
     public void SpawnGoldCoin()
     {
         int spawnPoint = Random.Range(0, 2);
@@ -41,6 +34,7 @@ public class GoldCoinSpawner : OutsideSpawnerBase<GoldCoin>
 
     protected override void PreSpawn()
     {
-        //Do Nothing
+        spawnPoints[0] = ScreenBounds.leftEdge.middle + Vector2.left;
+        spawnPoints[1] = ScreenBounds.rightEdge.middle + Vector2.right;
     }
 }

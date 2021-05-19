@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: D:\User\Documents\Security\KeyStores\Cradaptive\astroguard.keystore
+  androidKeystorePath: D:\Users\Timi\Documents\Security\KeyStores\Cradaptive\astroguard.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

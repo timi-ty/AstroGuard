@@ -39,6 +39,7 @@ public class AudioManager : MonoBehaviour
     #region Properties
     private static bool isSfxEnabled => Settings.isSfxEnabled;
     private static bool isBgMusicEnabled => Settings.isBgMusicEnabled;
+    private static float bgMusicTime;
     #endregion
 
     private void Start()
@@ -65,6 +66,20 @@ public class AudioManager : MonoBehaviour
         if (!isSfxEnabled) return;
 
         instance.uiAudioSource.PlayOneShot(audioClip);
+    }
+
+    public static void MarkBgMusicTime(bool reset)
+    {
+        bgMusicTime = reset ? 0 : instance.bgMusicSource.time;
+
+        Debug.Log("Marked bg time as: " + instance.bgMusicSource.time);
+    }
+
+    public static void RestoreBgMusicTime()
+    {
+        instance.bgMusicSource.time = bgMusicTime;
+
+        Debug.Log("Restored bg time as: " + bgMusicTime);
     }
 
     public static void PlayCelebrationSFX()

@@ -67,7 +67,18 @@ public class PowerUpOrbSpawner : OutsideSpawnerBase<PowerUpOrb>
         {
             PowerUpOrbSpawnInfo spawnInfo = (PowerUpOrbSpawnInfo)(object)powerUpOrbLineup[i];
             float delay = spawnInfo.spawnDelay;
-            yield return new WaitForSeconds(delay);
+
+            if(i == 0)
+            {
+                int decider = Random.Range(0, 3);
+
+                if(decider == 0) yield return new WaitForSeconds(0.5f);
+                else yield return new WaitForSeconds(delay);
+            }
+            else
+            {
+                yield return new WaitForSeconds(delay);
+            }
 
             SpawnPowerUp(spawnInfo);
         }

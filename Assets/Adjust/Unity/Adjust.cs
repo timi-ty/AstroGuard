@@ -6,10 +6,6 @@ namespace com.adjust.sdk
 {
     public class Adjust : MonoBehaviour
     {
-        #region Singleton
-        public static Adjust instance { get; private set; }
-        #endregion
-
         private const string errorMsgEditor = "[Adjust]: SDK can not be used in Editor.";
         private const string errorMsgStart = "[Adjust]: SDK not started. Start it manually using the 'start' method.";
         private const string errorMsgPlatform = "[Adjust]: SDK can only be used in Android, iOS, Windows Phone 8.1, Windows Store or Universal Windows apps.";
@@ -37,34 +33,19 @@ namespace com.adjust.sdk
 
         void Awake()
         {
-            #region Singleton
-
-            if (!instance)
-            {
-                instance = this;
-
-                if (!this.startManually)
-                {
-                    Initialize();
-                }
-            }
-            else if (!instance.Equals(this))
-            {
-                Destroy(gameObject);
-            }
-            #endregion
-        }
-
-        public void Initialize()
-        {
             if (IsEditor()) { return; }
 
-            AdjustConfig adjustConfig = new AdjustConfig(this.appToken, this.environment, (this.logLevel == AdjustLogLevel.Suppress));
-            adjustConfig.setLogLevel(this.logLevel);
-            adjustConfig.setSendInBackground(this.sendInBackground);
-            adjustConfig.setEventBufferingEnabled(this.eventBuffering);
-            adjustConfig.setLaunchDeferredDeeplink(this.launchDeferredDeeplink);
-            Adjust.start(adjustConfig);
+            DontDestroyOnLoad(transform.gameObject);
+
+            if (!this.startManually)
+            {
+                AdjustConfig adjustConfig = new AdjustConfig(this.appToken, this.environment, (this.logLevel == AdjustLogLevel.Suppress));
+                adjustConfig.setLogLevel(this.logLevel);
+                adjustConfig.setSendInBackground(this.sendInBackground);
+                adjustConfig.setEventBufferingEnabled(this.eventBuffering);
+                adjustConfig.setLaunchDeferredDeeplink(this.launchDeferredDeeplink);
+                Adjust.start(adjustConfig);
+            }
         }
 
         void OnApplicationPause(bool pauseStatus)

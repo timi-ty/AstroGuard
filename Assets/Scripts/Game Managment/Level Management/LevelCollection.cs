@@ -17,7 +17,7 @@ public class LevelCollection : ScriptableObject
     #endregion
 
     #region Properties
-    public int Count => defaultLevelCollection.Count;
+    public int Size => defaultLevelCollection.Count;
     #endregion
 
 #if UNITY_EDITOR
@@ -52,6 +52,23 @@ public class LevelCollection : ScriptableObject
         LoadLevelInfoCollection();
 
         Debug.Log("New Default Level Saved. Level " + (defaultLevelCollection.Count));
+    }
+
+    public void OverwriteAsDefaultLevel(LevelInfo levelInfo, int index)
+    {
+        if (index < 0 || index >= defaultLevelCollection.Count)
+        {
+            Debug.Log("Attempted Level Overwrite With Invalid Level Index.");
+            return;
+        }
+
+        defaultLevelCollection[index] = JsonUtility.ToJson(levelInfo, true);
+
+        EditorUtility.SetDirty(this);
+
+        LoadLevelInfoCollection();
+
+        Debug.Log("Default Level Overwritten Successfully. Level " + index);
     }
 
     public void LoadLevelInfoCollection()

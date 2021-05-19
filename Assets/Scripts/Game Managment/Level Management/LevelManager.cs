@@ -155,7 +155,7 @@ public class LevelManager : MonoBehaviour
     {
         List<LevelInfo> dlcLevels = new List<LevelInfo>();
 
-        int defaultLevelsCount = defaultLevels.Count;
+        int defaultLevelsCount = defaultLevels.Size;
 
         FirebaseUtility.QueryFromDatabase(DLC_LEVELS_PATH,
             (dlcLevelsJsons) =>

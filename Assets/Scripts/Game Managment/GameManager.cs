@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.Events;
+using YsoCorp.GameUtils;
 
 public class GameManager : MonoBehaviour
 {
@@ -83,6 +84,8 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         InitializeGame();
+
+        AudioManager.RestoreBgMusicTime();
     }
 
     private void OnDisable()
@@ -132,6 +135,9 @@ public class GameManager : MonoBehaviour
             () =>
             {
                 FirebaseUtility.SyncGameData();
+
+                AudioManager.MarkBgMusicTime(true);
+
                 SceneManager.LoadScene(0);
             },
             showInterstitial: false);
@@ -239,6 +245,8 @@ public class GameManager : MonoBehaviour
         RestoreTimeScale();
 
         UIManager.ShowPlayUI();
+
+        YCManager.instance.OnGameStarted(currentLevel);
     }
 
     private void PlayLevel(LevelInfo levelInfo)
@@ -297,6 +305,8 @@ public class GameManager : MonoBehaviour
 
         UIManager.ShowRetryUI();
 
+        YCManager.instance.OnGameFinished(false, Session.Score);
+
         Session.Instance.Reset();
     }
 
@@ -318,6 +328,8 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.AbortRetryCountdown();
 
+        AudioManager.MarkBgMusicTime(false);
+
         string levelText = isInInfiniteMode ? "Infite Level" : "Level " + currentLevel.ToString("D2");
 
         UIManager.Transition(
@@ -336,6 +348,8 @@ public class GameManager : MonoBehaviour
         int pocketedAstroGold = PlayerStats.Instance.TempAstroGoldPocket;
 
         Session.Instance.Bind();
+
+        AudioManager.MarkBgMusicTime(false);
 
         AudioManager.TurnUpBgMusic();
 
@@ -360,6 +374,8 @@ public class GameManager : MonoBehaviour
             "Next Level!", currentLevel.ToString("D2"),
             showInterstitial: ShouldShowInterstitial(), pocketedAstroGold);
         }
+
+        YCManager.instance.OnGameFinished(true, Session.Score);
     }
 
     public void OnGameFinished()
